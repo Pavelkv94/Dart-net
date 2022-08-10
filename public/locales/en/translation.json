@@ -1,0 +1,14 @@
+{
+    "login": {
+        "welcome": "Welcome!",
+        "loginNow": "Login Now",
+        "welcomeBack": "Welcome back! Please enter your details.",
+        "username": "Username",
+        "password": "Password",
+        "dontHaveAcc": "Don’t have an account?",
+        "registerNow": "Register Now",
+        "getExperience": "Get an awesome experience",
+        "discover": "Discover yourself in a fleet of awesome like-minded people, to make more awesome creations"
+    }
+    
+}
