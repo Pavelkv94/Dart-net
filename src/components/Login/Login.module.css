@@ -1,5 +1,36 @@
-.red {
-    width: 500px;
-    height: 500px;
-    background: red;
+.login_wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #efefef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login {
+    width: 80%;
+    max-width: 1420px;
+    height: 90vh;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+}
+
+.login_form {
+    width: 50%;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+    font-family: "Roboto", sans-serif;
+}
+.login_picture {
+    width: 50%;
+    height: 100%;
+    border-radius: 0 20px 20px 0;
+    background-image: url("../../assets/test.jpg");
+    background-size: cover;
+}
+
+.fake_logo {
+    background-color: gray;
+    width: 200px;
 }
