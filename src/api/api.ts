@@ -6,7 +6,7 @@ const expandHeaders = async () => ({
 
 const baseUrl = (url: string) => `${process.env.REACT_APP_HOST}${url}`;
 
-const newAPI = {
+const instance = {
     get: (url: string, headers: any = {}, params: any = {}) => {
         return axios.get(url, {
             headers,
@@ -29,8 +29,6 @@ const newAPI = {
         });
     },
 };
-
-const instance = newAPI;
 
 export const API = {
     // async createCategory(title: any) {

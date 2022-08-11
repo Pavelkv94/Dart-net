@@ -1,21 +1,25 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Login } from "./components/Login/Login";
-import { Profile } from "./components/Profile/Profile";
+import { Main } from "./components/Main/Main";
+import { meTC } from "./redux/appReducer";
 
 function App() {
-    const { t, i18n } = useTranslation();
 
-    // const changeLanguage = (language:any) => {
-    //     i18n.changeLanguage(language);
-    //   };
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        let username = localStorage.getItem("user");
+        //@ts-ignore
+        dispatch(meTC(username));
+    }, [dispatch]);
 
     return (
         <Routes>
             <Route element={<Login />} path="/login" />
-            <Route element={<Profile />} path="/" />
+            <Route element={<Main />} path="/" />
             <Route element={<div>empty</div>} path="*" />
         </Routes>
     );

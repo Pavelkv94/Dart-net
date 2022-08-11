@@ -1,0 +1,22 @@
+.headBar {
+    height: 60px;
+    width: 100%;
+    background-color: #313131;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.headBar nav {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: 100%;
+}
+.navbar {
+    display: flex;
+}
+.navbar_item {
+    height: 100%;
+}

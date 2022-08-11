@@ -31,6 +31,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 .register {
     font-size: 14px;
@@ -103,11 +104,14 @@
 .login_form_header h1 {
     font-size: 60px;
     margin: 0;
+    line-height: 1em;
 }
 .login_form_logo_header {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 350px;
+    justify-self: flex-start;
+    margin-top: 20px;
 }
 .lang div {
     border: 1px solid black;
@@ -122,6 +126,23 @@
     border-color: #ff7555;
     color: #ff7555;
     font-weight: 600;
+}
+.reg_descript {
+    opacity: 0.6;
+    font-size: 14px;
+}
+.error {
+    color: red;
+    text-align: center;
+}
+.preloader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.succeeded {
+    color: green;
 }
 
 @media screen and (max-width: 1024px) {
@@ -148,7 +169,6 @@
         font-size: 24px;
     }
     .login_picture_descript p {
-        font-size: 12px
+        font-size: 12px;
     }
-
 }

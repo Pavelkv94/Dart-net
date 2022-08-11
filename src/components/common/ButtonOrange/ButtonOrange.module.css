@@ -12,3 +12,10 @@
 .button_orange:hover {
     background: #ff5c37;
 }
+.disabled {
+    opacity: 0.7;
+    cursor: default;
+}
+.disabled:hover {
+    background: #ff7555;
+}

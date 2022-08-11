@@ -1,12 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from 'redux-thunk';
 import logger from 'redux-logger'
+import { appReducer } from "./appReducer";
 
 const rootReducer = combineReducers({
     // categories: categoriesReducer,
 	// posts: postsReducer,
 	// filter: filterReducer,
-	// app: appReducer
+	app: appReducer
 
 });
 
