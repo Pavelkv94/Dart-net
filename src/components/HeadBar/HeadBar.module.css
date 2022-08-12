@@ -16,7 +16,76 @@
 }
 .navbar {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 .navbar_item {
     height: 100%;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.navbar_item:hover {
+    cursor: pointer;
+    background-color: #202020;
+}
+.last_navbar_item {
+    width: 100px;
+}
+.last_navbar_item:hover {
+    background-color: #313131;
+}
+.avatar {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #FF7555;
+    border-radius: 50%;
+    padding: 2px;
+    margin-right: 4px;
+}
+.lang_indicator {
+    position: absolute;
+    color: rgb(255, 255, 255, .6);
+    top: -8px;
+    right: 0;
+}
+.nav_icon {
+    opacity: 0.6;
+}
+.nav_icon:hover {
+    opacity: 0.9;
+}
+.dropdown_menu {
+    position: absolute;
+    top: 62px;
+    min-height: 10rem;
+    width: 200px;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    color: #212529;
+    background-color: white;
+    border-radius: 0.375rem;
+
+    box-shadow: 0px 0px 4px 0px black;
+
+}
+.link_menu_item {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    padding: 8px 20px;
+    clear: both;
+    font-weight: 400;
+    color: #847577;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-decoration: none;
+}
+.feather_user::before {
+    content: "\e9f1";
 }

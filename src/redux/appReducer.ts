@@ -76,7 +76,7 @@ export const loginTC = (payload: any) => async (dispatch: any) => {
             //@ts-ignore
             localStorage.setItem("token", res.data.token);
             //@ts-ignore
-            localStorage.setItem("user", res.data.username);
+            localStorage.setItem("user_id", res.data.user_id);
             //@ts-ignore
             localStorage.setItem("role", res.data.roles);
         })
@@ -103,16 +103,16 @@ export const registrationTC = (payload: any) => (dispatch: any) => {
         });
 };
 
-export const meTC = (username: string | null) => (dispatch: any) => {
+export const meTC = (user_id: string | null) => (dispatch: any) => {
     dispatch(setAppStatusAC("loading"));
 
-    API.me(username)
+    API.me(user_id)
         .then((res) => {
             dispatch(meAC());
             dispatch(meDataAC(res.data));
             dispatch(setAppStatusAC("succeeded"));
         })
         .catch((e) => {;
-            dispatch(setAppErrAC(e.response ? e.response.data.message : "Server is not available"));
+            // dispatch(setAppErrAC(e.response ? e.response.data.message : "Server is not available"));
         });
 };

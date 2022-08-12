@@ -8,7 +8,7 @@ import { CustomInput } from "../common/CustomInput/CustomInput";
 import s from "./Login.module.css";
 
 type InitialLoginData = {
-    username: string;
+    email: string;
     password: string;
 };
 
@@ -16,7 +16,7 @@ export const LoginNow = ({ t, setLoginMode }: any) => {
     const dispatch = useDispatch();
 
     const initialData = {
-        username: "",
+        email: "",
         password: "",
     };
     const [loginData, setLoginData] = useState<InitialLoginData>(initialData);
@@ -42,15 +42,15 @@ export const LoginNow = ({ t, setLoginMode }: any) => {
             </div>
 
             <div className={s.credentials}>
-                <b>{t("login.nickname")}:</b> user <b>{t("login.password")}:</b> demo
+                <b>{t("login.email")}:</b> test@example.com <b>{t("login.password")}:</b> demo
             </div>
             <div>
                 <CustomInput
-                    type={"text"}
+                    type={"email"}
                     width={310}
-                    placeholder={t("login.nickname")}
-                    value={loginData.username}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setLoginData({ ...loginData, username: e.currentTarget.value })}
+                    placeholder={t("login.email")}
+                    value={loginData.email}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setLoginData({ ...loginData, email: e.currentTarget.value })}
                 />
                 <br />
                 <CustomInput

@@ -11,9 +11,9 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let username = localStorage.getItem("user");
+        let user_id = localStorage.getItem("user_id");
         //@ts-ignore
-        dispatch(meTC(username));
+        dispatch(meTC(user_id));
     }, [dispatch]);
 
     return (

@@ -77,9 +77,9 @@ export const API = {
     async registration(payload: any) {
         return instance.post(baseUrl("/auth/registration"), {}, payload);
     },
-    async me(username: string | null) {
+    async me(user_id: string | null) {
         return instance.get(
-            baseUrl(`/auth/me/${username}`),
+            baseUrl(`/auth/me/${user_id}`),
             await expandHeaders()
         );
     },

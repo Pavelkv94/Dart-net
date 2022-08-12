@@ -9,7 +9,6 @@ import { Circle } from "../common/Preloaders/Circle/Circle";
 import s from "./Login.module.css";
 
 type InitialRegisterData = {
-    username: string;
     email: string;
     password: string;
 };
@@ -18,7 +17,6 @@ export const Registration = ({ t, setLoginMode }: any) => {
     const dispatch = useDispatch();
 
     const initialData = {
-        username: "",
         email: "",
         password: "",
     };
@@ -38,7 +36,7 @@ export const Registration = ({ t, setLoginMode }: any) => {
         setLoginMode(true);
     };
 
-    const disabled = regData.email === "" || regData.password === "" || regData.username === "";
+    const disabled = regData.email === "" || regData.password === "";
 
     useEffect(() => {
         status === "succeeded" &&
@@ -54,14 +52,6 @@ export const Registration = ({ t, setLoginMode }: any) => {
             </div>
 
             <div>
-                <CustomInput
-                    type={"text"}
-                    width={310}
-                    placeholder={t("login.nickname")}
-                    value={regData.username}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setRegData({ ...regData, username: e.currentTarget.value })}
-                />
-                <br />
                 <CustomInput
                     type={"email"}
                     width={310}
