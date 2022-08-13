@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "./HeadBar.module.css";
 import logo_dark from "../../assets/Logo/logo-dark.png";
 import home from "../../assets/svg/home.svg";
@@ -12,6 +12,7 @@ import { HeadDropdownMenu } from "./HeadDropdownMenu";
 
 export const HeadBar = ({ exit }: any) => {
     const { i18n } = useTranslation();
+    const [openProfileMenu, setOpenProfileMenu] = useState(false)
 
     return (
         <header className={s.headBar}>
@@ -36,12 +37,12 @@ export const HeadBar = ({ exit }: any) => {
                         <img src={lang} alt="lang" width={20} className={s.nav_icon}/>
                         <p className={s.lang_indicator}>{i18n.language}</p>
                     </div>
-                    <div className={`${s.navbar_item} ${s.last_navbar_item}`}>
+                    <div className={`${s.navbar_item} ${s.last_navbar_item}`} onClick={() => setOpenProfileMenu(prev => !prev)} >
                         <div className={s.avatar}></div>
                         <img src={down_arr} alt="down-arrow" width={14} className={s.nav_icon}/>
-                        <HeadDropdownMenu />
+                        {openProfileMenu && <HeadDropdownMenu setOpenProfileMenu={setOpenProfileMenu} exit={exit} openProfileMenu={s}/>}
                     </div>
-                    <button onClick={exit}>+++</button>
+                    
                 </div>
             </nav>
         </header>
