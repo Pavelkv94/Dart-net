@@ -1,51 +1,54 @@
 import React, { MouseEvent, useEffect, useRef } from "react";
+import { NavLink } from "react-router-dom";
 import s from "./HeadBar.module.css";
 
 export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit }: any) => {
-
-    const onClose = (e: MouseEvent<HTMLElement>) => {
-        e.stopPropagation();
-    };
+    const onStopPropagation = (e: MouseEvent<HTMLElement>) => e.stopPropagation();
+    const onClose = () => setOpenProfileMenu(false);
 
     return (
-        <div className={s.dropdown_menu} onClick={onClose} onBlur={() => setOpenProfileMenu(false)} tabIndex={-1} >
+        <div className={s.dropdown_menu} onClick={onStopPropagation} onBlur={onClose} tabIndex={-1}>
             <div className={s.user_info}>
                 <p>NAME SURNAME</p>
                 <p>test@gmail.com</p>
             </div>
-            <a href="#" className={s.link_menu_item}>
-                <svg width="22px" height="22px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className={s.svg}>
-                    <title />
-                    <g data-name="Layer 2" id="Layer_2">
-                        <path d="M16,14a6,6,0,1,1,6-6A6,6,0,0,1,16,14ZM16,4a4,4,0,1,0,4,4A4,4,0,0,0,16,4Z" />
-                        <path d="M24,30H8a2,2,0,0,1-2-2V22a7,7,0,0,1,7-7h6a7,7,0,0,1,7,7v6A2,2,0,0,1,24,30ZM13,17a5,5,0,0,0-5,5v6H24V22a5,5,0,0,0-5-5Z" />
-                    </g>
-                </svg>
-                Profile
-            </a>
-            <a href="#" className={s.link_menu_item}>
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 324.143 324.143" width={22} height={22} className={s.svg}>
-                    <g>
+            <NavLink to="/profile" style={{ textDecoration: "none" }} onClick={onClose}>
+                <div className={s.link_menu_item}>
+                    <svg width="22px" height="22px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className={s.svg}>
+                        <title />
+                        <g data-name="Layer 2" id="Layer_2">
+                            <path d="M16,14a6,6,0,1,1,6-6A6,6,0,0,1,16,14ZM16,4a4,4,0,1,0,4,4A4,4,0,0,0,16,4Z" />
+                            <path d="M24,30H8a2,2,0,0,1-2-2V22a7,7,0,0,1,7-7h6a7,7,0,0,1,7,7v6A2,2,0,0,1,24,30ZM13,17a5,5,0,0,0-5,5v6H24V22a5,5,0,0,0-5-5Z" />
+                        </g>
+                    </svg>
+                    Profile
+                </div>
+            </NavLink>
+            <NavLink to="/messages" style={{ textDecoration: "none" }} onClick={onClose}>
+                <div className={s.link_menu_item}>
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 324.143 324.143" width={22} height={22} className={s.svg}>
                         <g>
                             <g>
-                                <circle cx="88.071" cy="164.571" r="19" />
-                                <circle cx="162.071" cy="164.571" r="19" />
-                                <path
-                                    d="M162.071,0C73.162,0,0.83,72.332,0.83,161.241c0,37.076,12.788,73.004,36.1,101.677
+                                <g>
+                                    <circle cx="88.071" cy="164.571" r="19" />
+                                    <circle cx="162.071" cy="164.571" r="19" />
+                                    <path
+                                        d="M162.071,0C73.162,0,0.83,72.332,0.83,161.241c0,37.076,12.788,73.004,36.1,101.677
 				c-6.65,16.756-17.788,31.245-32.401,42.089c-2.237,1.66-3.37,4.424-2.94,7.177c0.429,2.754,2.349,5.042,4.985,5.942
 				c11.683,3.992,23.856,6.017,36.182,6.017c19.572,0,38.698-5.093,55.569-14.763c20.158,8.696,41.584,13.104,63.747,13.104
 				c88.909,0,161.241-72.333,161.241-161.242S250.98,0,162.071,0z M162.071,307.483c-21.32,0-41.881-4.492-61.11-13.351
 				c-2.292-1.057-4.959-0.891-7.102,0.443c-15.313,9.529-32.985,14.566-51.104,14.566c-6.053,0-12.065-0.564-17.981-1.684
 				c12.521-12.12,22.014-26.95,27.788-43.547c0.878-2.525,0.346-5.328-1.398-7.354C28.378,230.07,15.83,196.22,15.83,161.241
 				C15.83,80.604,81.434,15,162.071,15s146.241,65.604,146.241,146.241C308.313,241.88,242.709,307.483,162.071,307.483z"
-                                />
-                                <circle cx="236.071" cy="164.571" r="19" />
+                                    />
+                                    <circle cx="236.071" cy="164.571" r="19" />
+                                </g>
                             </g>
                         </g>
-                    </g>
-                </svg>
-                Messages
-            </a>
+                    </svg>
+                    Messages
+                </div>
+            </NavLink>
             <a href="#" className={s.link_menu_item}>
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 471.701 471.701" width={22} height={22} className={s.svg}>
                     <g>

@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { registrationTC, RequestStatusType, setAppErrAC, setAppStatusAC } from "../../redux/appReducer";
-import { AppStateType } from "../../redux/store";
+import { AppDispatchType, AppStateType } from "../../redux/store";
 import { ButtonOrange } from "../common/ButtonOrange/ButtonOrange";
 import { CustomInput } from "../common/CustomInput/CustomInput";
 import { Circle } from "../common/Preloaders/Circle/Circle";
@@ -14,7 +14,7 @@ type InitialRegisterData = {
 };
 
 export const Registration = ({ t, setLoginMode }: any) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatchType>();
 
     const initialData = {
         email: "",
@@ -26,7 +26,6 @@ export const Registration = ({ t, setLoginMode }: any) => {
     const status = useSelector<AppStateType, RequestStatusType>((state) => state.app.status);
 
     const handleClick = () => {
-        //@ts-ignore
         dispatch(registrationTC(regData));
     };
 

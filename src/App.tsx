@@ -5,21 +5,26 @@ import "./App.css";
 import { Login } from "./components/Login/Login";
 import { Main } from "./components/Main/Main";
 import { meTC } from "./redux/appReducer";
+import { AppDispatchType } from "./redux/store";
 
 function App() {
-
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatchType>();
 
     useEffect(() => {
         let user_id = localStorage.getItem("user_id");
-        //@ts-ignore
         dispatch(meTC(user_id));
     }, [dispatch]);
+
+    const displayMode = {
+        profile: "profile",
+        messages: "messages",
+    };
 
     return (
         <Routes>
             <Route element={<Login />} path="/login" />
-            <Route element={<Main />} path="/" />
+            <Route element={<Main mode={displayMode.profile} />} path="/profile" />
+            <Route element={<Main mode={displayMode.messages} />} path="/messages" />
             <Route element={<div>empty</div>} path="*" />
         </Routes>
     );

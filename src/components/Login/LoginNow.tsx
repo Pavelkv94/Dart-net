@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loginTC, setAppErrAC, setAppStatusAC } from "../../redux/appReducer";
-import { AppStateType } from "../../redux/store";
+import { AppDispatchType, AppStateType } from "../../redux/store";
 import { ButtonOrange } from "../common/ButtonOrange/ButtonOrange";
 import { CustomInput } from "../common/CustomInput/CustomInput";
 import s from "./Login.module.css";
@@ -13,7 +13,7 @@ type InitialLoginData = {
 };
 
 export const LoginNow = ({ t, setLoginMode }: any) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatchType>();
 
     const initialData = {
         email: "",
@@ -24,7 +24,6 @@ export const LoginNow = ({ t, setLoginMode }: any) => {
     const error = useSelector<AppStateType, string | null>((state) => state.app.error);
 
     const handleClick = () => {
-        //@ts-ignore
         dispatch(loginTC(loginData));
     };
 

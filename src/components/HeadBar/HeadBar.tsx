@@ -10,9 +10,10 @@ import down_arr from "../../assets/svg/down-arr.svg";
 import { useTranslation } from "react-i18next";
 import { HeadDropdownMenu } from "./HeadDropdownMenu";
 
-export const HeadBar = ({ exit }: any) => {
+export const HeadBar = React.memo(({ exit }: any) => {
     const { i18n } = useTranslation();
     const [openProfileMenu, setOpenProfileMenu] = useState(false)
+
 
     return (
         <header className={s.headBar}>
@@ -47,4 +48,4 @@ export const HeadBar = ({ exit }: any) => {
             </nav>
         </header>
     );
-};
+});

@@ -1,5 +1,4 @@
-.blue {
-    width: 500px;
-    height: 500px;
-    background: blue;
+.profile_wrapper {
+    border: 1px solid red;
+    width: 80%;
 }
