@@ -1,17 +1,19 @@
 import React from "react";
 import s from "./BlockComponent.module.css";
 
-const BlockComponent = ({width = 300, height = '100%', title, component}: any) => {
-
+const BlockComponent = ({ width = 300, height = "100%", margin, title, component }: any) => {
     const style = {
-        width: width,
-        height: height
-    }
+        width,
+        height,
+        margin,
+    };
 
-    return <div className={s.block} style={style}>
-        <span className={s.title}>{title}</span>
-        <div>{component}</div>
-    </div>;
+    return (
+        <div className={s.block} style={style}>
+            <span className={s.title}>{title}</span>
+            <div>{component}</div>
+        </div>
+    );
 };
 
 export default BlockComponent;

@@ -12,7 +12,7 @@ const Posts = React.lazy(() => import("./Posts/Posts"));
 const About = React.lazy(() => import("./About/About"));
 const Gallery = React.lazy(() => import("./Gallery/Gallery"));
 
-type TabType = "about" | "posts" | "gallery";
+export type TabType = "about" | "posts" | "gallery";
 
 const Profile = () => {
     const { t } = useTranslation();
@@ -98,7 +98,7 @@ const Profile = () => {
                         path="about"
                         element={
                             <Suspense fallback={<Circle />}>
-                                <About setCurrentTab={setCurrentTab} t={t}/>
+                                <About setCurrentTab={setCurrentTab} t={t} profileData={profileData}/>
                             </Suspense>
                         }
                     />

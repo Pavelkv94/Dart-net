@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { ReactI18NextChild, useTranslation } from "react-i18next";
 import s from "./Login.module.css";
 import logo from "../../assets/Logo/logo.png";
 import { LoginNow } from "./LoginNow";
@@ -10,6 +10,11 @@ import { RequestStatusType } from "../../redux/appReducer";
 import { Navigate } from "react-router-dom";
 
 type LangType = "ru" | "en";
+
+export type LoginPropsType = {
+    t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
+    setLoginMode: (value: boolean) => void;
+};
 
 const Login = () => {
     const { t, i18n } = useTranslation();

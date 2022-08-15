@@ -1,0 +1,33 @@
+.about {
+    margin-bottom: 90px;
+    display: flex;
+}
+
+.personal_info_item {
+    background-color: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.personal_info_item div {
+    display: flex;
+    align-items: center;
+    margin: 0 0 5px 0;
+}
+.personal_info_item img {
+margin: 0 10px 0 0;
+}
+.personal_info_item h6 {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #515365;
+}
+
+.personal_info_item p {
+    margin: 0 0 0 20px;
+    font-size: 13px;
+    line-height: 20px;
+    color: #757a95;
+
+}

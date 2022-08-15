@@ -5,6 +5,7 @@ import { loginTC, setAppErrAC, setAppStatusAC } from "../../redux/appReducer";
 import { AppDispatchType, AppStateType } from "../../redux/store";
 import { ButtonOrange } from "../common/ButtonOrange/ButtonOrange";
 import { CustomInput } from "../common/CustomInput/CustomInput";
+import { LoginPropsType } from "./Login";
 import s from "./Login.module.css";
 
 type InitialLoginData = {
@@ -12,7 +13,7 @@ type InitialLoginData = {
     password: string;
 };
 
-export const LoginNow = ({ t, setLoginMode }: any) => {
+export const LoginNow = ({ t, setLoginMode }: LoginPropsType) => {
     const dispatch = useDispatch<AppDispatchType>();
 
     const initialData = {
@@ -29,9 +30,9 @@ export const LoginNow = ({ t, setLoginMode }: any) => {
 
     const changeMode = () => {
         dispatch(setAppStatusAC("idle"));
-        dispatch(setAppErrAC(''));
-        setLoginMode(false)
-    }
+        dispatch(setAppErrAC(""));
+        setLoginMode(false);
+    };
 
     return (
         <section>

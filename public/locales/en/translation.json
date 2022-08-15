@@ -28,7 +28,9 @@
         "emailWeb": "Email & Website",
         "education": "Education",
         "work": "Work and experience",
-        "socialNetworks": "Social Networks"
+        "socialNetworks": "Social Networks",
+        "personalInfo": "Personal Info",
+        "generalInfo": "General Info"
     }
     
 }

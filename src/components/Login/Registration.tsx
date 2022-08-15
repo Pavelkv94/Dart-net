@@ -6,6 +6,7 @@ import { AppDispatchType, AppStateType } from "../../redux/store";
 import { ButtonOrange } from "../common/ButtonOrange/ButtonOrange";
 import { CustomInput } from "../common/CustomInput/CustomInput";
 import { Circle } from "../common/Preloaders/Circle/Circle";
+import { LoginPropsType } from "./Login";
 import s from "./Login.module.css";
 
 type InitialRegisterData = {
@@ -13,7 +14,7 @@ type InitialRegisterData = {
     password: string;
 };
 
-export const Registration = ({ t, setLoginMode }: any) => {
+export const Registration = ({ t, setLoginMode }: LoginPropsType) => {
     const dispatch = useDispatch<AppDispatchType>();
 
     const initialData = {
