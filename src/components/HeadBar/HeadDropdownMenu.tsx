@@ -1,16 +1,18 @@
 import React, { MouseEvent, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { AppStateType } from "../../redux/store";
 import s from "./HeadBar.module.css";
 
 export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit }: any) => {
     const onStopPropagation = (e: MouseEvent<HTMLElement>) => e.stopPropagation();
     const onClose = () => setOpenProfileMenu(false);
+    const email = useSelector<AppStateType, string>(state => state.app.user.email);
 
     return (
         <div className={s.dropdown_menu} onClick={onStopPropagation} onBlur={onClose} tabIndex={-1}>
             <div className={s.user_info}>
-                <p>NAME SURNAME</p>
-                <p>test@gmail.com</p>
+                <p>{email}</p>
             </div>
             <NavLink to="/profile" style={{ textDecoration: "none" }} onClick={onClose}>
                 <div className={s.link_menu_item}>

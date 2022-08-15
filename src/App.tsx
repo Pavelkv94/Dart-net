@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Login } from "./components/Login/Login";
-import { Main } from "./components/Main/Main";
+import { Circle } from "./components/common/Preloaders/Circle/Circle";
 import { meTC } from "./redux/appReducer";
 import { AppDispatchType } from "./redux/store";
+
+const Login = React.lazy(() => import("./components/Login/Login"));
+const Main = React.lazy(() => import("./components/Main/Main"));
 
 function App() {
     const dispatch = useDispatch<AppDispatchType>();
@@ -22,7 +24,7 @@ function App() {
 
     return (
         <Routes>
-            <Route element={<Login />} path="/login" />
+            <Route element={<Suspense fallback={<Circle />}><Login /></Suspense>} path="/login" />
             <Route element={<Main mode={displayMode.profile} />} path="/profile" />
             <Route element={<Main mode={displayMode.messages} />} path="/messages" />
             <Route element={<div>empty</div>} path="*" />

@@ -1,3 +1,4 @@
+import { AppDispatchType } from './store';
 import { API } from "../api/api";
 
 export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
@@ -63,7 +64,7 @@ export const logoutAC = () => ({
     type: "LOGOUT",
 });
 
-export const loginTC = (payload: any) => async (dispatch: any) => {
+export const loginTC = (payload: any) => async (dispatch: AppDispatchType) => {
     dispatch(setAppStatusAC("loading"));
     await API.login(payload)
         .then((res) => {
@@ -79,7 +80,7 @@ export const loginTC = (payload: any) => async (dispatch: any) => {
         });
 };
 
-export const registrationTC = (payload: any) => (dispatch: any) => {
+export const registrationTC = (payload: any) => (dispatch: AppDispatchType) => {
     dispatch(setAppStatusAC("loading"));
     API.registration(payload)
         .then((res) => {
@@ -92,7 +93,7 @@ export const registrationTC = (payload: any) => (dispatch: any) => {
         });
 };
 
-export const meTC = (user_id: string | null) => (dispatch: any) => {
+export const meTC = (user_id: string | null) => (dispatch: AppDispatchType) => {
     dispatch(setAppStatusAC("loading"));
 
     API.me(user_id)

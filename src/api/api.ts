@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const expandHeaders = async () => ({
+export const expandHeaders = async () => ({
     Authorization: `Bearer ${localStorage.getItem("token")}`,
 });
 
-const baseUrl = (url: string) => `${process.env.REACT_APP_HOST}${url}`;
+export const baseUrl = (url: string) => `${process.env.REACT_APP_HOST}${url}`;
 
-const instance = {
+export const instance = {
     get: (url: string, headers: any = {}, params: any = {}) => {
         return axios.get(url, {
             headers,
@@ -31,6 +31,10 @@ const instance = {
 };
 
 export const API = {
+    //todo Profile
+    async getProfileInfo(user_id:string) {
+        return instance.get(baseUrl(`/profile/${user_id}`), await expandHeaders());
+    },
     // async createCategory(title: any) {
     //     return instance.post(baseUrl("/categories"), await expandHeaders(), {
     //         title: title,
@@ -71,6 +75,7 @@ export const API = {
     //         category,
     //     });
     // },
+    //todo AUTH
     async login(payload: any) {
         return instance.post(baseUrl("/auth/login"), {}, payload);
     },
@@ -78,9 +83,6 @@ export const API = {
         return instance.post(baseUrl("/auth/registration"), {}, payload);
     },
     async me(user_id: string | null) {
-        return instance.get(
-            baseUrl(`/auth/me/${user_id}`),
-            await expandHeaders()
-        );
+        return instance.get(baseUrl(`/auth/me/${user_id}`), await expandHeaders());
     },
 };

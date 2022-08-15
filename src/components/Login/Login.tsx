@@ -11,7 +11,7 @@ import { Navigate } from "react-router-dom";
 
 type LangType = "ru" | "en";
 
-export const Login = () => {
+const Login = () => {
     const { t, i18n } = useTranslation();
 
     const [lang, setLang] = useState(i18n.language);
@@ -58,3 +58,5 @@ export const Login = () => {
             </div>
         );
 };
+
+export default Login;

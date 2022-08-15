@@ -3,12 +3,11 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger'
 import { appReducer } from "./appReducer";
 import { configureStore } from "@reduxjs/toolkit";
+import { profileReducer } from "./profileReducer";
 
 const rootReducer = combineReducers({
-    // categories: categoriesReducer,
-	// posts: postsReducer,
-	// filter: filterReducer,
-	app: appReducer
+	app: appReducer,
+	profile: profileReducer
 
 });
 

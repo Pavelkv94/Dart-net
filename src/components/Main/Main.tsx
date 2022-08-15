@@ -6,11 +6,12 @@ import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { AppDispatchType, AppStateType } from "../../redux/store";
 import { useSelector } from "react-redux";
-import { Profile } from "../Profile/Profile";
-import { Messages } from "../Messages/Messages";
 import { Circle } from "../common/Preloaders/Circle/Circle";
 
-export const Main = ({mode}: any) => {
+const Profile = React.lazy(() => import("../Profile/Profile"));
+const Messages = React.lazy(() => import("../Messages/Messages"));
+
+const Main = ({ mode }: any) => {
     const dispatch = useDispatch<AppDispatchType>();
 
     const isAuth = useSelector<AppStateType, boolean>((state) => state.app.isAuth);
@@ -22,15 +23,27 @@ export const Main = ({mode}: any) => {
         localStorage.removeItem("role");
     };
 
-    const currentWindow = (mode:any) => {
+    const currentWindow = (mode: any) => {
         switch (mode) {
             case "profile":
-                return <Suspense fallback={<Circle/>}><Profile /></Suspense>;;
+                return (
+                    <Suspense fallback={<Circle />}>
+                        <Profile />
+                    </Suspense>
+                );
             case "messages":
-                return <Suspense fallback={<Circle/>}><Messages /></Suspense>;;
+                return (
+                    <Suspense fallback={<Circle />}>
+                        <Messages />
+                    </Suspense>
+                );
 
             default:
-                return <Suspense fallback={<Circle/>}><Profile /></Suspense>;;
+                return (
+                    <Suspense fallback={<Circle />}>
+                        <Profile />
+                    </Suspense>
+                );
         }
     };
 
@@ -40,7 +53,9 @@ export const Main = ({mode}: any) => {
         return (
             <div className={s.main}>
                 <HeadBar exit={logout} />
-                {currentWindow(mode)}
+                <div className={s.content}>{currentWindow(mode)}</div>
             </div>
         );
 };
+
+export default Main;
