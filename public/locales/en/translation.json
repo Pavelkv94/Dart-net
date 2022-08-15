@@ -15,6 +15,20 @@
         "haveAcc": "If you have an account?",
         "regDescript": "By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. You may receive Email notifications from us and can opt out at any time.",
         "regSuccess": "Registration completed. Redirecting to login page..."
+    },
+    "profile": {
+        "posts": "Posts",
+        "friends": "Friends",
+        "aboutMe": "About Me",
+        "gallery": "Gallery",
+        "birthday": "Birthday",
+        "gender": "Gender",
+        "country": "Country",
+        "joined": "Joined",
+        "emailWeb": "Email & Website",
+        "education": "Education",
+        "work": "Work and experience",
+        "socialNetworks": "Social Networks"
     }
     
 }
