@@ -20,6 +20,7 @@
         "posts": "Posts",
         "friends": "Friends",
         "aboutMe": "About Me",
+        "about": "About",
         "gallery": "Gallery",
         "birthday": "Birthday",
         "gender": "Gender",
@@ -30,7 +31,8 @@
         "work": "Work and experience",
         "socialNetworks": "Social Networks",
         "personalInfo": "Personal Info",
-        "generalInfo": "General Info"
+        "generalInfo": "General Info",
+        "changeImage": "Change image"
     }
     
 }

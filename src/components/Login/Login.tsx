@@ -9,7 +9,7 @@ import { AppStateType } from "../../redux/store";
 import { RequestStatusType } from "../../redux/appReducer";
 import { Navigate } from "react-router-dom";
 
-type LangType = "ru" | "en";
+export type LangType = "ru" | "en";
 
 export type LoginPropsType = {
     t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
@@ -31,7 +31,7 @@ const Login = () => {
     };
 
     if (isAuth && status === "succeeded") {
-        return <Navigate to={"/profile"} />;
+        return <Navigate to={"/profile/about"} />;
     } else
         return (
             <div className={s.login_wrapper}>

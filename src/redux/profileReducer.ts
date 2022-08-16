@@ -84,16 +84,18 @@ export const setProfileStatusAC = (status: RequestStatusType) => {
 
 export const getProfileTC = (user_id: string) => async (dispatch: AppDispatchType) => {
     dispatch(setProfileStatusAC("loading"));
-    await profileAPI.getProfileInfo(user_id).then((res) => {
-        let data = res.data;
-        delete data['_id']
-        delete data['__v']
-        dispatch(setProfileInfoAC(data))
-        dispatch(setProfileStatusAC("succeeded"));
-    })
-    .catch((e) => {
-        dispatch(setProfileStatusAC("failed"));
-    });
+    await profileAPI
+        .getProfileInfo(user_id)
+        .then((res) => {
+            let data = res.data;
+            delete data["_id"];
+            delete data["__v"];
+            dispatch(setProfileInfoAC(data));
+            dispatch(setProfileStatusAC("succeeded"));
+        })
+        .catch((e) => {
+            dispatch(setProfileStatusAC("failed"));
+        });
 };
 // export const getProfileInfoAC = (status: RequestStatusType) => {
 //     return {
@@ -101,3 +103,18 @@ export const getProfileTC = (user_id: string) => async (dispatch: AppDispatchTyp
 //         status,
 //     };
 // };
+
+// const savePhotoAC= (photo: any) => ({
+//         type: "SAVE-PHOTO",
+//         photo
+//     })
+export const getPhotoTC = () => async (dispatch: AppDispatchType) => {
+    await profileAPI.getProfilePhoto().then((res) => console.log(res));
+};
+
+export const savePhotoTC = (file: File, user_id: string) => async (dispatch: AppDispatchType) => {
+    await profileAPI.saveProfilePhoto(file).then((res) => console.log(res))
+    .then(() => dispatch(getProfileTC(user_id))    );
+};
+
+

@@ -112,3 +112,48 @@
     font-size: 12px;
     color: #757a95;
 }
+.download_avatar {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #bbb;
+    transition: 0.5s;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.download_avatar:hover {
+    cursor: pointer;
+    background-color: #ff9c85;
+    transition: 0.5s;
+}
+.change_img_btn {
+    color: #313131;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    padding: 12px 20px;
+    transition: all 0.3s;
+    vertical-align: middle;
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.change_img_btn:hover {
+    background-color: #FF7555;
+    border: 1px solid #FF7555;
+    color: white;
+    fill: white;
+}

@@ -20,6 +20,7 @@
         "posts": "Посты",
         "friends": "Друзья",
         "aboutMe": "Обо мне",
+        "about": "Подробно",
         "gallery": "Галлерея",
         "birthday": "День рождения",
         "gender": "Пол",
@@ -30,7 +31,8 @@
         "work": "Работа и опыт",
         "socialNetworks": "Социальные сети",
         "personalInfo": "Личная информация",
-        "generalInfo": "Общая информация"
+        "generalInfo": "Общая информация",
+        "changeImage": "Изменить изображение"
     }
     
 }
