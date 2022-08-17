@@ -1,0 +1,52 @@
+.post {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ede9e9;
+    border-radius: 5px;
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 20px;
+    position: relative;
+}
+
+.post_photo img {
+    width: 100%;
+}
+
+.post_description {
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 26px;
+    color: #959ab5;
+    font-weight: 600;
+}
+
+.post_header {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.post_whois span {
+    display: flex;
+    margin-top: 10px;
+    font-size: 12px;
+}
+.post_whois span p {
+    font-size: 12px;
+    margin-left: 4px;
+    color: #999;
+}
+.post_whois p {
+    margin: 0;
+    font-size: 14px;
+}
+.post_avatar {
+    border: 1px solid red;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.post_footer {
+    border-top: 1px solid #e6ecf5;
+}

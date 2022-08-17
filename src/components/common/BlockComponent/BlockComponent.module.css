@@ -5,6 +5,7 @@
     border-radius: 5px;
     display: inline-block;
     padding: 20px;
+    z-index: 2;
 }
 .title {
     border-bottom: 1px solid #e6ecf5;

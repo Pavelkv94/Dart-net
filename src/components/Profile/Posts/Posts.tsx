@@ -1,19 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BlockComponent from "../../common/BlockComponent/BlockComponent";
 import Weather from "../../common/Weather/Weather";
 import s from "./Posts.module.css";
-import emptyProfile from "../../../assets/empty-profile.png";
-import { ButtonOrange } from "../../common/ButtonOrange/ButtonOrange";
+import AddPost from "./AddPost/AddPost";
+import Post from "../../common/Post/Post";
 
 const Posts = ({ setCurrentTab, t, profileData }: any) => {
+    const [textareaFocus, setTextareaFocus] = useState<boolean>(false);
 
     useEffect(() => {
         setCurrentTab("posts");
     }, [setCurrentTab]);
-
-    const avatar = {
-        backgroundImage: profileData.photo ? `url(${process.env.REACT_APP_HOST}${profileData.photo})` : `url(${emptyProfile})`,
-    };
 
     return (
         <div className={s.posts}>
@@ -22,13 +19,16 @@ const Posts = ({ setCurrentTab, t, profileData }: any) => {
                 <Weather />
             </section>
             <section className={s.main_panel}>
-                <BlockComponent title={t("posts.createPost")} width={"calc(100% - 40px)"} margin={"0 0 0 0"} component={<div>
-                    <div className={s.type_post}>
-                        <div className={s.post_author_wrapper}><div className={s.post_author} style={avatar}></div></div>
-                        <textarea cols={30} rows={4}></textarea>
-                    </div>
-                    <div className={s.create_post_controls}><ButtonOrange width={200} height={40} title={t('posts.publish')}/></div>
-                </div>} />
+                {textareaFocus && <div className={s.focused_back} onClick={() => setTextareaFocus(false)}></div>}
+                <BlockComponent
+                    title={t("posts.createPost")}
+                    width={"calc(100% - 40px)"}
+                    margin={"0 0 0 0"}
+                    position={"relative"}
+                    component={<AddPost t={t} profileData={profileData} setTextareaFocus={setTextareaFocus} />}
+                />
+
+                <Post  width={"calc(100% - 40px)"} />
             </section>
         </div>
     );

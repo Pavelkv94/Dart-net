@@ -1,10 +1,10 @@
 import React from "react";
 import s from './ButtonOrange.module.css'
 
-export const ButtonOrange = ({title, width, height, onClick, disabled = false}:any) => {
+export const ButtonOrange = ({title, width, height, onClick, disabled = false, alignSelf}:any) => {
 
     const style = {
-        width, height
+        width, height, alignSelf
     }
 
     return(
