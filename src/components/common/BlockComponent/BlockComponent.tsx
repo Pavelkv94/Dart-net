@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./BlockComponent.module.css";
 
-const BlockComponent = ({ width = 300, height = "100%", margin, title, component }: any) => {
+const BlockComponent = ({ width = 300, height, margin, title, component }: any) => {
     const style = {
         width,
         height,

@@ -39,7 +39,7 @@ const ProfileInfo = ({ t, profileData, user_id, currentTab }: ProfileInfoPropsTy
         }
     };
     const changeBackground = () => {
-        dispatch(changeBackgroundTC(backUrl));
+        if(backUrl.trim() !== ""){dispatch(changeBackgroundTC(backUrl));}
         setBackUrl("");
         setOpenBackUrl(false);
     };

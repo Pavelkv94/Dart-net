@@ -1,6 +1,5 @@
 import { profileAPI } from "./../api/profileAPI";
 import { AppDispatchType } from "./store";
-import { API } from "../api/api";
 
 export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
 

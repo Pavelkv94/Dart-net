@@ -34,6 +34,10 @@
         "generalInfo": "General Info",
         "changeImage": "Change image",
         "enterUrl": "Enter picture URL"
+    },
+    "posts": {
+        "createPost": "Create Post",
+        "publish": "Publish"
     }
     
 }

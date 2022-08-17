@@ -34,6 +34,10 @@
         "generalInfo": "Общая информация",
         "changeImage": "Изменить изображение",
         "enterUrl": "Введите URL картинки"
+    },
+    "posts": {
+        "createPost": "Создать пост",
+        "publish": "Опубликовать"
     }
     
 }

@@ -14,7 +14,7 @@ export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit }: 
             <div className={s.user_info}>
                 <p>{email}</p>
             </div>
-            <NavLink to="/profile" style={{ textDecoration: "none" }} onClick={onClose}>
+            <NavLink to="/profile/about" style={{ textDecoration: "none" }} onClick={onClose}>
                 <div className={s.link_menu_item}>
                     <svg width="22px" height="22px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className={s.svg}>
                         <title />

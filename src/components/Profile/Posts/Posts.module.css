@@ -1,0 +1,44 @@
+.posts {
+    margin-bottom: 90px;
+    min-height: 200px;
+    display: flex;
+}
+.right_panel {
+    width: 25%;
+    padding-right: 40px;
+}
+.main_panel {
+    width: 70%;
+    margin-left: 20px;
+    /* padding: 20px; */
+}
+.type_post {
+    display: flex;
+}
+.type_post textarea {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    resize: none;
+    overflow-y: scroll;
+    border: 1px solid #e6ecf5;
+    border-radius: 5px;
+}
+.post_author_wrapper {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+}
+.post_author {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 20px;
+    background-size: cover;
+    background-position: center;
+}
+.create_post_controls {
+    border: 1px solid red;
+    display: flex;
+    margin-top: 20px;
+}

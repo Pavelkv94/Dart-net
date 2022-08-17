@@ -42,7 +42,7 @@ const Profile = () => {
                         path="posts"
                         element={
                             <Suspense fallback={<Circle />}>
-                                <Posts setCurrentTab={setCurrentTab} t={t} />
+                                <Posts setCurrentTab={setCurrentTab} t={t} profileData={profileData}/>
                             </Suspense>
                         }
                     />

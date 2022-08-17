@@ -1,0 +1,16 @@
+.weather {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../../../assets/weather.jpg');
+    padding: 20px;
+    position: relative;
+    color: #fff;
+    text-align: center;
+    background-color: #ff7555;
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    height: 200px;
+}
