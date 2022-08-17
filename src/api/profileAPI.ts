@@ -14,8 +14,7 @@ export const profileAPI = {
         formData.append("image", photoFile);
         return instance.post(baseUrl(`/profile/upload`),await expandHeadersForPhoto(), formData);
     },
-    async getProfilePhoto() {
-        return instance.get(baseUrl(`/profile/get`),await expandHeadersForPhoto());
-    },
-    
+    async changeBackground(url: string) {
+        return instance.put(baseUrl('/profile/changeBackground'), await expandHeadersForPhoto(), {url})
+    }
 };

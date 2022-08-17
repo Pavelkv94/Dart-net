@@ -15,7 +15,7 @@
     margin: 0 0 5px 0;
 }
 .personal_info_item img {
-margin: 0 10px 0 0;
+    margin: 0 10px 0 0;
 }
 .personal_info_item h6 {
     margin: 0;
@@ -29,5 +29,37 @@ margin: 0 10px 0 0;
     font-size: 13px;
     line-height: 20px;
     color: #757a95;
-
+}
+.social_networks {
+    border-top: 1px solid #e6ecf5;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.social_networks span {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 15px;
+    margin-bottom: 20px;
+    color: #515365;
+}
+.social_networks_items {
+    display: flex;
+    flex-wrap: wrap;
+}
+.social_networks_items a {
+    margin: 10px;
+    transition: 0.1s;
+}
+.social_networks_items a:hover {
+    transform: scale(1.2);
+    transition: 0.1s;
+}
+.social_link {
+    border: 2px solid #ff7555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 10px;
 }

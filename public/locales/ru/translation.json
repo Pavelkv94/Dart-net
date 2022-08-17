@@ -32,7 +32,8 @@
         "socialNetworks": "Социальные сети",
         "personalInfo": "Личная информация",
         "generalInfo": "Общая информация",
-        "changeImage": "Изменить изображение"
+        "changeImage": "Изменить изображение",
+        "enterUrl": "Введите URL картинки"
     }
     
 }

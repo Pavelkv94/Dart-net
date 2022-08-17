@@ -29,6 +29,8 @@ export type ProfileInfoType = {
     contacts: ContactsType;
     about: string;
     created_at: string;
+    education: string;
+    work: string;
 };
 const initialState = {
     profileData: {
@@ -52,6 +54,8 @@ const initialState = {
         },
         about: "",
         created_at: "",
+        education: "",
+        work: "",
     },
     status: "idle" as RequestStatusType,
 };
@@ -62,7 +66,11 @@ export function profileReducer(state: InitialStateType = initialState, action: A
     switch (action.type) {
         case "GET-PROFILE-INFO":
             return { ...state, profileData: action.payload };
-
+        case "SAVE-BACKGROUND":
+            return { ...state, profileData: { ...state.profileData, background: action.url } };
+        case "SAVE - PHOTO":
+            return { ...state, profileData: { ...state.profileData, photo: action.photoUrl } };
+            
         default:
             return state;
     }
@@ -104,17 +112,20 @@ export const getProfileTC = (user_id: string) => async (dispatch: AppDispatchTyp
 //     };
 // };
 
-// const savePhotoAC= (photo: any) => ({
-//         type: "SAVE-PHOTO",
-//         photo
-//     })
-export const getPhotoTC = () => async (dispatch: AppDispatchType) => {
-    await profileAPI.getProfilePhoto().then((res) => console.log(res));
+const savePhotoAC = (photoUrl: any) => ({
+    type: "SAVE-PHOTO",
+    photoUrl,
+});
+
+const saveBackgroundAC = (url: string) => ({
+    type: "SAVE-BACKGROUND",
+    url,
+});
+
+export const savePhotoTC = (file: File) => async (dispatch: AppDispatchType) => {
+    await profileAPI.saveProfilePhoto(file).then((res) => dispatch(savePhotoAC(res.data.path)));
 };
 
-export const savePhotoTC = (file: File, user_id: string) => async (dispatch: AppDispatchType) => {
-    await profileAPI.saveProfilePhoto(file).then((res) => console.log(res))
-    .then(() => dispatch(getProfileTC(user_id))    );
+export const changeBackgroundTC = (url: string) => async (dispatch: AppDispatchType) => {
+    await profileAPI.changeBackground(url).then((res) => dispatch(saveBackgroundAC(res.data.image)));
 };
-
-

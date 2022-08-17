@@ -32,7 +32,8 @@
         "socialNetworks": "Social Networks",
         "personalInfo": "Personal Info",
         "generalInfo": "General Info",
-        "changeImage": "Change image"
+        "changeImage": "Change image",
+        "enterUrl": "Enter picture URL"
     }
     
 }
