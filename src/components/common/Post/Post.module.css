@@ -12,7 +12,11 @@
 .post_photo img {
     width: 100%;
 }
-
+.post_photo {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .post_description {
     font-size: 14px;
     letter-spacing: 0.1px;
@@ -25,6 +29,7 @@
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 .post_whois span {
     display: flex;
@@ -55,7 +60,109 @@
     padding-top: 10px;
 }
 .likes,
-.comments{
+.comments {
     margin-right: 30px;
+    cursor: pointer;
+}
 
+.dots {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 2px;
+    transition: 0.3s;
+}
+.dots:hover {
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: rgb(216, 216, 216);
+}
+
+/* COMMENTS */
+.comment_wrapper {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.comment_main {
+    width: 100%;
+    margin-left: 10px;
+}
+.comment_main p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 20px;
+    color: #959ab5;
+}
+.comment_main p b {
+    margin-right: 10px;
+    color: #515365;
+}
+.comment_author_wrapper {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+}
+.comment_author {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+}
+.comment_main {
+    display: flex;
+    flex-direction: column;
+}
+.comment_controls {
+    border-bottom: 1px solid #e6ecf5;
+    padding: 5px 0;
+    font-size: 12px;
+    line-height: 20px;
+    color: #515365;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.likes_comment {
+    cursor: pointer;
+    margin-left: 30px;
+}
+.likes_comment svg {
+    width: 14px;
+    height: 14px;
+    color: #515365;
+}
+.comment_textarea {
+    width: 100%;
+    outline: none;
+    resize: none;
+    overflow-y: scroll;
+    border: 1px solid #e6ecf5;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+}
+.add_comment {
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: flex;
+}
+.comment_textarea_wrapper {
+    width: 90%;
+}
+.add_comment_controls {
+    display: flex;
+}
+.emoji_block {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+.emoji {
+    margin: 0 2px;
+    cursor: pointer;
 }

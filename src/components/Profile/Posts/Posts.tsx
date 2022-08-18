@@ -23,8 +23,6 @@ const Posts = ({ setCurrentTab, t, profileData }: PostsPropsType) => {
 
     const myPosts = useSelector<AppStateType, Array<PostType>>((state) => state.posts.myPosts);
 
-    console.log(myPosts);
-
     const [textareaFocus, setTextareaFocus] = useState<boolean>(false);
 
     useEffect(() => {
@@ -39,7 +37,7 @@ const Posts = ({ setCurrentTab, t, profileData }: PostsPropsType) => {
         <div className={s.posts}>
             <section className={s.right_panel}>
                 <BlockComponent title={t("profile.personalInfo")} width={"100%"} margin={"0 10px 0 0"} component={<div>asd asd asd a</div>} />
-                <Weather />
+                <Weather t={t}/>
             </section>
             <section className={s.main_panel}>
                 {textareaFocus && <div className={s.focused_back} onClick={() => setTextareaFocus(false)}></div>}

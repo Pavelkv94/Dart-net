@@ -39,7 +39,43 @@
         "createPost": "Создать пост",
         "publish": "Опубликовать",
         "pinPicture": "Прикрепить картинку",
-        "enterImgUrl" : "Введите URL картинки:"
+        "enterImgUrl" : "Введите URL картинки:",
+        "published": "Опубликовано:"
+    },
+    "months": {
+        "january": "Январь",
+        "february": "Февраль",
+        "march": "Март",
+        "april": "Апрель",
+        "may": "Май",
+        "june": "Июнь",
+        "july": "Июль",
+        "august": "Август",
+        "september": "Сентябрь",
+        "october": "Октябрь",
+        "november": "Ноябрь",
+        "december": "Декабрь"
+    },
+    "cities": {
+        "minsk": "Минск, BY",
+        "moscow": "Москва, RU",
+        "london": "Лондон, UK'",
+        "paris": "Париж, FR",
+        "warsaw": "Варшава, PL",
+        "newYork": "Нью Йорк, US",
+        "prague": "Прага, CZ",
+        "amsterdam": "Амстердам, NL",
+        "cyprus": "Кипр, JM",
+        "sydney": "Сидней, AU"
+    },
+    "days": {
+        "monday": "Понедельник",
+        "tuesday": "Вторник",
+        "wednesday": "Среда",
+        "thursday": "Четверг",
+        "friday": "Пятница",
+        "saturday": "Суббота",
+        "sunday": "Воскресенье"
     }
     
 }

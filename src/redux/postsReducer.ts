@@ -6,13 +6,14 @@ export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
 
 type ActionType = any;
 
-type CommentType = {
+export type CommentType = {
     user: string;
     user_id: string
     userAvatar: string;
     message: string;
     created_at: string;
     likes: number;
+    post_id: string | undefined;
 };
 
 export type PostType = {
@@ -22,8 +23,9 @@ export type PostType = {
     userAvatar: string;
     created_at?: string | Date;
     text: string;
-    likes: number
+    likes: Array<string>
     comments: Array<CommentType>
+    _id?: string | undefined
 };
 
 const initialState = {
@@ -39,7 +41,7 @@ export function postsReducer(state: InitialStateType = initialState, action: Act
         // case "SET-APP-STATUS":
         //     return { ...state, status: action.status };
         case "GET-MY-POSTS":
-            return { ...state, myPosts: action.payload };
+            return { ...state, myPosts: action.payload.reverse() };
         // case "SET-APP-ERR":
         //     return { ...state, error: action.err };
         // case "SET_ME":
@@ -72,3 +74,12 @@ export const getMyPostsTC = () => async (dispatch: AppDispatchType) => {
 export const createPostTC = (payload: PostType) => async (dispatch: AppDispatchType) => {
     postsAPI.createPost(payload).then((res) => dispatch(getMyPostsTC()))
 }
+
+export const sendCommentTC = (payload: any) => async (dispatch: AppDispatchType) => {
+    postsAPI.createComment(payload).then(() => dispatch(getMyPostsTC()))
+}
+
+export const likedTC = (payload: any) => async (dispatch: AppDispatchType) => {
+    postsAPI.liked(payload).then((res) => dispatch(getMyPostsTC()))
+}
+

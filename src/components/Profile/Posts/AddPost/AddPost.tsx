@@ -30,7 +30,7 @@ const AddPost = ({ t, profileData, setTextareaFocus }: AddPostPropsType) => {
         user_id: profileData.user_id,
         userAvatar: `${process.env.REACT_APP_HOST}${profileData.photo}`,
         text: "",
-        likes: 0,
+        likes: [],
         comments: [],
     };
 

@@ -39,7 +39,42 @@
         "createPost": "Create Post",
         "publish": "Publish",
         "pinPicture": "Pin picture",
-        "enterImgUrl" : "Enter image URL:"
+        "enterImgUrl": "Enter image URL:",
+        "published": "Published:"
+    },
+    "months": {
+        "january": "Januaryь",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
+    },
+    "cities": {
+        "minsk": "Minsk, BY",
+        "moscow": "Moscow, RU",
+        "london": "London, UK'",
+        "paris": "Paris, FR",
+        "warsaw": "Warsaw, PL",
+        "newYork": "New York, US",
+        "prague": "Prague, CZ",
+        "amsterdam": "Amsterdam, NL",
+        "cyprus": "Cyprus, JM",
+        "sydney": "Sydney, AU"
+    },
+    "days": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
     }
-    
 }

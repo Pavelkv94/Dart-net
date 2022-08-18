@@ -7,6 +7,13 @@ export const postsAPI = {
     },
     async getMyPosts() {
         return instance.get(baseUrl("/posts/getMyPosts"), await expandHeaders());
+    },
+    async  createComment(payload: any) {
+        return instance.put(baseUrl("/posts/addComment"), await expandHeaders(), payload);
+    },
+    async liked(payload:any) {
+        return instance.post(baseUrl("/posts/liked"), await expandHeaders(), payload);
     }
+
    
 };
