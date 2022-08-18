@@ -4,10 +4,12 @@ import logger from 'redux-logger'
 import { appReducer } from "./appReducer";
 import { configureStore } from "@reduxjs/toolkit";
 import { profileReducer } from "./profileReducer";
+import { postsReducer } from "./postsReducer";
 
 const rootReducer = combineReducers({
 	app: appReducer,
-	profile: profileReducer
+	profile: profileReducer,
+	posts: postsReducer
 
 });
 

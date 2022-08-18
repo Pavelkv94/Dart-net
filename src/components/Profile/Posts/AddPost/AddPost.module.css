@@ -1,5 +1,6 @@
 .type_post {
     display: flex;
+    margin-bottom: 20px;
 }
 .type_post textarea {
     width: 100%;
@@ -25,12 +26,12 @@
 .create_post_controls {
     /* border: 1px solid red; */
     display: flex;
-    margin-top: 20px;
+    margin-top: 10px;
     justify-content: flex-end;
     align-items: center;
 }
 .emojiBlock {
-    width: 400px;
+    max-width: 400px;
     height: 20px;
     overflow-y: scroll;
     display: flex;
@@ -71,4 +72,22 @@
     margin: 5px 20px;
     align-self: flex-end;
     cursor: pointer;
+}
+.pin_img_url {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.pin_img_url p {
+    margin: 0;
+    width: 90px;
+    font-size: 10px;
+    color: #535165;
+}
+.pin_img_url input{
+    border: 1px solid #e6ecf5;
+    outline: none;
+    width: calc(100% - 200px);
+    max-width: 480px;
+    height: 20px;
 }

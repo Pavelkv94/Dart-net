@@ -37,7 +37,9 @@
     },
     "posts": {
         "createPost": "Create Post",
-        "publish": "Publish"
+        "publish": "Publish",
+        "pinPicture": "Pin picture",
+        "enterImgUrl" : "Enter image URL:"
     }
     
 }
