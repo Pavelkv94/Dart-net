@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { changeBackgroundTC, ProfileInfoType, savePhotoTC } from "../../../redux/profileReducer";
 import { AppDispatchType } from "../../../redux/store";
 import cameraIcon from "../../../assets/svg/camera-icon.svg";
@@ -9,6 +8,7 @@ import s from "./ProfileInfo.module.css";
 import emptyProfile from "../../../assets/empty-profile.png";
 import { ReactI18NextChild } from "react-i18next";
 import { TabType } from "../Profile";
+import { useParams } from "react-router-dom";
 
 type ProfileInfoPropsType = {
     t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
@@ -19,6 +19,8 @@ type ProfileInfoPropsType = {
 };
 const ProfileInfo = ({ t, profileData, user_id, currentTab, setCurrentTab }: ProfileInfoPropsType) => {
     const dispatch = useDispatch<AppDispatchType>();
+
+    const { id } = useParams();
 
     const [openBackUrl, setOpenBackUrl] = useState<boolean>(false);
     const [backUrl, setBackUrl] = useState<string>("");
@@ -69,7 +71,7 @@ const ProfileInfo = ({ t, profileData, user_id, currentTab, setCurrentTab }: Pro
                     </div>
                 )}
                 {/* @ts-ignore */}
-                <button className={s.change_img_btn} onClick={() => setOpenBackUrl((prev) => !prev)}>
+                {!id && <button className={s.change_img_btn} onClick={() => setOpenBackUrl((prev) => !prev)}>
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 512 512" width={16} height={16} style={{ marginRight: "4px" }}>
                         <g>
                             <g>
@@ -94,13 +96,13 @@ M261.333,170.667c-8.822,0-16-7.178-16-16s7.178-16,16-16c8.822,0,16,7.178,16,16S2
                         </g>
                     </svg>
                     {t("profile.changeImage")}
-                </button>
+                </button>}
                 <div className={s.top_screen_avatar_wrapper}>
                     <div className={s.top_screen_avatar} style={avatar}>
                         {/* @ts-ignore */}
-                        <div onClick={() => avaRef.current.click()} className={s.download_avatar}>
+                        {!id && <div onClick={() => avaRef.current.click()} className={s.download_avatar}>
                             <img src={cameraIcon} alt="camera icon" width={20} height={20} />{" "}
-                        </div>
+                        </div>}
                     </div>
                 </div>
                 {/* @ts-ignore */}
@@ -116,7 +118,9 @@ M261.333,170.667c-8.822,0-16-7.178-16-16s7.178-16,16-16c8.822,0,16,7.178,16,16S2
                         {t("profile.posts")}
                     </div>
 
-                    <div className={s.top_screen_navigate_menu_item}>{t("profile.gallery")}</div>
+                    <div className={`${s.top_screen_navigate_menu_item} ${currentTab === "saved" ? s.active : undefined}`} onClick={() => setCurrentTab("saved")}>
+                        {t("profile.gallery")}
+                    </div>
                     <div className={`${s.top_screen_navigate_menu_item} ${currentTab === "about" ? s.active : undefined}`} onClick={() => setCurrentTab("about")}>
                         {t("profile.about")}
                     </div>
@@ -128,7 +132,7 @@ M261.333,170.667c-8.822,0-16-7.178-16-16s7.178-16,16-16c8.822,0,16,7.178,16,16S2
                     </div>
                     <div className={s.navigate_stats}>
                         <span>{t("profile.friends")}:</span>
-                        <span>25</span>
+                        <span>{profileData.friends.length}</span>
                     </div>
                 </section>
             </div>

@@ -11,6 +11,7 @@ import { ReactI18NextChild } from "react-i18next";
 import { TabType } from "../Profile";
 import { ProfileInfoType } from "../../../redux/profileReducer";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 type PostsPropsType = {
     t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
@@ -19,6 +20,8 @@ type PostsPropsType = {
 };
 
 const Posts = ({ setCurrentTab, t, profileData }: PostsPropsType) => {
+    const {id} = useParams();
+
     const dispatch = useDispatch<AppDispatchType>();
 
     const myPosts = useSelector<AppStateType, Array<PostType>>((state) => state.posts.myPosts);
@@ -39,15 +42,15 @@ const Posts = ({ setCurrentTab, t, profileData }: PostsPropsType) => {
                 <BlockComponent title={t("profile.personalInfo")} width={"100%"} margin={"0 10px 0 0"} component={<div>asd asd asd a</div>} />
                 <Weather t={t}/>
             </section>
-            <section className={s.main_panel}>
+           <section className={s.main_panel}>
                 {textareaFocus && <div className={s.focused_back} onClick={() => setTextareaFocus(false)}></div>}
-                <BlockComponent
+                {!id && <BlockComponent
                     title={t("posts.createPost")}
                     width={"calc(100% - 40px)"}
                     margin={"0 0 0 0"}
                     position={"relative"}
                     component={<AddPost t={t} profileData={profileData} setTextareaFocus={setTextareaFocus} />}
-                />
+                />}
 
                 {myPosts.map((el, i) => (
                     <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t}/>

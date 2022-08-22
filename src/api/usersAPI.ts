@@ -10,5 +10,7 @@ export const usersAPI = {
     async unfollow(payload:any) {
         return instance.post(baseUrl(`/users/unfollow`), await expandHeaders(), payload);
     },
-    
+    async getUserProfile(user_id:string) {
+        return instance.get(baseUrl(`/users/${user_id}`), await expandHeaders());
+    }
 };

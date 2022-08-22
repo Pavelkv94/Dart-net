@@ -9,6 +9,7 @@ type ActionType = any;
 
 const initialState = {
     users: [],
+    currentProfile: {}
 };
 
 export type InitialStateType = typeof initialState;

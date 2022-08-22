@@ -34,7 +34,7 @@ const User = ({ user, user_id, t }: any) => {
                 <div className={s.user_avatar} style={avatar}></div>
             </div>
             <div className={s.user_name}>
-                <NavLink to="#">
+                <NavLink to={`/profile/${user.user_id}`}>
                     <span>{user.name}</span>
                 </NavLink>
                 <span className={s.user_name_country}>{user.country}</span>

@@ -30,7 +30,7 @@ export type ProfileInfoType = {
     created_at: string;
     education: string;
     work: string;
-    friends: Array<string>
+    friends: Array<string>;
 };
 const initialState = {
     profileData: {
@@ -56,7 +56,7 @@ const initialState = {
         created_at: "",
         education: "",
         work: "",
-        friends: []
+        friends: [],
     },
     status: "idle" as RequestStatusType,
 };
@@ -71,7 +71,7 @@ export function profileReducer(state: InitialStateType = initialState, action: A
             return { ...state, profileData: { ...state.profileData, background: action.url } };
         case "SAVE - PHOTO":
             return { ...state, profileData: { ...state.profileData, photo: action.photoUrl } };
-            
+
         default:
             return state;
     }
@@ -106,12 +106,6 @@ export const getProfileTC = (user_id: string) => async (dispatch: AppDispatchTyp
             dispatch(setProfileStatusAC("failed"));
         });
 };
-// export const getProfileInfoAC = (status: RequestStatusType) => {
-//     return {
-//         type: "SET-APP-STATUS",
-//         status,
-//     };
-// };
 
 const savePhotoAC = (photoUrl: any) => ({
     type: "SAVE-PHOTO",
