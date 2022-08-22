@@ -31,7 +31,7 @@ const Login = () => {
     };
 
     if (isAuth && status === "succeeded") {
-        return <Navigate to={"/profile/about"} />;
+        return <Navigate to={"/profile"} />;
     } else
         return (
             <div className={s.login_wrapper}>

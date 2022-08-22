@@ -10,6 +10,7 @@ import down_arr from "../../assets/svg/down-arr.svg";
 import { useTranslation } from "react-i18next";
 import { HeadDropdownMenu } from "./HeadDropdownMenu";
 import { LangType } from "../Login/Login";
+import { NavLink } from "react-router-dom";
 
 export const HeadBar = React.memo(({ exit }: any) => {
     const { i18n } = useTranslation();
@@ -33,7 +34,7 @@ export const HeadBar = React.memo(({ exit }: any) => {
                         <img src={home} alt="home" width={20} className={s.nav_icon} />
                     </div>
                     <div className={s.navbar_item}>
-                        <img src={friends} alt="friends" width={20} className={s.nav_icon} />
+                        <NavLink to="/users"><img src={friends} alt="friends" width={20} className={s.nav_icon} /></NavLink> 
                     </div>
                     <div className={s.navbar_item}>
                         <img src={notify} alt="notify" width={20} className={s.nav_icon} />

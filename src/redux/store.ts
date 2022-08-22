@@ -5,11 +5,13 @@ import { appReducer } from "./appReducer";
 import { configureStore } from "@reduxjs/toolkit";
 import { profileReducer } from "./profileReducer";
 import { postsReducer } from "./postsReducer";
+import { usersReducer } from "./usersReducer";
 
 const rootReducer = combineReducers({
 	app: appReducer,
 	profile: profileReducer,
-	posts: postsReducer
+	posts: postsReducer,
+	users: usersReducer
 
 });
 

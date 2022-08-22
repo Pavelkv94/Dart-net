@@ -12,8 +12,9 @@ export type CommentType = {
     userAvatar: string;
     message: string;
     created_at: string;
-    likes: number;
+    likes: Array<string>;
     post_id: string | undefined;
+    comment_id?: string
 };
 
 export type PostType = {
@@ -42,16 +43,6 @@ export function postsReducer(state: InitialStateType = initialState, action: Act
         //     return { ...state, status: action.status };
         case "GET-MY-POSTS":
             return { ...state, myPosts: action.payload.reverse() };
-        // case "SET-APP-ERR":
-        //     return { ...state, error: action.err };
-        // case "SET_ME":
-        //     return {
-        //         ...state,
-        //         isAuth: true,
-        //         user: {...action.payload, token: state.user.token, }
-        //     };
-        // case "LOGOUT":
-        //     return { ...state, isAuth: false, user: {} };
         default:
             return state;
     }
@@ -79,7 +70,15 @@ export const sendCommentTC = (payload: any) => async (dispatch: AppDispatchType)
     postsAPI.createComment(payload).then(() => dispatch(getMyPostsTC()))
 }
 
-export const likedTC = (payload: any) => async (dispatch: AppDispatchType) => {
-    postsAPI.liked(payload).then((res) => dispatch(getMyPostsTC()))
+export const likedPostTC = (payload: any) => async (dispatch: AppDispatchType) => {
+    postsAPI.likedPost(payload).then((res) => dispatch(getMyPostsTC()))
+}
+
+export const unlikedPostTC = (payload: any) => async (dispatch: AppDispatchType) => {
+    postsAPI.unlikedPost(payload).then((res) => dispatch(getMyPostsTC()))
+}
+
+export const likedCommentTC = (payload: any) => async (dispatch: AppDispatchType) => {
+    postsAPI.likedComment(payload).then((res) => dispatch(getMyPostsTC()))
 }
 

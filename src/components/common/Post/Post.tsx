@@ -3,7 +3,7 @@ import s from "./Post.module.css";
 import planet from "../../../assets/svg/about-country.svg";
 import comment from "../../../assets/svg/comment.svg";
 import { ReactI18NextChild } from "react-i18next";
-import { CommentType, likedTC, PostType, sendCommentTC } from "../../../redux/postsReducer";
+import { CommentType, likedCommentTC, likedPostTC, PostType, sendCommentTC, unlikedPostTC } from "../../../redux/postsReducer";
 import threeDots from "../../../assets/svg/three-dots.svg";
 import Comment from "./Comment";
 import { ButtonOrange } from "../ButtonOrange/ButtonOrange";
@@ -39,7 +39,7 @@ const Post = ({ t, width, postData }: PostPropsType) => {
         userAvatar: `${process.env.REACT_APP_HOST}${profileData.photo}`,
         message: "",
         created_at: "",
-        likes: 0,
+        likes: [],
         post_id: postData._id,
     };
 
@@ -52,11 +52,11 @@ const Post = ({ t, width, postData }: PostPropsType) => {
         }
     };
 
-    const setLike = () => {
+    const setPostLike = () => {
         if (!postData.likes.find((el) => el === user_id)) {
-            dispatch(likedTC({ post_id: postData._id, user_id: user_id }));
+            dispatch(likedPostTC({ post_id: postData._id, user_id: user_id }));
         } else {
-            //unliked
+            dispatch(unlikedPostTC({ post_id: postData._id, user_id: user_id }));
         }
     };
 
@@ -71,28 +71,6 @@ const Post = ({ t, width, postData }: PostPropsType) => {
     };
 
     const colorLike = postData.likes.find((el) => el === user_id) ? "#FF7555" : "#535165"
-    const comments = [
-        {
-            user: "Pavel Kazlou",
-            user_id: "07264700-1c94-11ed-a6cb-edb0c9ea4f0c",
-            userAvatar: "http://localhost:5000/storage/07264700-1c94-11ed-a6cb-edb0c9ea4f0c.jpg",
-            message:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla porttitor accumsan tincidunt.",
-            created_at: "12/12/12",
-            likes: 22,
-            post_id: "12",
-        },
-        {
-            user: "Pavel Kazlou",
-            user_id: "07264700-1c94-11ed-a6cb-edb0c9ea4f0c",
-            userAvatar: "http://localhost:5000/storage/07264700-1c94-11ed-a6cb-edb0c9ea4f0c.jpg",
-            message:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla porttitor accumsan tincidunt.",
-            created_at: "12/12/12",
-            likes: 22,
-            post_id: "12",
-        },
-    ];
 
     const emojiArray = [
         emoji.unicode[0],
@@ -133,7 +111,7 @@ const Post = ({ t, width, postData }: PostPropsType) => {
                 </div>
             </div>
             <div className={s.post_footer}>
-                <div title="Like" className={s.likes} onClick={setLike}>
+                <div title="Like" className={s.likes} onClick={setPostLike}>
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30px" height="30px" fill={colorLike} viewBox="0 0 544.582 544.582">
                         <g>
                             <path
@@ -179,7 +157,7 @@ const Post = ({ t, width, postData }: PostPropsType) => {
                         </div>
                     </div>
                     {postData.comments.map((el, i) => (
-                        <Comment key={i} comment={el} />
+                        <Comment key={i} comment={el} user_id={user_id}/>
                     ))}
                 </div>
             )}

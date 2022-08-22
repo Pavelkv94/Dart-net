@@ -30,6 +30,7 @@ export type ProfileInfoType = {
     created_at: string;
     education: string;
     work: string;
+    friends: Array<string>
 };
 const initialState = {
     profileData: {
@@ -55,6 +56,7 @@ const initialState = {
         created_at: "",
         education: "",
         work: "",
+        friends: []
     },
     status: "idle" as RequestStatusType,
 };

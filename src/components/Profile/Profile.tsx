@@ -35,9 +35,11 @@ const Profile = () => {
     } else
         return (
             <div className={s.profile_wrapper}>
-                <ProfileInfo t={t} profileData={profileData} user_id={user_id} currentTab={currentTab} />
+                <ProfileInfo t={t} profileData={profileData} user_id={user_id} currentTab={currentTab} setCurrentTab={setCurrentTab}/>
 
-                <Routes>
+{currentTab === "about" && <About setCurrentTab={setCurrentTab} t={t} profileData={profileData} />}
+{currentTab === "posts" &&  <Posts setCurrentTab={setCurrentTab} t={t} profileData={profileData}/>}
+                {/* <Routes>
                     <Route
                         path="posts"
                         element={
@@ -62,7 +64,7 @@ const Profile = () => {
                             </Suspense>
                         }
                     />
-                </Routes>
+                </Routes> */}
             </div>
         );
 };

@@ -1,12 +1,26 @@
 import React from "react";
-import { CommentType } from "../../../redux/postsReducer";
+import { useDispatch } from "react-redux";
+import { CommentType, likedCommentTC } from "../../../redux/postsReducer";
+import { AppDispatchType } from "../../../redux/store";
 import s from "./Post.module.css";
 
 type CommentPropsType = {
     comment: CommentType;
+    user_id: string
 };
 
-const Comment = ({ comment }: CommentPropsType) => {
+const Comment = ({ comment,user_id }: CommentPropsType) => {
+
+    const dispatch = useDispatch<AppDispatchType>();
+console.log(comment)
+    const setCommentLike = () => {
+        if (!comment.likes.find((el) => el === user_id)) {
+            dispatch(likedCommentTC({ comment_id: comment.comment_id, post_id: comment.post_id, user_id: user_id }));
+        } else {
+            //unliked
+        }
+    };
+
     const avatar = {
         backgroundImage: `url(${comment.userAvatar})`,
     };
@@ -24,7 +38,7 @@ const Comment = ({ comment }: CommentPropsType) => {
                     {comment.message}
                 </p>
                 <div className={s.comment_controls}><p>{comment.created_at}</p>
-                <div title="Like" className={s.likes_comment}>
+                <div title="Like" className={s.likes_comment} onClick={setCommentLike}>
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30px" height="30px" fill="#535165" viewBox="0 0 544.582 544.582">
                         <g>
                             <path

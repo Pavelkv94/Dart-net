@@ -11,6 +11,7 @@ import logo from "../../assets/Logo/logo.png";
 
 const Profile = React.lazy(() => import("../Profile/Profile"));
 const Messages = React.lazy(() => import("../Messages/Messages"));
+const Users = React.lazy(() => import("../Users/Users"));
 
 const Main = ({ mode }: any) => {
     const dispatch = useDispatch<AppDispatchType>();
@@ -36,6 +37,12 @@ const Main = ({ mode }: any) => {
                 return (
                     <Suspense fallback={<Circle />}>
                         <Messages />
+                    </Suspense>
+                );
+            case "users":
+                return (
+                    <Suspense fallback={<Circle />}>
+                        <Users />
                     </Suspense>
                 );
 

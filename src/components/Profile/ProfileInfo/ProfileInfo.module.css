@@ -25,16 +25,17 @@
 .top_screen_navigate_menu {
     display: flex;
 }
-.top_screen_navigate_menu a {
+.top_screen_navigate_menu_item {
     text-decoration: none;
     margin: 0 30px;
     color: #535165;
     position: relative;
+    cursor: pointer;
 }
-.top_screen_navigate_menu a:hover {
+.top_screen_navigate_menu_item:hover {
     color: #ff7555;
 }
-.top_screen_navigate_menu a.active::after {
+.top_screen_navigate_menu_item.active::after {
     border-bottom: 10px solid #fa6342;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;

@@ -31,7 +31,7 @@ const Weather = React.memo(({ t }: WeatherPropsType) => {
         { title: "sydney", code: "22889" },
     ];
 
-    const days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
 
     useEffect(() => {
@@ -56,7 +56,7 @@ const Weather = React.memo(({ t }: WeatherPropsType) => {
             </div>
             <div className={s.weather_main}>
                 <div className={s.weather_main_col1}>
-                    <div className={s.weather_dayWeek}>{t(`days.${days[weather.dayWeek - 1]}`)}</div>
+                    <div className={s.weather_dayWeek}>{t(`days.${days[weather.dayWeek]}`)}</div>
                     <div className={s.weather_day}>
                         <span>{t(`months.${months[weather.month - 1]}`)}</span>
                         <span>{weather.day}</span>

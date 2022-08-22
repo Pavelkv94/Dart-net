@@ -15,8 +15,9 @@ type ProfileInfoPropsType = {
     profileData: ProfileInfoType;
     user_id: string;
     currentTab: TabType;
+    setCurrentTab: (value: TabType) => void;
 };
-const ProfileInfo = ({ t, profileData, user_id, currentTab }: ProfileInfoPropsType) => {
+const ProfileInfo = ({ t, profileData, user_id, currentTab, setCurrentTab }: ProfileInfoPropsType) => {
     const dispatch = useDispatch<AppDispatchType>();
 
     const [openBackUrl, setOpenBackUrl] = useState<boolean>(false);
@@ -39,17 +40,18 @@ const ProfileInfo = ({ t, profileData, user_id, currentTab }: ProfileInfoPropsTy
         }
     };
     const changeBackground = () => {
-        if(backUrl.trim() !== ""){dispatch(changeBackgroundTC(backUrl));}
+        if (backUrl.trim() !== "") {
+            dispatch(changeBackgroundTC(backUrl));
+        }
         setBackUrl("");
         setOpenBackUrl(false);
     };
 
-    const onKeyHandler = (e:KeyboardEvent) => {
+    const onKeyHandler = (e: KeyboardEvent) => {
         if (e.key === "Enter") {
-            changeBackground()
+            changeBackground();
         }
-    }
-
+    };
 
     return (
         <div className={s.profile_top_screen}>
@@ -58,7 +60,6 @@ const ProfileInfo = ({ t, profileData, user_id, currentTab }: ProfileInfoPropsTy
                     <div
                         className={s.enter_back_url}
                         // onBlur={() => {setOpenBackUrl(false); setBackUrl("")}}
-                        
                     >
                         {/* @ts-ignore */}
                         <input type="text" autoFocus placeholder={t("profile.enterUrl")} value={backUrl} onChange={(e) => setBackUrl(e.currentTarget.value)} onKeyDown={onKeyHandler} />
@@ -111,15 +112,14 @@ M261.333,170.667c-8.822,0-16-7.178-16-16s7.178-16,16-16c8.822,0,16,7.178,16,16S2
                     <div className={s.navigate_country}>{profileData.country}</div>
                 </section>
                 <section className={s.top_screen_navigate_menu}>
-                    <NavLink to="posts" className={currentTab === "posts" ? s.active : undefined}>
-                        <div className={s.top_screen_navigate_menu_item}>{t("profile.posts")}</div>
-                    </NavLink>
-                    <NavLink to="gallery">
-                        <div className={s.top_screen_navigate_menu_item}>{t("profile.gallery")}</div>
-                    </NavLink>
-                    <NavLink to="about" className={currentTab === "about" ? s.active : undefined}>
-                        <div className={s.top_screen_navigate_menu_item}>{t("profile.about")}</div>
-                    </NavLink>
+                    <div className={`${s.top_screen_navigate_menu_item} ${currentTab === "posts" ? s.active : undefined}`} onClick={() => setCurrentTab("posts")}>
+                        {t("profile.posts")}
+                    </div>
+
+                    <div className={s.top_screen_navigate_menu_item}>{t("profile.gallery")}</div>
+                    <div className={`${s.top_screen_navigate_menu_item} ${currentTab === "about" ? s.active : undefined}`} onClick={() => setCurrentTab("about")}>
+                        {t("profile.about")}
+                    </div>
                 </section>
                 <section>
                     <div className={s.navigate_stats}>

@@ -9,7 +9,7 @@ const Messages = () => {
 
     if (!isAuth) {
         return <Navigate to="/login" />;
-    } else return <div className={s.blue}>Messages</div>;
+    } else return <div className={s.blue}>Messsages</div>;
 };
 
 export default Messages;

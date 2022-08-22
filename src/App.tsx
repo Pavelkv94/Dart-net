@@ -20,13 +20,15 @@ function App() {
     const displayMode = {
         profile: "profile",
         messages: "messages",
+        users: "users"
     };
 
     return (
         <Routes>
             <Route element={<Suspense fallback={<Circle />}><Login /></Suspense>} path="/login" />
-            <Route element={<Main mode={displayMode.profile} />} path="/profile/*" />
+            <Route element={<Main mode={displayMode.profile} />} path="/profile" />
             <Route element={<Main mode={displayMode.messages} />} path="/messages" />
+            <Route element={<Main mode={displayMode.users} />} path="/users" />
             <Route element={<div>empty</div>} path="*" />
         </Routes>
     );
