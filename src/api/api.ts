@@ -44,4 +44,7 @@ export const API = {
     async getWeather(city_id:string) {
         return instance.get(baseUrl(`/weather/${city_id}`), await expandHeaders());
     },
+    async getPhoto(user_id:string) {
+        return instance.get(baseUrl(`/auth/getPhoto/${user_id}`), await expandHeaders());
+    },
 };

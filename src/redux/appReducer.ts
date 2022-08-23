@@ -11,8 +11,8 @@ export type WeatherType = {
     realfeel: number;
     city: string;
     dayWeek: number;
-    day: number
-    month: number
+    day: number;
+    month: number;
 };
 
 const initialState = {
@@ -20,7 +20,8 @@ const initialState = {
     error: null as string | null,
     isAuth: false,
     user: {} as any,
-    weather: {} as WeatherType
+    weather: {} as WeatherType,
+    photo: ""
 };
 
 export type InitialStateType = typeof initialState;
@@ -43,6 +44,9 @@ export function appReducer(state: InitialStateType = initialState, action: Actio
             return { ...state, weather: action.payload };
         case "LOGOUT":
             return { ...state, isAuth: false, user: {} };
+        case "GET-PHOTO":
+            return { ...state, photo: action.photo };
+
         default:
             return state;
     }
@@ -76,6 +80,19 @@ const meAC = (payload: any) => ({
 export const logoutAC = () => ({
     type: "LOGOUT",
 });
+
+const getPhotoAC = (photo: string) => ({
+    type: "GET-PHOTO",
+    photo
+});
+
+export const getPhotoTC = (user_id: string) => async (dispatch: AppDispatchType) => {
+    await API.getPhoto(user_id)
+        .then((res) => dispatch(getPhotoAC(res.data.photo)))
+        .catch((e) => {
+            dispatch(setAppErrAC(e.response ? e.response.data.message : "Error get photo"));
+        });
+};
 
 export const loginTC = (payload: any) => async (dispatch: AppDispatchType) => {
     dispatch(setAppStatusAC("loading"));
@@ -132,10 +149,9 @@ export const getWeatherTC = (city_id: string) => (dispatch: AppDispatchType) => 
                 summary: res.data.Summary,
                 realfeel: res.data.RealFeel,
                 city: city_id,
-                dayWeek: +(new Date().getDay()),
-                day: +(new Date().getDate()),
-                month: +(new Date().getMonth())
-
+                dayWeek: +new Date().getDay(),
+                day: +new Date().getDate(),
+                month: +new Date().getMonth(),
             };
             dispatch(setWeatherAC(payload));
             // dispatch(setAppStatusAC("succeeded"));

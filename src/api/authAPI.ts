@@ -11,4 +11,7 @@ export const authAPI = {
     async me(user_id: string | null) {
         return instance.get(baseUrl(`/auth/me/${user_id}`), await expandHeaders());
     },
+    async getPhoto(user_id:string) {
+        return instance.get(baseUrl(`/auth/getPhoto/${user_id}`), await expandHeaders());
+    }
 };

@@ -33,7 +33,11 @@
         "personalInfo": "Personal Info",
         "generalInfo": "General Info",
         "changeImage": "Change image",
-        "enterUrl": "Enter picture URL"
+        "enterUrl": "Enter picture URL",
+        "saved": "Saved",
+        "savedEmpty": "You don't have any like entries yet. Start your activity.",
+        "postsEmpty": "You don't have any entries yet. Create your first post.",
+        "startActivity": "Start your activity"
     },
     "posts": {
         "createPost": "Create Post",

@@ -1,4 +1,4 @@
-import { postsAPI } from './../api/postsAPI';
+import { postsAPI } from "./../api/postsAPI";
 import { AppDispatchType } from "./store";
 import { API } from "../api/api";
 
@@ -8,30 +8,30 @@ type ActionType = any;
 
 export type CommentType = {
     user: string;
-    user_id: string
+    user_id: string;
     userAvatar: string;
     message: string;
     created_at: string;
     likes: Array<string>;
     post_id: string | undefined;
-    comment_id?: string
+    comment_id?: string;
 };
 
 export type PostType = {
     image: string;
     user: string;
-    user_id: string
+    user_id: string;
     userAvatar: string;
     created_at?: string | Date;
     text: string;
-    likes: Array<string>
-    comments: Array<CommentType>
-    _id?: string | undefined
+    likes: Array<string>;
+    comments: Array<CommentType>;
+    _id?: string | undefined;
 };
 
 const initialState = {
-    posts: [] as Array<PostType>, 
-    myPosts: [] as Array<PostType>,
+    posts: [] as Array<PostType>,
+    savedPosts: [] as Array<PostType>,
     status: "idle" as RequestStatusType,
 };
 
@@ -41,44 +41,53 @@ export function postsReducer(state: InitialStateType = initialState, action: Act
     switch (action.type) {
         // case "SET-APP-STATUS":
         //     return { ...state, status: action.status };
-        case "GET-MY-POSTS":
-            return { ...state, myPosts: action.payload.reverse() };
+        case "GET-POSTS":
+            return { ...state, posts: action.payload.reverse() };
+        case "GET-SAVED-POSTS":
+            return { ...state, savedPosts: action.payload.reverse() };
         default:
             return state;
     }
 }
 
+const getPostsAC = (payload: any) => ({
+    type: "GET-POSTS",
+    payload,
+});
 
+const getSavedPostsAC = (payload: any) => ({
+    type: "GET-SAVED-POSTS",
+    payload,
+});
 
-const  getMyPostsAC = (payload: any) => ({
-    type: "GET-MY-POSTS",
-    payload
-})
+export const getPostsTC = (user_id: string) => async (dispatch: AppDispatchType) => {
+    postsAPI.getPosts(user_id).then((res) => {
+        dispatch(getPostsAC(res.data));
+    });
+};
 
-
-export const getMyPostsTC = () => async (dispatch: AppDispatchType) => {
-    postsAPI.getMyPosts().then((res) => {
-        dispatch(getMyPostsAC(res.data));
-    })
-}
+export const getSavedPostsTC = (user_id: string) => async (dispatch: AppDispatchType) => {
+    postsAPI.getSavedPosts(user_id).then((res) => {
+        dispatch(getSavedPostsAC(res.data));
+    });
+};
 
 export const createPostTC = (payload: PostType) => async (dispatch: AppDispatchType) => {
-    postsAPI.createPost(payload).then((res) => dispatch(getMyPostsTC()))
-}
+    postsAPI.createPost(payload).then((res) => dispatch(getPostsTC(payload.user_id)));
+};
 
 export const sendCommentTC = (payload: any) => async (dispatch: AppDispatchType) => {
-    postsAPI.createComment(payload).then(() => dispatch(getMyPostsTC()))
-}
+    postsAPI.createComment(payload).then(() => dispatch(getPostsTC(payload.user_id)));
+};
 
 export const likedPostTC = (payload: any) => async (dispatch: AppDispatchType) => {
-    postsAPI.likedPost(payload).then((res) => dispatch(getMyPostsTC()))
-}
+    postsAPI.likedPost(payload).then((res) => dispatch(getPostsTC(payload.user_id)));
+};
 
 export const unlikedPostTC = (payload: any) => async (dispatch: AppDispatchType) => {
-    postsAPI.unlikedPost(payload).then((res) => dispatch(getMyPostsTC()))
-}
+    postsAPI.unlikedPost(payload).then((res) => dispatch(getPostsTC(payload.user_id)));
+};
 
 export const likedCommentTC = (payload: any) => async (dispatch: AppDispatchType) => {
-    postsAPI.likedComment(payload).then((res) => dispatch(getMyPostsTC()))
-}
-
+    postsAPI.likedComment(payload).then((res) => dispatch(getPostsTC(payload.user_id)));
+};

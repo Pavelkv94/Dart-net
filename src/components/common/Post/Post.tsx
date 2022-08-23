@@ -61,7 +61,7 @@ const Post = ({ t, width, postData }: PostPropsType) => {
     };
 
     const avatar = {
-        backgroundImage: `url(${postData.userAvatar})`,
+        backgroundImage: `url(${process.env.REACT_APP_HOST}${postData.userAvatar})`,
     };
 
     const image = {

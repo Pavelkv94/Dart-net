@@ -38,7 +38,6 @@ const ProfileInfo = ({ t, profileData, user_id, currentTab, setCurrentTab }: Pro
     const onAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
             dispatch(savePhotoTC(e.target.files[0]));
-            console.log(e.target.files[0]);
         }
     };
     const changeBackground = () => {
@@ -118,9 +117,9 @@ M261.333,170.667c-8.822,0-16-7.178-16-16s7.178-16,16-16c8.822,0,16,7.178,16,16S2
                         {t("profile.posts")}
                     </div>
 
-                    <div className={`${s.top_screen_navigate_menu_item} ${currentTab === "saved" ? s.active : undefined}`} onClick={() => setCurrentTab("saved")}>
-                        {t("profile.gallery")}
-                    </div>
+                    {!id && <div className={`${s.top_screen_navigate_menu_item} ${currentTab === "saved" ? s.active : undefined}`} onClick={() => setCurrentTab("saved")}>
+                        {t("profile.saved")}
+                    </div>}
                     <div className={`${s.top_screen_navigate_menu_item} ${currentTab === "about" ? s.active : undefined}`} onClick={() => setCurrentTab("about")}>
                         {t("profile.about")}
                     </div>

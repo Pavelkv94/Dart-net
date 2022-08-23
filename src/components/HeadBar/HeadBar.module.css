@@ -48,6 +48,8 @@
     border-radius: 50%;
     padding: 2px;
     margin-right: 4px;
+    background-size: cover;
+    background-position: center;
 }
 .lang_indicator {
     position: absolute;
