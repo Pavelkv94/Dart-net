@@ -91,7 +91,7 @@
     margin: 20px 0;
 }
 .login_form_header {
-    margin: 40px 0 40px 0;
+    margin: 40px 0 20px 0;
     align-self: flex-start;
 }
 .login_form_header p {
@@ -143,6 +143,35 @@
 }
 .succeeded {
     color: green;
+}
+.time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px 20px 20px;
+    background-color: #a0a0a01f;
+    border-style: solid;
+    border-width: 0px 4px 0px 4px;
+    border-color: #ff7555;
+    border-radius: 10px 10px 10px 10px;
+    width: 310px;
+    margin: 20px 0;
+}
+.time label {
+    font-weight: 600;
+}
+.time section:first-child {
+    margin-bottom: 10px;
+    font-size: 18px;
+    opacity: 0.8;
+}
+.time input {
+    margin: 0 6px;
+    height: 30px;
+    width: 50px;
+    border: 1px solid #e6e6e6;
+    outline: none;
+    font-size: 18px;
 }
 
 @media screen and (max-width: 1024px) {

@@ -50,7 +50,7 @@ const Weather = React.memo(({ t }: WeatherPropsType) => {
                         ))}
                     </select>
                 </div>
-                <div>
+                <div className={s.sun}>
                     <img src={sun} alt="" width={60} height={60} />
                 </div>
             </div>

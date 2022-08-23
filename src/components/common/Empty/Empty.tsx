@@ -10,7 +10,7 @@ export const Empty = ({ t, title, width, flag }: any) => {
     return (
         <div className={s.empty} style={style}>
             <h2>{t(title)}</h2>
-            {flag === "saved" && <NavLink to="">{t('profile.startActivity')}</NavLink>}
+            {flag === "saved" && <NavLink to="/home">{t('profile.startActivity')}</NavLink>}
             {flag === "saved" ? <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="130px" fill="#dfdfdf" height="130px" viewBox="0 0 544.582 544.582">
                 <g>
                     <path

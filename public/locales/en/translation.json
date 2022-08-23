@@ -14,7 +14,10 @@
         "email": "Email",
         "haveAcc": "If you have an account?",
         "regDescript": "By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. You may receive Email notifications from us and can opt out at any time.",
-        "regSuccess": "Registration completed. Redirecting to login page..."
+        "regSuccess": "Registration completed. Redirecting to login page...",
+        "limit": "Set a time limit for your stay online",
+        "hours": "Hours",
+        "minutes": "Minutes"
     },
     "profile": {
         "posts": "Posts",

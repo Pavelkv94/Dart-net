@@ -3,7 +3,7 @@ import s from "./Post.module.css";
 import planet from "../../../assets/svg/about-country.svg";
 import comment from "../../../assets/svg/comment.svg";
 import { ReactI18NextChild } from "react-i18next";
-import { CommentType, likedCommentTC, likedPostTC, PostType, sendCommentTC, unlikedPostTC } from "../../../redux/postsReducer";
+import { CommentType, likedPostTC, PostType, sendCommentTC, unlikedPostTC } from "../../../redux/postsReducer";
 import threeDots from "../../../assets/svg/three-dots.svg";
 import Comment from "./Comment";
 import { ButtonOrange } from "../ButtonOrange/ButtonOrange";
@@ -11,16 +11,17 @@ import { ProfileInfoType } from "../../../redux/profileReducer";
 import { useSelector } from "react-redux";
 import { AppDispatchType, AppStateType } from "../../../redux/store";
 import { useDispatch } from "react-redux";
+import emptyProfile from "../../../assets/empty-profile.png";
 
 type PostPropsType = {
     t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
-    width: number | string;
+    width?: number | string;
     postData: PostType;
 };
 
 const emoji = require("emoji-dictionary");
 
-const Post = ({ t, width, postData }: PostPropsType) => {
+const Post = ({ t, width="100%", postData }: PostPropsType) => {
     const dispatch = useDispatch<AppDispatchType>();
 
     const user_id = useSelector<AppStateType, string>((state) => state.app.user.user_id);
@@ -61,7 +62,7 @@ const Post = ({ t, width, postData }: PostPropsType) => {
     };
 
     const avatar = {
-        backgroundImage: `url(${process.env.REACT_APP_HOST}${postData.userAvatar})`,
+        backgroundImage: postData.userAvatar ? `url(${process.env.REACT_APP_HOST}${postData.userAvatar})` : `url(${emptyProfile})`,
     };
 
     const image = {

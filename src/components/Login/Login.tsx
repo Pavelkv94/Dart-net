@@ -51,7 +51,8 @@ const Login = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={s.login_form_block}>{loginMode ? <LoginNow t={t} setLoginMode={setLoginMode} /> : <Registration t={t} setLoginMode={setLoginMode} />}</div>
+                       
+                        <div className={s.login_form_block}>{loginMode ? <LoginNow t={t} setLoginMode={setLoginMode}  /> : <Registration t={t} setLoginMode={setLoginMode}  />}</div>
                     </div>
                     <div className={s.login_picture}>
                         <div className={s.login_picture_descript}>

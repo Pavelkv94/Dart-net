@@ -21,11 +21,14 @@ export const LoginNow = ({ t, setLoginMode }: LoginPropsType) => {
         password: "",
     };
     const [loginData, setLoginData] = useState<InitialLoginData>(initialData);
+    const [time, setTime] = useState({ hour: "0", minutes: "1" });
 
     const error = useSelector<AppStateType, string | null>((state) => state.app.error);
 
+    console.log(time);
     const handleClick = () => {
-        dispatch(loginTC(loginData));
+        //@ts-ignore
+        dispatch(loginTC({ ...loginData, time: `${time.hour * 3600 + time.minutes * 60 > 0 ? time.hour * 3600 + time.minutes * 60 : "1"}` }));
     };
 
     const changeMode = () => {
@@ -40,10 +43,37 @@ export const LoginNow = ({ t, setLoginMode }: LoginPropsType) => {
                 <h1>{t("login.welcome")}</h1>
                 <p>{t("login.welcomeBack")}</p>
             </div>
-
             <div className={s.credentials}>
                 <b>{t("login.email")}:</b> test@example.com <b>{t("login.password")}:</b> demo
             </div>
+            <div className={s.time}>
+                <section>{t("login.limit")}:</section>
+                <section>
+                    <label htmlFor="">{t("login.hours")}:</label>
+                    <input
+                        title="0-24h"
+                        type="number"
+                        value={time.hour}
+                        max={24}
+                        min={0}
+                        onChange={(e) => {
+                            setTime({ ...time, hour: e.currentTarget.value });
+                        }}
+                    />
+                    <label htmlFor="">{t("login.minutes")}:</label>
+                    <input
+                        title="0-60m"
+                        type="number"
+                        value={time.minutes}
+                        max={60}
+                        min={1}
+                        onChange={(e) => {
+                            setTime({ ...time, minutes: e.currentTarget.value });
+                        }}
+                    />
+                </section>
+            </div>
+
             <div>
                 <CustomInput
                     type={"email"}

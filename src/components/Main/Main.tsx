@@ -8,6 +8,7 @@ import { AppDispatchType, AppStateType } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { Circle } from "../common/Preloaders/Circle/Circle";
 import logo from "../../assets/Logo/logo.png";
+import Home from "../Home/Home";
 
 const Profile = React.lazy(() => import("../Profile/Profile"));
 const Messages = React.lazy(() => import("../Messages/Messages"));
@@ -45,7 +46,12 @@ const Main = ({ mode }: any) => {
                         <Users />
                     </Suspense>
                 );
-
+            case "home":
+                return (
+                    <Suspense fallback={<Circle />}>
+                        <Home />
+                    </Suspense>
+                );
             default:
                 return (
                     <Suspense fallback={<Circle />}>

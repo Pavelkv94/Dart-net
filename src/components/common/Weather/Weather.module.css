@@ -62,3 +62,11 @@
     font-weight: 400;
     margin: 0 10px;
 }
+.sun {
+    animation: preloader-rotate 10s infinite linear;
+}
+@keyframes preloader-rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }

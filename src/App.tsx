@@ -20,7 +20,8 @@ function App() {
     const displayMode = {
         profile: "profile",
         messages: "messages",
-        users: "users"
+        users: "users",
+        home: "home"
     };
 
     return (
@@ -31,6 +32,7 @@ function App() {
             </Route>
             <Route element={<Main mode={displayMode.messages} />} path="/messages" />
             <Route element={<Main mode={displayMode.users} />} path="/users" />
+            <Route element={<Main mode={displayMode.home} />} path="/home" />
             <Route element={<div>empty</div>} path="*" />
         </Routes>
     );
