@@ -3,6 +3,7 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 90px;
 }
 .left_panel {
     width: 25%;
@@ -21,7 +22,7 @@
     transition: 0.3s;
 }
 .reload:hover {
-    background: linear-gradient(180deg, rgba(255,255,255,1) 55%, rgb(238, 238, 238) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 55%, rgb(238, 238, 238) 100%);
     transition: 0.3s;
     padding: 2px 0;
 }
@@ -36,19 +37,15 @@
     margin: 10px 0;
     fill: #ff7555;
     transition: 0.3s;
-    
 }
 .reload svg.rotate {
     animation: preloader-rotate 1s infinite linear;
 }
 @keyframes preloader-rotate {
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-
-
-
+}
 
 .right_panel {
     width: 25%;

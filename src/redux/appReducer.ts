@@ -5,22 +5,13 @@ export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
 
 type ActionType = any;
 
-export type WeatherType = {
-    temperature: number;
-    summary: string;
-    realfeel: number;
-    city: string;
-    dayWeek: number;
-    day: number;
-    month: number;
-};
+
 
 const initialState = {
     status: "idle" as RequestStatusType,
     error: null as string | null,
     isAuth: false,
     user: {} as any,
-    weather: {} as WeatherType,
     photo: ""
 };
 
@@ -40,8 +31,7 @@ export function appReducer(state: InitialStateType = initialState, action: Actio
                 isAuth: true,
                 user: { ...action.payload, token: state.user.token },
             };
-        case "SET-WEATHER":
-            return { ...state, weather: action.payload };
+        
         case "LOGOUT":
             return { ...state, isAuth: false, user: {} };
         case "GET-PHOTO":
@@ -137,27 +127,4 @@ export const meTC = (user_id: string | null) => (dispatch: AppDispatchType) => {
         });
 };
 
-const setWeatherAC = (payload: any) => ({
-    type: "SET-WEATHER",
-    payload,
-});
-export const getWeatherTC = (city_id: string) => (dispatch: AppDispatchType) => {
-    API.getWeather(city_id)
-        .then((res) => {
-            let payload = {
-                temperature: res.data.Temperature,
-                summary: res.data.Summary,
-                realfeel: res.data.RealFeel,
-                city: city_id,
-                dayWeek: +new Date().getDay(),
-                day: +new Date().getDate(),
-                month: +new Date().getMonth(),
-            };
-            dispatch(setWeatherAC(payload));
-            // dispatch(setAppStatusAC("succeeded"));
-            // console.log(res)
-        })
-        .catch((e) => {
-            // dispatch(setAppErrAC(e.response ? e.response.data.message : "Weather is not available"));
-        });
-};
+

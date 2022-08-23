@@ -6,12 +6,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { profileReducer } from "./profileReducer";
 import { postsReducer } from "./postsReducer";
 import { usersReducer } from "./usersReducer";
+import { outDataReducer } from "./outDataReducer";
 
 const rootReducer = combineReducers({
 	app: appReducer,
 	profile: profileReducer,
 	posts: postsReducer,
-	users: usersReducer
+	users: usersReducer,
+	outData: outDataReducer
 
 });
 

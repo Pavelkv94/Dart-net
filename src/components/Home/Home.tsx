@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { getNewsTC } from "../../redux/outDataReducer";
 import { getPostsTC, PostType } from "../../redux/postsReducer";
 import { AppDispatchType, AppStateType } from "../../redux/store";
 import BlockComponent from "../common/BlockComponent/BlockComponent";
+import { NewsBlock } from "../common/NewsBlock/NewsBlock";
 import Post from "../common/Post/Post";
+import Weather from "../common/Weather/Weather";
 import s from "./Home.module.css";
 
 const Home = () => {
@@ -14,12 +17,17 @@ const Home = () => {
     const dispatch = useDispatch<AppDispatchType>();
 
     const allPosts = useSelector<AppStateType, Array<PostType>>((state) => state.posts.posts);
+    const news = useSelector<AppStateType, any>((state) => state.outData.news);
 
     const [rotate, setRotate] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(getPostsTC("all"));
     }, [dispatch]);
+
+    useEffect(() => {
+        news.length < 1 && dispatch(getNewsTC());
+    }, [news, dispatch]);
 
     useEffect(() => {
         setTimeout(() => setRotate(false), 2000);
@@ -33,6 +41,7 @@ const Home = () => {
     return (
         <div className={s.home}>
             <section className={s.left_panel}>
+                <Weather t={t} width={"calc(100% - 60px)"} />
                 <BlockComponent title={t("profile.personalInfo")} width={"calc(100% - 60px)"} component={<div>asdasd</div>} />
             </section>
             <section className={s.main_panel}>
@@ -55,7 +64,10 @@ const Home = () => {
                 ))}
             </section>
             <section className={s.right_panel}>
-                <BlockComponent title={t("profile.personalInfo")} width={"calc(100% - 60px)"} margin={"0 0 0 20px"} component={<div>asdasd</div>} />
+                <NewsBlock t={t} newsElement={news[Math.floor(Math.random() * 100)]} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
+                <NewsBlock t={t} newsElement={news[Math.floor(Math.random() * 100)]} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
+                <NewsBlock t={t} newsElement={news[Math.floor(Math.random() * 100)]} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
+                <NewsBlock t={t} newsElement={news[Math.floor(Math.random() * 100)]} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
             </section>
         </div>
     );

@@ -83,5 +83,9 @@
         "friday": "Friday",
         "saturday": "Saturday",
         "sunday": "Sunday"
+    },
+    "home": {
+        "news": "News",
+        "readMore": "Read more"
     }
 }

@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getWeatherTC, WeatherType } from "../../../redux/appReducer";
 import { AppDispatchType, AppStateType } from "../../../redux/store";
 import s from "./Weather.module.css";
 import sun from "../../../assets/svg/weather-sun.svg";
 import { useDispatch } from "react-redux";
 import { ReactI18NextChild } from "react-i18next";
+import { getWeatherTC, WeatherType } from "../../../redux/outDataReducer";
 
 type WeatherPropsType = {
     t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
+    width?: string | number;
 };
 
-const Weather = React.memo(({ t }: WeatherPropsType) => {
+const Weather = React.memo(({ t, width }: WeatherPropsType) => {
     const dispatch = useDispatch<AppDispatchType>();
 
-    const weather = useSelector<AppStateType, WeatherType>((state) => state.app.weather);
+    const weather = useSelector<AppStateType, WeatherType>((state) => state.outData.weather);
 
     const [city, setCity] = useState("28580");
 
@@ -38,13 +39,14 @@ const Weather = React.memo(({ t }: WeatherPropsType) => {
         dispatch(getWeatherTC(city));
     }, [dispatch, city]);
 
+    const style = { width };
     return (
-        <div className={s.weather}>
+        <div className={s.weather} style={style}>
             <div className={s.weather_header}>
                 <div>
                     <select name="select" className={s.city_select} onChange={(e) => setCity(e.target.value)}>
                         {cities.map((el, i) => (
-                            <option key={i} value={el.code} defaultValue={el.code} >
+                            <option key={i} value={el.code} defaultValue={el.code}>
                                 {t(`cities.${el.title}`)}
                             </option>
                         ))}
@@ -63,7 +65,7 @@ const Weather = React.memo(({ t }: WeatherPropsType) => {
                     </div>
                 </div>
                 <div className={s.weather_main_col2}>
-                    <div className={s.weather_temp}>{weather.temperature} &#8451;</div>
+                    <div className={s.weather_temp}>{weather.temperature ? weather.temperature : '?'} &#8451;</div>
                 </div>
             </div>
         </div>

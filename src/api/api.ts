@@ -31,7 +31,6 @@ export const instance = {
 };
 
 export const API = {
-
     async login(payload: any) {
         return instance.post(baseUrl("/auth/login"), {}, payload);
     },
@@ -41,10 +40,7 @@ export const API = {
     async me(user_id: string | null) {
         return instance.get(baseUrl(`/auth/me/${user_id}`), await expandHeaders());
     },
-    async getWeather(city_id:string) {
-        return instance.get(baseUrl(`/weather/${city_id}`), await expandHeaders());
-    },
-    async getPhoto(user_id:string) {
+    async getPhoto(user_id: string) {
         return instance.get(baseUrl(`/auth/getPhoto/${user_id}`), await expandHeaders());
     },
 };

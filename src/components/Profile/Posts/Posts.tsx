@@ -13,6 +13,8 @@ import { ProfileInfoType } from "../../../redux/profileReducer";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Empty } from "../../common/Empty/Empty";
+import { NewsBlock } from "../../common/NewsBlock/NewsBlock";
+import { getNewsTC } from "../../../redux/outDataReducer";
 
 type PostsPropsType = {
     t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
@@ -29,6 +31,11 @@ const Posts = ({ setCurrentTab, t, profileData }: PostsPropsType) => {
 
     const [textareaFocus, setTextareaFocus] = useState<boolean>(false);
 
+    const news = useSelector<AppStateType, any>((state) => state.outData.news);
+    useEffect(() => {
+        news.length < 1 && dispatch(getNewsTC());
+    }, [news, dispatch]);
+
     useEffect(() => {
         setCurrentTab("posts");
     }, [setCurrentTab]);
@@ -40,8 +47,8 @@ const Posts = ({ setCurrentTab, t, profileData }: PostsPropsType) => {
     return (
         <div className={s.posts}>
             <section className={s.right_panel}>
-                <BlockComponent title={t("profile.personalInfo")} width={"100%"} margin={"0 10px 0 0"} component={<div>asd asd asd a</div>} />
                 <Weather t={t} />
+                <NewsBlock t={t} newsElement={news[0]} width={"100%"} margin={"0 0 0 0"} />
             </section>
             <section className={s.main_panel}>
                 {textareaFocus && <div className={s.focused_back} onClick={() => setTextareaFocus(false)}></div>}
@@ -55,9 +62,11 @@ const Posts = ({ setCurrentTab, t, profileData }: PostsPropsType) => {
                     />
                 )}
 
-                {myPosts.length > 0 ? myPosts.map((el, i) => (
-                    <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t} />
-                )) : <Empty t={t} title="profile.postsEmpty" width={"calc(100% - 40px)"} flag="post"/>}
+                {myPosts.length > 0 ? (
+                    myPosts.map((el, i) => <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t} />)
+                ) : (
+                    <Empty t={t} title="profile.postsEmpty" width={"calc(100% - 40px)"} flag="post" />
+                )}
             </section>
         </div>
     );
