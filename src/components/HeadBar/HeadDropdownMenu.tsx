@@ -1,13 +1,13 @@
-import React, { MouseEvent, useEffect, useRef } from "react";
+import React, { MouseEvent } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { AppStateType } from "../../redux/store";
 import s from "./HeadBar.module.css";
 
-export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit }: any) => {
+export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit, t }: any) => {
     const onStopPropagation = (e: MouseEvent<HTMLElement>) => e.stopPropagation();
     const onClose = () => setOpenProfileMenu(false);
-    const email = useSelector<AppStateType, string>(state => state.app.user.email);
+    const email = useSelector<AppStateType, string>((state) => state.app.user.email);
 
     return (
         <div className={s.dropdown_menu} onClick={onStopPropagation} onBlur={onClose} tabIndex={-1}>
@@ -23,7 +23,7 @@ export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit }: 
                             <path d="M24,30H8a2,2,0,0,1-2-2V22a7,7,0,0,1,7-7h6a7,7,0,0,1,7,7v6A2,2,0,0,1,24,30ZM13,17a5,5,0,0,0-5,5v6H24V22a5,5,0,0,0-5-5Z" />
                         </g>
                     </svg>
-                    Profile
+                    {t("profile.profile")}
                 </div>
             </NavLink>
             <NavLink to="/messages" style={{ textDecoration: "none" }} onClick={onClose}>
@@ -48,25 +48,27 @@ export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit }: 
                             </g>
                         </g>
                     </svg>
-                    Messages
+                    {t("messages.messages")}
                 </div>
             </NavLink>
-            <a href="#" className={s.link_menu_item}>
-                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 471.701 471.701" width={22} height={22} className={s.svg}>
-                    <g>
-                        <path
-                            d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
+            <NavLink to="/profile" style={{ textDecoration: "none" }} onClick={onClose}>
+                <div className={s.link_menu_item}>
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 471.701 471.701" width={22} height={22} className={s.svg}>
+                        <g>
+                            <path
+                                d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1
 		c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3
 		l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4
 		C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3
 		s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4
 		c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3
 		C444.801,187.101,434.001,213.101,414.401,232.701z"
-                        />
-                    </g>
-                </svg>
-                Saved items
-            </a>
+                            />
+                        </g>
+                    </svg>
+                    Saved items
+                </div>
+            </NavLink>
             <a href="#" className={s.link_menu_item}>
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 204.993 204.993" width={22} height={22} className={s.svg}>
                     <g>

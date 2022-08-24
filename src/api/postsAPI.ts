@@ -4,7 +4,7 @@ export const postsAPI = {
     async createPost(payload: any) {
         return instance.post(baseUrl("/posts/create"), await expandHeaders(), payload);
     },
-    async getPosts(user_id: string) {
+    async getPosts(user_id: string | undefined) {
         return instance.get(baseUrl(`/posts/getPosts/${user_id}`), await expandHeaders());
     },
     async getSavedPosts(user_id: string) {

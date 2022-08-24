@@ -20,6 +20,7 @@
         "minutes": "Минуты"
     },
     "profile": {
+        "profile": "Профиль",
         "posts": "Посты",
         "friends": "Друзья",
         "aboutMe": "Обо мне",
@@ -75,6 +76,18 @@
         "cyprus": "Кипр, JM",
         "sydney": "Сидней, AU"
     },
+    "countries": {
+        "belarus": "Беларусь",
+        "poland": "Польша",
+        "russia": "Россия",
+        "usa": "Соед. Штаты",
+        "unitedKingdom": "Великобритания",
+        "france": "Франция",
+        "turkey": "Турция",
+        "canada": "Канада",
+        "china": "Китай",
+        "germany": "Германия"
+    },
     "days": {
         "monday": "Понедельник",
         "tuesday": "Вторник",
@@ -86,7 +99,20 @@
     },
     "home": {
         "news": "Новости",
-        "readMore": "Читать больше"
+        "readMore": "Читать больше",
+        "youKnowThem": "Возможно вы их знаете"
+    },
+    "covid" : {
+        "population": "Население:",
+        "totalCases": "Всего случаев:",
+        "newCases": "Новых случаев:",
+        "activeCases": "Активные случаи:",
+        "newDeaths": "Новые смерти:",
+        "totalDeaths": "Всего смертей:",
+        "totalTests": "Всего тестов:"
+    },
+    "messages": {
+        "messages": "Сообщения"
     }
     
 }

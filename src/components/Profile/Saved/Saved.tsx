@@ -6,6 +6,7 @@ import { getSavedPostsTC, PostType } from "../../../redux/postsReducer";
 import { ProfileInfoType } from "../../../redux/profileReducer";
 import { AppDispatchType, AppStateType } from "../../../redux/store";
 import BlockComponent from "../../common/BlockComponent/BlockComponent";
+import { Covid } from "../../common/Covid/Covid";
 import { Empty } from "../../common/Empty/Empty";
 import Post from "../../common/Post/Post";
 import { TabType } from "../Profile";
@@ -34,11 +35,11 @@ const Saved = ({ setCurrentTab, t, profileData }: SavedPropsType) => {
     return (
         <div className={s.saved}>
             <section className={s.right_panel}>
-                <BlockComponent title={t("profile.personalInfo")} width={"100%"} margin={"0 10px 0 0"} component={<div>asd asd asd a</div>} />
+            <Covid t={t} />
             </section>
             <section className={s.main_panel}>
                 {savedPosts.length > 0 ? (
-                    savedPosts.map((el, i) => <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t} />)
+                    savedPosts.map((el, i) => <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t} place="saved"/>)
                 ) : (
                     <Empty t={t} title="profile.savedEmpty" width={"calc(100% - 40px)"} flag="saved"/>
                 )}

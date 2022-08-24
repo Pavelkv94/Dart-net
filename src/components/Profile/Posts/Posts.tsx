@@ -20,21 +20,22 @@ type PostsPropsType = {
     t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
     setCurrentTab: (value: TabType) => void;
     profileData: ProfileInfoType;
+    lang: string
 };
 
-const Posts = ({ setCurrentTab, t, profileData }: PostsPropsType) => {
+const Posts = ({ setCurrentTab, t, lang, profileData }: PostsPropsType) => {
     const { id } = useParams();
 
     const dispatch = useDispatch<AppDispatchType>();
 
-    const myPosts = useSelector<AppStateType, Array<PostType>>((state) => state.posts.posts);
+    const posts = useSelector<AppStateType, Array<PostType>>((state) => state.posts.posts);
 
     const [textareaFocus, setTextareaFocus] = useState<boolean>(false);
 
     const news = useSelector<AppStateType, any>((state) => state.outData.news);
     useEffect(() => {
-        news.length < 1 && dispatch(getNewsTC());
-    }, [news, dispatch]);
+        news.length < 1 && dispatch(getNewsTC(lang));
+    }, [news, dispatch, lang]);
 
     useEffect(() => {
         setCurrentTab("posts");
@@ -62,8 +63,8 @@ const Posts = ({ setCurrentTab, t, profileData }: PostsPropsType) => {
                     />
                 )}
 
-                {myPosts.length > 0 ? (
-                    myPosts.map((el, i) => <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t} />)
+                {posts.length > 0 ? (
+                    posts.map((el, i) => <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t} place={id ? "userPosts" : "myPosts"}/>)
                 ) : (
                     <Empty t={t} title="profile.postsEmpty" width={"calc(100% - 40px)"} flag="post" />
                 )}

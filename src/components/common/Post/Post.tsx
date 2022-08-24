@@ -3,7 +3,7 @@ import s from "./Post.module.css";
 import planet from "../../../assets/svg/about-country.svg";
 import comment from "../../../assets/svg/comment.svg";
 import { ReactI18NextChild } from "react-i18next";
-import { CommentType, likedPostTC, PostType, sendCommentTC, unlikedPostTC } from "../../../redux/postsReducer";
+import { CommentType, likedPostTC, PlaceType, PostType, sendCommentTC, unlikedPostTC } from "../../../redux/postsReducer";
 import threeDots from "../../../assets/svg/three-dots.svg";
 import Comment from "./Comment";
 import { ButtonOrange } from "../ButtonOrange/ButtonOrange";
@@ -12,16 +12,20 @@ import { useSelector } from "react-redux";
 import { AppDispatchType, AppStateType } from "../../../redux/store";
 import { useDispatch } from "react-redux";
 import emptyProfile from "../../../assets/empty-profile.png";
+import { useParams } from "react-router-dom";
 
 type PostPropsType = {
     t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
     width?: number | string;
     postData: PostType;
+    place: PlaceType;
 };
 
 const emoji = require("emoji-dictionary");
 
-const Post = ({ t, width="100%", postData }: PostPropsType) => {
+const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
+    const { id } = useParams();
+
     const dispatch = useDispatch<AppDispatchType>();
 
     const user_id = useSelector<AppStateType, string>((state) => state.app.user.user_id);
@@ -46,23 +50,28 @@ const Post = ({ t, width="100%", postData }: PostPropsType) => {
 
     const [commentData, setCommentData] = useState<CommentType>(initialComment);
 
+    const user = id ? id : user_id;
+
     const sendComment = () => {
         if (commentData.message.trim() !== "") {
-            dispatch(sendCommentTC(commentData));
+            dispatch(sendCommentTC(commentData, place, user));
             setCommentData(initialComment);
         }
     };
 
     const setPostLike = () => {
         if (!postData.likes.find((el) => el === user_id)) {
-            dispatch(likedPostTC({ post_id: postData._id, user_id: user_id }));
+            dispatch(likedPostTC({ post_id: postData._id, user_id: user_id }, place, user));
         } else {
-            dispatch(unlikedPostTC({ post_id: postData._id, user_id: user_id }));
+            dispatch(unlikedPostTC({ post_id: postData._id, user_id: user_id }, place, user));
         }
     };
 
     const avatar = {
         backgroundImage: postData.userAvatar ? `url(${process.env.REACT_APP_HOST}${postData.userAvatar})` : `url(${emptyProfile})`,
+    };
+    const myAvatar = {
+        backgroundImage: profileData.photo ? `url(${process.env.REACT_APP_HOST}${profileData.photo})` : `url(${emptyProfile})`,
     };
 
     const image = {
@@ -71,7 +80,7 @@ const Post = ({ t, width="100%", postData }: PostPropsType) => {
         height: "400px",
     };
 
-    const colorLike = postData.likes.find((el) => el === user_id) ? "#FF7555" : "#535165"
+    const colorLike = postData.likes.find((el) => el === user_id) ? "#FF7555" : "#535165";
 
     const emojiArray = [
         emoji.unicode[0],
@@ -133,7 +142,7 @@ const Post = ({ t, width="100%", postData }: PostPropsType) => {
                 <div>
                     <div className={s.add_comment}>
                         <div className={s.comment_author_wrapper}>
-                            <div className={s.comment_author} style={avatar}></div>
+                            <div className={s.comment_author} style={myAvatar}></div>
                         </div>
                         <div className={s.comment_textarea_wrapper}>
                             <textarea
@@ -158,7 +167,7 @@ const Post = ({ t, width="100%", postData }: PostPropsType) => {
                         </div>
                     </div>
                     {postData.comments.map((el, i) => (
-                        <Comment key={i} comment={el} user_id={user_id}/>
+                        <Comment key={i} comment={el} user_id={user_id} />
                     ))}
                 </div>
             )}

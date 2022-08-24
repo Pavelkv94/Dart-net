@@ -58,19 +58,48 @@ const initialState = {
         work: "",
         friends: [],
     },
-    status: "idle" as RequestStatusType,
+    anotherProfileData: {
+        user_id: "",
+        email: "",
+        first_name: "",
+        last_name: "",
+        status: "",
+        photo: "",
+        background: "",
+        country: "",
+        birthday: "",
+        contacts: {
+            facebook: "",
+            youtube: "",
+            vk: "",
+            instagram: "",
+            linkedin: "",
+            twitter: "",
+            telegram: "",
+        },
+        about: "",
+        created_at: "",
+        education: "",
+        work: "",
+        friends: [],
+    },
+    profileStatus: "idle" as RequestStatusType,
 };
 
 export type InitialStateType = typeof initialState;
 
 export function profileReducer(state: InitialStateType = initialState, action: ActionType): InitialStateType {
     switch (action.type) {
-        case "GET-PROFILE-INFO":
+        case "SET-PROFILE-INFO":
             return { ...state, profileData: action.payload };
+        case "SET-ANOTHER-PROFILE-INFO":
+            return { ...state, anotherProfileData: action.payload };
         case "SAVE-BACKGROUND":
             return { ...state, profileData: { ...state.profileData, background: action.url } };
-        case "SAVE - PHOTO":
+        case "SAVE-PHOTO":
             return { ...state, profileData: { ...state.profileData, photo: action.photoUrl } };
+        case "SET-PROFILE-STATUS":
+            return { ...state, profileStatus: action.status };
 
         default:
             return state;
@@ -79,14 +108,21 @@ export function profileReducer(state: InitialStateType = initialState, action: A
 
 const setProfileInfoAC = (payload: any) => {
     return {
-        type: "GET-PROFILE-INFO",
+        type: "SET-PROFILE-INFO",
+        payload,
+    };
+};
+
+const setAnotherProfileInfoAC = (payload: any) => {
+    return {
+        type: "SET-ANOTHER-PROFILE-INFO",
         payload,
     };
 };
 
 export const setProfileStatusAC = (status: RequestStatusType) => {
     return {
-        type: "SET-Profile-STATUS",
+        type: "SET-PROFILE-STATUS",
         status,
     };
 };
@@ -100,6 +136,22 @@ export const getProfileTC = (user_id: string) => async (dispatch: AppDispatchTyp
             delete data["_id"];
             delete data["__v"];
             dispatch(setProfileInfoAC(data));
+            dispatch(setProfileStatusAC("succeeded"));
+        })
+        .catch((e) => {
+            dispatch(setProfileStatusAC("failed"));
+        });
+};
+
+export const getAnotherProfileTC = (user_id: string) => async (dispatch: AppDispatchType) => {
+    dispatch(setProfileStatusAC("loading"));
+    await profileAPI
+        .getProfileInfo(user_id)
+        .then((res) => {
+            let data = res.data;
+            delete data["_id"];
+            delete data["__v"];
+            dispatch(setAnotherProfileInfoAC(data));
             dispatch(setProfileStatusAC("succeeded"));
         })
         .catch((e) => {

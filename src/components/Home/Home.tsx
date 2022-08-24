@@ -5,29 +5,38 @@ import { useDispatch } from "react-redux";
 import { getNewsTC } from "../../redux/outDataReducer";
 import { getPostsTC, PostType } from "../../redux/postsReducer";
 import { AppDispatchType, AppStateType } from "../../redux/store";
+import { getUsersTC } from "../../redux/usersReducer";
 import BlockComponent from "../common/BlockComponent/BlockComponent";
 import { NewsBlock } from "../common/NewsBlock/NewsBlock";
 import Post from "../common/Post/Post";
 import Weather from "../common/Weather/Weather";
 import s from "./Home.module.css";
+import emptyProfile from "../../assets/empty-profile.png";
+import { NavLink } from "react-router-dom";
+import { Covid } from "../common/Covid/Covid";
 
 const Home = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const dispatch = useDispatch<AppDispatchType>();
 
+    const user_id = useSelector<AppStateType, string>((state) => state.app.user.user_id);
     const allPosts = useSelector<AppStateType, Array<PostType>>((state) => state.posts.posts);
     const news = useSelector<AppStateType, any>((state) => state.outData.news);
+    const users = useSelector<AppStateType, any>((state) => state.users.users);
+
+    const notFriends = users.filter((el: any) => el.friends.find((id: any) => id !== user_id) !== undefined);
 
     const [rotate, setRotate] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(getPostsTC("all"));
+        dispatch(getUsersTC());
     }, [dispatch]);
 
     useEffect(() => {
-        news.length < 1 && dispatch(getNewsTC());
-    }, [news, dispatch]);
+        news.length < 1 && dispatch(getNewsTC(i18n.language));
+    }, [news, dispatch, i18n.language]);
 
     useEffect(() => {
         setTimeout(() => setRotate(false), 2000);
@@ -42,7 +51,25 @@ const Home = () => {
         <div className={s.home}>
             <section className={s.left_panel}>
                 <Weather t={t} width={"calc(100% - 60px)"} />
-                <BlockComponent title={t("profile.personalInfo")} width={"calc(100% - 60px)"} component={<div>asdasd</div>} />
+
+                <BlockComponent
+                    title={t("home.youKnowThem")}
+                    width={"calc(100% - 60px)"}
+                    margin={'0 0 20px 0'}
+                    component={
+                        <div className={s.not_friends}>
+                            {notFriends.slice(0, 6).map((el: any, i: any) => (
+                                <div key={i} className={s.not_friend_user}>
+                                    <div className={s.avatar_wrapper}>
+                                        <div className={s.avatar} style={{ backgroundImage: el.photo ? `url(${process.env.REACT_APP_HOST}${el.photo})` : `url(${emptyProfile})` }}></div>
+                                    </div>
+                                    <NavLink to={`/profile/${el.user_id}`}>{el.name}</NavLink>
+                                </div>
+                            ))}
+                        </div>
+                    }
+                />
+                <Covid width={"calc(100% - 60px)"} t={t} />
             </section>
             <section className={s.main_panel}>
                 <div className={s.reload} onClick={reloadUsers}>
@@ -60,7 +87,7 @@ const Home = () => {
                 </div>
 
                 {allPosts.map((el, i) => (
-                    <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t} />
+                    <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t} place="allPosts" />
                 ))}
             </section>
             <section className={s.right_panel}>

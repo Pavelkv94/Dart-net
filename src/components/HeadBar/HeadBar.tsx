@@ -16,11 +16,12 @@ import { AppDispatchType, AppStateType } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import emptyProfile from "../../assets/empty-profile.png";
+import { getNewsTC } from "../../redux/outDataReducer";
 
 export const HeadBar = React.memo(({ exit }: any) => {
     const dispatch = useDispatch<AppDispatchType>();
 
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [openProfileMenu, setOpenProfileMenu] = useState(false);
     const [lang, setLang] = useState(i18n.language);
 
@@ -30,6 +31,7 @@ export const HeadBar = React.memo(({ exit }: any) => {
     const changeLanguage = (language: LangType) => {
         i18n.changeLanguage(language);
         setLang(language);
+        dispatch(getNewsTC(language));
     };
 
     useEffect(() => {
@@ -70,7 +72,7 @@ export const HeadBar = React.memo(({ exit }: any) => {
                     <div className={`${s.navbar_item} ${s.last_navbar_item}`} onClick={() => setOpenProfileMenu((prev) => !prev)}>
                         <div className={s.avatar} style={avatar}></div>
                         <img src={down_arr} alt="down-arrow" width={14} className={s.nav_icon} />
-                        {openProfileMenu && <HeadDropdownMenu setOpenProfileMenu={setOpenProfileMenu} exit={exit} openProfileMenu={s} />}
+                        {openProfileMenu && <HeadDropdownMenu setOpenProfileMenu={setOpenProfileMenu} exit={exit} openProfileMenu={s} t={t}/>}
                     </div>
                 </div>
             </nav>

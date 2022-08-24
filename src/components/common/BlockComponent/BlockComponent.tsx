@@ -1,12 +1,13 @@
 import React from "react";
 import s from "./BlockComponent.module.css";
 
-const BlockComponent = ({ width = 300, height, margin, title, component, position }: any) => {
+const BlockComponent = ({ width = 300, height, margin, title, component, position, top }: any) => {
     const style = {
         width,
         height,
         margin,
-        position
+        position,
+        top
     };
 
     return (

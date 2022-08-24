@@ -20,6 +20,7 @@
         "minutes": "Minutes"
     },
     "profile": {
+        "profile": "Profile",
         "posts": "Posts",
         "friends": "Friends",
         "aboutMe": "About Me",
@@ -75,6 +76,18 @@
         "cyprus": "Cyprus, JM",
         "sydney": "Sydney, AU"
     },
+    "countries": {
+        "belarus": "Belarus",
+        "poland": "Poland",
+        "russia": "Russia",
+        "usa": "USA",
+        "unitedKingdom": "United Kingdom",
+        "france": "France",
+        "turkey": "Turkey",
+        "canada": "Canada",
+        "china": "China",
+        "germany": "Germany"
+    },
     "days": {
         "monday": "Monday",
         "tuesday": "Tuesday",
@@ -86,6 +99,19 @@
     },
     "home": {
         "news": "News",
-        "readMore": "Read more"
+        "readMore": "Read more",
+        "youKnowThem": "Maybe yоu know them"
+    },
+    "covid": {
+        "population": "Population: ",
+        "totalCases": "Total cases: ",
+        "newCases": "New cases: ",
+        "activeCases": "Active cases: ",
+        "newDeaths": "New deaths: ",
+        "totalDeaths": "Total deaths: ",
+        "totalTests": "Total tests: "
+    },
+    "messages": {
+        "messages": "Messages"
     }
 }
