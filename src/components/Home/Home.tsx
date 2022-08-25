@@ -91,10 +91,10 @@ const Home = () => {
                 ))}
             </section>
             <section className={s.right_panel}>
-                <NewsBlock t={t} newsElement={news[Math.floor(Math.random() * 100)]} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
-                <NewsBlock t={t} newsElement={news[Math.floor(Math.random() * 100)]} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
-                <NewsBlock t={t} newsElement={news[Math.floor(Math.random() * 100)]} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
-                <NewsBlock t={t} newsElement={news[Math.floor(Math.random() * 100)]} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
+                <NewsBlock t={t} news={news} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
+                <NewsBlock t={t} news={news} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
+                <NewsBlock t={t} news={news} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
+                <NewsBlock t={t} news={news} width={"calc(100% - 60px)"} margin={"0 0 20px 20px"} />
             </section>
         </div>
     );

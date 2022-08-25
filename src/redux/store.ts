@@ -7,13 +7,15 @@ import { profileReducer } from "./profileReducer";
 import { postsReducer } from "./postsReducer";
 import { usersReducer } from "./usersReducer";
 import { outDataReducer } from "./outDataReducer";
+import { messagesReducer } from "./messagesReducer";
 
 const rootReducer = combineReducers({
 	app: appReducer,
 	profile: profileReducer,
 	posts: postsReducer,
 	users: usersReducer,
-	outData: outDataReducer
+	outData: outDataReducer,
+	messages: messagesReducer
 
 });
 

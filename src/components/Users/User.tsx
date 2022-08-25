@@ -4,9 +4,8 @@ import emptyProfile from "../../assets/empty-profile.png";
 import { NavLink } from "react-router-dom";
 import { ButtonOrange } from "../common/ButtonOrange/ButtonOrange";
 import { useDispatch } from "react-redux";
-import { AppDispatchType, AppStateType } from "../../redux/store";
+import { AppDispatchType } from "../../redux/store";
 import { followTC, unfollowTC } from "../../redux/usersReducer";
-import { useSelector } from "react-redux";
 
 const User = ({ user, user_id, t }: any) => {
 
@@ -47,7 +46,7 @@ const User = ({ user, user_id, t }: any) => {
                     <ButtonOrange title={t('users.follow')} width={100} height={30} onClick={follow} />
                 )}
 
-                <ButtonOrange title={t('users.message')} width={100} height={30} disabled={true} />
+                <NavLink to="/messages"><ButtonOrange title={t('users.message')} width={100} height={30} /></NavLink> 
             </div>
         </div>
     );

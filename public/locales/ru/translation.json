@@ -115,7 +115,8 @@
         "totalTests": "Всего тестов:"
     },
     "messages": {
-        "messages": "Сообщения"
+        "messages": "Сообщения",
+        "send": "Отправить"
     },
     "settings": {
         "aboutMe": "Обо мне:",

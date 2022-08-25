@@ -115,7 +115,8 @@
         "totalTests": "Total tests: "
     },
     "messages": {
-        "messages": "Messages"
+        "messages": "Messages",
+        "send": "Send"
     },
     "settings": {
         "aboutMe": "About Me:",

@@ -44,6 +44,17 @@
 .post_whois p {
     margin: 0;
     font-size: 14px;
+  
+}
+.post_whois a {
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+    font-weight: 600;
+    color: #515365;
+}
+.post_whois a:hover {
+    color: #FF7555;
 }
 .post_avatar {
     width: 50px;

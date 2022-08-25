@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { AppDispatchType, AppStateType } from "../../../redux/store";
 import { useDispatch } from "react-redux";
 import emptyProfile from "../../../assets/empty-profile.png";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 type PostPropsType = {
     t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
@@ -104,7 +104,7 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
             <div className={s.post_header}>
                 <div className={s.post_avatar} style={avatar}></div>
                 <div className={s.post_whois}>
-                    <p>{postData.user}</p>
+                    <NavLink to={`/profile/${postData.user_id === user_id ? '' : postData.user_id}`}>{postData.user}</NavLink>
                     <span>
                         <img src={planet} alt="icon" width={14} />
                         <p>{`${t("posts.published")} ${postData.created_at}`}</p>

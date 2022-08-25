@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { editProfileTC, ProfileInfoType, RequestStatusType, setProfileEditStatusAC } from "../../redux/profileReducer";
+import { editProfileTC, getProfileTC, ProfileInfoType, RequestStatusType, setProfileEditStatusAC } from "../../redux/profileReducer";
 import { AppDispatchType, AppStateType } from "../../redux/store";
 import BlockComponent from "../common/BlockComponent/BlockComponent";
 import { ButtonOrange } from "../common/ButtonOrange/ButtonOrange";
@@ -18,11 +18,10 @@ const Settings = () => {
 
     const profileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.profileData);
     const status = useSelector<AppStateType, RequestStatusType>((state) => state.profile.profileEditStatus);
+    const user_id = useSelector<AppStateType, string>((state) => state.app.user.user_id);
 
     const [tab, setTab] = useState<SettingsType>("profile");
     const [profileInfoData, setProfileInfoData] = useState<ProfileInfoType>(profileData);
-
-    console.log(profileInfoData);
 
     const onSubmit = () => {
         dispatch(editProfileTC(profileInfoData));
@@ -31,6 +30,10 @@ const Settings = () => {
     useEffect(() => {
         status === "succeeded" && setTimeout(() => dispatch(setProfileEditStatusAC("idle")), 3000);
     }, [status, dispatch]);
+
+    useEffect(() => {
+        dispatch(getProfileTC(user_id));
+    }, [dispatch]);
 
     const error = profileInfoData.first_name.length > 20 || profileInfoData.last_name.length > 20;
 
@@ -86,7 +89,13 @@ const Settings = () => {
                         </div>
                         <div className={s.setting_item}>
                             <label htmlFor="">{t("settings.country")}</label>
-                            <input type="text" className={s.text_field} placeholder={t("settings.countruPlaceholder")} value={profileInfoData.country} onChange={(e) => setProfileInfoData({ ...profileInfoData, country: e.currentTarget.value })} />
+                            <input
+                                type="text"
+                                className={s.text_field}
+                                placeholder={t("settings.countruPlaceholder")}
+                                value={profileInfoData.country}
+                                onChange={(e) => setProfileInfoData({ ...profileInfoData, country: e.currentTarget.value })}
+                            />
                         </div>
                         <div className={s.setting_item}>
                             <label htmlFor="">{t("settings.education")}</label>

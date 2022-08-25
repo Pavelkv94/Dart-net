@@ -33,6 +33,7 @@ const Posts = ({ setCurrentTab, t, lang, profileData }: PostsPropsType) => {
     const [textareaFocus, setTextareaFocus] = useState<boolean>(false);
 
     const news = useSelector<AppStateType, any>((state) => state.outData.news);
+    
     useEffect(() => {
         news.length < 1 && dispatch(getNewsTC(lang));
     }, [news, dispatch, lang]);
@@ -49,7 +50,7 @@ const Posts = ({ setCurrentTab, t, lang, profileData }: PostsPropsType) => {
         <div className={s.posts}>
             <section className={s.right_panel}>
                 <Weather t={t} />
-                <NewsBlock t={t} newsElement={news[0]} width={"100%"} margin={"0 0 0 0"} />
+                <NewsBlock t={t} news={news} width={"100%"} margin={"0 0 0 0"} />
             </section>
             <section className={s.main_panel}>
                 {textareaFocus && <div className={s.focused_back} onClick={() => setTextareaFocus(false)}></div>}
