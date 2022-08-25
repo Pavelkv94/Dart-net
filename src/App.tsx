@@ -6,6 +6,7 @@ import { Circle } from "./components/common/Preloaders/Circle/Circle";
 import { meTC } from "./redux/appReducer";
 import { AppDispatchType } from "./redux/store";
 
+//@ts-ignore
 const Login = React.lazy(() => import("./components/Login/Login"));
 const Main = React.lazy(() => import("./components/Main/Main"));
 

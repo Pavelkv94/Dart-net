@@ -25,7 +25,7 @@ const Home = () => {
     const news = useSelector<AppStateType, any>((state) => state.outData.news);
     const users = useSelector<AppStateType, any>((state) => state.users.users);
 
-    const notFriends = users.filter((el: any) => el.friends.find((id: any) => id !== user_id) !== undefined);
+    const notFriends = users.filter((el: any) => el.friends.find((id: any) => id !== user_id) === undefined);
 
     const [rotate, setRotate] = useState<boolean>(false);
 

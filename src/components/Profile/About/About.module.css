@@ -70,6 +70,8 @@
 .edit_profile_wrapper {
     text-decoration: none;
     color: #515365;
+    margin: 0 20px;
+    width: 100px;
 }
 .edit_profile_wrapper:hover {
     color: black;
@@ -82,5 +84,6 @@
 
 }
 .edit_profile p {
-    margin: 10px 0 0 0 
+    margin: 10px 0 0 0;
+    text-align: center;
 }

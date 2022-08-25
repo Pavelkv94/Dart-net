@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { AppDispatchType, AppStateType } from "../../redux/store";
@@ -8,7 +9,8 @@ import s from "./Users.module.css";
 
 type UsersFilterType = "all" | "friends";
 
-const Users = ({ t }: any) => {
+const Users = () => {
+    const {t} = useTranslation();
     const dispatch = useDispatch<AppDispatchType>();
 
     const users = useSelector<AppStateType, any>((state) => state.users.users);
@@ -42,11 +44,11 @@ const Users = ({ t }: any) => {
         <div className={s.users}>
             <div className={s.users_header}>
                 <div className={`${s.users_switch} ${!usersMode && s.active}`} onClick={allClick}>
-                    All users
+                    {t('users.allUsers')}
                 </div>
                 <div className={s.users_switch_vr}></div>
                 <div className={`${s.users_switch} ${usersMode && s.active}`} onClick={friendsClick}>
-                    Friends
+                    {t('users.friends')}
                 </div>
             </div>
 
@@ -54,7 +56,7 @@ const Users = ({ t }: any) => {
                 {filteredUsers
                     .filter((el: any) => el.user_id !== user_id)
                     .map((el: any) => (
-                        <User user={el} user_id={user_id} />
+                        <User user={el} user_id={user_id} t={t}/>
                     ))}
             </div>
         </div>

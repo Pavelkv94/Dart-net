@@ -103,7 +103,7 @@ const About = ({ setCurrentTab, t, profileData }: AboutType) => {
                         </div>
                         <NavLink to="/settings" className={s.edit_profile_wrapper}> <div className={s.edit_profile}>
                             <img src={settingIcon} alt="settings icon" width={50} />
-                            <p>Edit Profile</p>
+                            <p>{t('profile.editProfile')}</p>
                         </div></NavLink>
                         </div>
                         <section className={s.social_networks}>

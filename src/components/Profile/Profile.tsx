@@ -26,7 +26,7 @@ const Profile = () => {
     const profileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.profileData);
     const anotherProfileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.anotherProfileData);
 
-    const [currentTab, setCurrentTab] = useState<TabType>("about");
+    const [currentTab, setCurrentTab] = useState<TabType>("posts");
 
     useEffect(() => {
         id ? dispatch(getAnotherProfileTC(id)) : dispatch(getProfileTC(user_id));

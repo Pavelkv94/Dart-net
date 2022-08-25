@@ -43,7 +43,8 @@
         "postsEmpty": "You don't have any entries yet. Create your first post.",
         "startActivity": "Start your activity",
         "logout": "Logout",
-        "settings": "Settings"
+        "settings": "Settings",
+        "editProfile": "Edit Profile"
     },
     "posts": {
         "createPost": "Create Post",
@@ -130,6 +131,13 @@
         "male": "Male",
         "female": "Female",
         "error": "Name length should be no more 20 symbols",
-        "success": "Success"
+        "success": "Success!"
+    },
+    "users": {
+        "allUsers": "All users",
+        "friends": "Friends",
+        "follow": "Follow",
+        "unfollow": "Unfollow",
+        "message": "Message"
     }
 }

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeBackgroundTC, ProfileInfoType, savePhotoTC } from "../../../redux/profileReducer";
-import { AppDispatchType } from "../../../redux/store";
+import { AppDispatchType, AppStateType } from "../../../redux/store";
 import cameraIcon from "../../../assets/svg/camera-icon.svg";
 import ok from "../../../assets/svg/ok.svg";
 import s from "./ProfileInfo.module.css";
@@ -9,6 +9,8 @@ import emptyProfile from "../../../assets/empty-profile.png";
 import { ReactI18NextChild } from "react-i18next";
 import { TabType } from "../Profile";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { PostType } from "../../../redux/postsReducer";
 
 type ProfileInfoPropsType = {
     t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
@@ -21,6 +23,8 @@ const ProfileInfo = ({ t, profileData, user_id, currentTab, setCurrentTab }: Pro
     const dispatch = useDispatch<AppDispatchType>();
 
     const { id } = useParams();
+
+    const posts = useSelector<AppStateType, Array<PostType>>((state) => state.posts.posts)
 
     const [openBackUrl, setOpenBackUrl] = useState<boolean>(false);
     const [backUrl, setBackUrl] = useState<string>("");
@@ -127,7 +131,7 @@ M261.333,170.667c-8.822,0-16-7.178-16-16s7.178-16,16-16c8.822,0,16,7.178,16,16S2
                 <section>
                     <div className={s.navigate_stats}>
                         <span>{t("profile.posts")}:</span>
-                        <span>122</span>
+                        <span>{posts.length}</span>
                     </div>
                     <div className={s.navigate_stats}>
                         <span>{t("profile.friends")}:</span>

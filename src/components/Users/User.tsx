@@ -42,12 +42,12 @@ const User = ({ user, user_id, t }: any) => {
             <div className={s.user_info}></div>
             <div className={s.user_footer}>
                 {user.friends.find((el: string) => el === user_id) !== undefined ? (
-                    <ButtonOrange title={"UnFollow"} width={100} height={30} onClick={unfollow} backgroundColor="gray"/>
+                    <ButtonOrange title={t('users.unfollow')} width={100} height={30} onClick={unfollow} backgroundColor="gray"/>
                 ) : (
-                    <ButtonOrange title={"Follow"} width={100} height={30} onClick={follow} />
+                    <ButtonOrange title={t('users.follow')} width={100} height={30} onClick={follow} />
                 )}
 
-                <ButtonOrange title={"Message"} width={100} height={30} disabled={true} />
+                <ButtonOrange title={t('users.message')} width={100} height={30} disabled={true} />
             </div>
         </div>
     );

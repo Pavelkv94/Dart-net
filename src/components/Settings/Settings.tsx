@@ -31,7 +31,7 @@ const Settings = () => {
     useEffect(() => {
         status === "succeeded" && setTimeout(() => dispatch(setProfileEditStatusAC("idle")), 3000);
     }, [status, dispatch]);
-    
+
     const error = profileInfoData.first_name.length > 20 || profileInfoData.last_name.length > 20;
 
     return (
@@ -85,8 +85,8 @@ const Settings = () => {
                             />
                         </div>
                         <div className={s.setting_item}>
-                            <label htmlFor="">{t("settings.country")}y</label>
-                            <input type="text" className={s.text_field} placeholder={t("settings.countruPlaceholder")} value={profileInfoData.country} />
+                            <label htmlFor="">{t("settings.country")}</label>
+                            <input type="text" className={s.text_field} placeholder={t("settings.countruPlaceholder")} value={profileInfoData.country} onChange={(e) => setProfileInfoData({ ...profileInfoData, country: e.currentTarget.value })} />
                         </div>
                         <div className={s.setting_item}>
                             <label htmlFor="">{t("settings.education")}</label>

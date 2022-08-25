@@ -7,7 +7,8 @@ import { Registration } from "./Registration";
 import { useSelector } from "react-redux";
 import { AppStateType } from "../../redux/store";
 import { RequestStatusType } from "../../redux/appReducer";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { Circle } from "../common/Preloaders/Circle/Circle";
 
 export type LangType = "ru" | "en";
 
@@ -30,9 +31,12 @@ const Login = () => {
         setLang(language);
     };
 
+    const navigate = useNavigate()
+
     if (isAuth && status === "succeeded") {
-        return <Navigate to={"/profile"} />;
-    } else
+        return navigate(-1);
+    }
+    if (status === "loading") { return <div className={s.preloader}><Circle /></div> }
         return (
             <div className={s.login_wrapper}>
                 <div className={s.login}>
