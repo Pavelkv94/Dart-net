@@ -63,7 +63,9 @@ export const HeadBar = React.memo(({ exit }: any) => {
                         <img src={notify} alt="notify" width={20} className={s.nav_icon} />
                     </div>
                     <div className={s.navbar_item}>
+                        <NavLink to="/messages">
                         <img src={messages} alt="messages" width={20} className={s.nav_icon} />
+                         </NavLink>
                     </div>
                     <div className={s.navbar_item} onClick={() => (lang === "en" ? changeLanguage("ru") : changeLanguage("en"))}>
                         <img src={langIcon} alt="lang" width={20} className={s.nav_icon} />

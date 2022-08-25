@@ -13,6 +13,7 @@ import Home from "../Home/Home";
 const Profile = React.lazy(() => import("../Profile/Profile"));
 const Messages = React.lazy(() => import("../Messages/Messages"));
 const Users = React.lazy(() => import("../Users/Users"));
+const Settings = React.lazy(() => import("../Settings/Settings"));
 
 const Main = ({ mode }: any) => {
     const dispatch = useDispatch<AppDispatchType>();
@@ -50,6 +51,12 @@ const Main = ({ mode }: any) => {
                 return (
                     <Suspense fallback={<Circle />}>
                         <Home />
+                    </Suspense>
+                );
+            case "settings":
+                return (
+                    <Suspense fallback={<Circle />}>
+                        <Settings />
                     </Suspense>
                 );
             default:

@@ -21,7 +21,8 @@ function App() {
         profile: "profile",
         messages: "messages",
         users: "users",
-        home: "home"
+        home: "home",
+        settings: "settings"
     };
 
     return (
@@ -33,6 +34,7 @@ function App() {
             <Route element={<Main mode={displayMode.messages} />} path="/messages" />
             <Route element={<Main mode={displayMode.users} />} path="/users" />
             <Route element={<Main mode={displayMode.home} />} path="/home" />
+            <Route element={<Main mode={displayMode.settings} />} path="/settings" />
             <Route element={<div>empty</div>} path="*" />
         </Routes>
     );

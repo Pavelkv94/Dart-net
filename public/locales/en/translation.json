@@ -41,7 +41,9 @@
         "saved": "Saved",
         "savedEmpty": "You don't have any like entries yet. Start your activity.",
         "postsEmpty": "You don't have any entries yet. Create your first post.",
-        "startActivity": "Start your activity"
+        "startActivity": "Start your activity",
+        "logout": "Logout",
+        "settings": "Settings"
     },
     "posts": {
         "createPost": "Create Post",
@@ -113,5 +115,21 @@
     },
     "messages": {
         "messages": "Messages"
+    },
+    "settings": {
+        "aboutMe": "About Me:",
+        "birthday": "Birthday:",
+        "gender": "Gender:",
+        "country": "Country, city:",
+        "education": "Education:",
+        "work": "Work and experience:",
+        "firstName": "First Name:",
+        "lastName": "Last Name:",
+        "countruPlaceholder": "Belarus, Minsk",
+        "confirm": "Confirm",
+        "male": "Male",
+        "female": "Female",
+        "error": "Name length should be no more 20 symbols",
+        "success": "Success"
     }
 }

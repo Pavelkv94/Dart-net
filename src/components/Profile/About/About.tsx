@@ -9,7 +9,7 @@ import gender from "../../../assets/svg/about-gender.svg";
 import join from "../../../assets/svg/about-join.svg";
 import profile from "../../../assets/svg/about-profile.svg";
 import work from "../../../assets/svg/about-work.svg";
-
+import settingIcon from "../../../assets/svg/setting.svg";
 import facebook from "../../../assets/svg/about-facebook.svg";
 import youtube from "../../../assets/svg/about-youtube.svg";
 import vk from "../../../assets/svg/about-vk.svg";
@@ -20,6 +20,7 @@ import telegram from "../../../assets/svg/about-telegram.svg";
 import { ReactI18NextChild } from "react-i18next";
 import { TabType } from "../Profile";
 import { ProfileInfoType } from "../../../redux/profileReducer";
+import { NavLink } from "react-router-dom";
 
 type PersonalInfoItemType = {
     icon: string;
@@ -96,7 +97,15 @@ const About = ({ setCurrentTab, t, profileData }: AboutType) => {
                 margin={"0 0 0 10px"}
                 component={
                     <div>
+                        <div className={s.flex}>
+                        <div>
                         {generalInfoItems}
+                        </div>
+                        <NavLink to="/settings" className={s.edit_profile_wrapper}> <div className={s.edit_profile}>
+                            <img src={settingIcon} alt="settings icon" width={50} />
+                            <p>Edit Profile</p>
+                        </div></NavLink>
+                        </div>
                         <section className={s.social_networks}>
                             <span>{t("profile.socialNetworks")}</span>
                             <div className={s.social_networks_items}>{socialNetworksItems}</div>

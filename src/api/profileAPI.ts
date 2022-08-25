@@ -16,5 +16,8 @@ export const profileAPI = {
     },
     async changeBackground(url: string) {
         return instance.put(baseUrl('/profile/changeBackground'), await expandHeadersForPhoto(), {url})
+    },
+    async editProfile(payload: string) {
+        return instance.put(baseUrl('/profile/edit'), await expandHeadersForPhoto(), payload)
     }
 };

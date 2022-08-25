@@ -30,6 +30,7 @@ export type ProfileInfoType = {
     created_at: string;
     education: string;
     work: string;
+    gender?: string;
     friends: Array<string>;
 };
 const initialState = {
@@ -56,6 +57,7 @@ const initialState = {
         created_at: "",
         education: "",
         work: "",
+        gender: "",
         friends: [],
     },
     anotherProfileData: {
@@ -84,6 +86,7 @@ const initialState = {
         friends: [],
     },
     profileStatus: "idle" as RequestStatusType,
+    profileEditStatus: "idle" as RequestStatusType,
 };
 
 export type InitialStateType = typeof initialState;
@@ -100,6 +103,8 @@ export function profileReducer(state: InitialStateType = initialState, action: A
             return { ...state, profileData: { ...state.profileData, photo: action.photoUrl } };
         case "SET-PROFILE-STATUS":
             return { ...state, profileStatus: action.status };
+        case "SET-PROFILE-EDIT-STATUS":
+            return { ...state, profileEditStatus: action.status };
 
         default:
             return state;
@@ -123,6 +128,13 @@ const setAnotherProfileInfoAC = (payload: any) => {
 export const setProfileStatusAC = (status: RequestStatusType) => {
     return {
         type: "SET-PROFILE-STATUS",
+        status,
+    };
+};
+
+export const setProfileEditStatusAC = (status: RequestStatusType) => {
+    return {
+        type: "SET-PROFILE-EDIT-STATUS",
         status,
     };
 };
@@ -175,4 +187,15 @@ export const savePhotoTC = (file: File) => async (dispatch: AppDispatchType) => 
 
 export const changeBackgroundTC = (url: string) => async (dispatch: AppDispatchType) => {
     await profileAPI.changeBackground(url).then((res) => dispatch(saveBackgroundAC(res.data.image)));
+};
+
+export const editProfileTC = (payload: any) => async (dispatch: AppDispatchType) => {
+    dispatch(setProfileEditStatusAC("loading"));
+    await profileAPI
+        .editProfile(payload)
+        .then((res) => {
+            dispatch(getProfileTC(res.data.user_id));
+            dispatch(setProfileEditStatusAC("succeeded"));
+        })
+        .catch((e) => dispatch(setProfileEditStatusAC("failed")));
 };

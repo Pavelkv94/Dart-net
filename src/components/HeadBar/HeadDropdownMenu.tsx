@@ -69,15 +69,16 @@ export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit, t 
                     Saved items
                 </div>
             </NavLink>
-            <a href="#" className={s.link_menu_item}>
-                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 204.993 204.993" width={22} height={22} className={s.svg}>
-                    <g>
+            <NavLink to="/settings" style={{ textDecoration: "none" }} onClick={onClose}>
+                <div className={s.link_menu_item}>
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 204.993 204.993" width={22} height={22} className={s.svg}>
                         <g>
                             <g>
                                 <g>
                                     <g>
-                                        <path
-                                            d="M113.711,202.935H92.163c-3.242,0-4.373,0.007-15.421-27.364l-8.532-3.468
+                                        <g>
+                                            <path
+                                                d="M113.711,202.935H92.163c-3.242,0-4.373,0.007-15.421-27.364l-8.532-3.468
 						c-23.248,10.547-26,10.547-26.92,10.547h-1.779l-1.517-1.303l-15.275-14.945c-2.323-2.319-3.128-3.124,8.825-30.137
 						l-3.479-8.231C0,117.977,0,116.81,0,113.496V92.37c0-3.31,0-4.355,27.972-15.171l3.479-8.249
 						c-12.644-26.602-11.774-27.428-9.28-29.776l16.427-16.105l2.04-0.064c2.48,0,11.681,3.357,27.371,9.981l8.507-3.454
@@ -98,15 +99,16 @@ export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit, t 
 						c-19.759,0-35.849-15.772-35.849-35.159c0-19.372,16.087-35.134,35.849-35.134c19.748,0,35.799,15.765,35.799,35.134
 						C138.294,121.881,122.243,137.653,102.495,137.653z M102.495,76.09c-14.956,0-27.113,11.846-27.113,26.405
 						c0,14.569,12.154,26.426,27.113,26.426c14.931,0,27.078-11.857,27.078-26.426C129.569,87.936,117.426,76.09,102.495,76.09z"
-                                        />
+                                            />
+                                        </g>
                                     </g>
                                 </g>
                             </g>
                         </g>
-                    </g>
-                </svg>
-                Settings
-            </a>
+                    </svg>
+                    {t('profile.settings')}
+                </div>
+            </NavLink>
             <div className={s.link_menu_item} onClick={exit}>
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 512 512" width={22} height={22} className={s.svg}>
                     <g>
@@ -128,7 +130,7 @@ export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit, t 
                         </g>
                     </g>
                 </svg>
-                Logout
+                {t('profile.logout')}
             </div>
         </div>
     );
