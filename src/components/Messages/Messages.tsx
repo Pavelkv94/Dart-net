@@ -82,7 +82,7 @@ const Messages = () => {
                             return (
                                 <div key={mess.id} className={`${s.message_item_wrapper} ${mess.user_id === user_id && s.reverse}`}>
                                     <div className={s.avatar_wrapper}>
-                                        <NavLink to={mess.user_id === user_id ? `/profile` : `/profile/${mess.user_id}`}>
+                                        <NavLink to={mess.user_id === user_id ? `/` : `/${mess.user_id}`}>
                                             <div
                                                 className={s.avatar}
                                                 style={{

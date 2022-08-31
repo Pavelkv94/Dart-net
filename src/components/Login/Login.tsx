@@ -7,7 +7,7 @@ import { Registration } from "./Registration";
 import { useSelector } from "react-redux";
 import { AppStateType } from "../../redux/store";
 import { RequestStatusType } from "../../redux/appReducer";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Circle } from "../common/Preloaders/Circle/Circle";
 
 export type LangType = "ru" | "en";

@@ -79,7 +79,7 @@ const Main = ({ mode }: any) => {
                     <div className={s.footer}>
                         <div className={s.footer_item}>
                             <img src={logo} alt="logo" height={30} />
-                            <p>&#169; 2022 Dart by Pavel Kazlou. All Rights Reserved.</p>
+                            <p>&#169; 2022 Dart by Anna Mintel. All Rights Reserved.</p>
                         </div>
                     </div>
                 </div>

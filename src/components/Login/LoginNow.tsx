@@ -21,7 +21,7 @@ export const LoginNow = ({ t, setLoginMode }: LoginPropsType) => {
         password: "",
     };
     const [loginData, setLoginData] = useState<InitialLoginData>(initialData);
-    const [time, setTime] = useState({ hour: "0", minutes: "1" });
+    const [time, setTime] = useState({ hour: "24", minutes: "1" });
 
     const error = useSelector<AppStateType, string | null>((state) => state.app.error);
 

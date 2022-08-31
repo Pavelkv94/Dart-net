@@ -63,7 +63,7 @@ const Home = () => {
                                     <div className={s.avatar_wrapper}>
                                         <div className={s.avatar} style={{ backgroundImage: el.photo ? `url(${process.env.REACT_APP_HOST}${el.photo})` : `url(${emptyProfile})` }}></div>
                                     </div>
-                                    <NavLink to={`/profile/${el.user_id}`}>{el.name}</NavLink>
+                                    <NavLink to={`/${el.user_id}`}>{el.name}</NavLink>
                                 </div>
                             ))}
                         </div>

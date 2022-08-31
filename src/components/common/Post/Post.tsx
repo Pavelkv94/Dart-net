@@ -104,7 +104,7 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
             <div className={s.post_header}>
                 <div className={s.post_avatar} style={avatar}></div>
                 <div className={s.post_whois}>
-                    <NavLink to={`/profile/${postData.user_id === user_id ? '' : postData.user_id}`}>{postData.user}</NavLink>
+                    <NavLink to={`/${postData.user_id === user_id ? '' : postData.user_id}`}>{postData.user}</NavLink>
                     <span>
                         <img src={planet} alt="icon" width={14} />
                         <p>{`${t("posts.published")} ${postData.created_at}`}</p>
