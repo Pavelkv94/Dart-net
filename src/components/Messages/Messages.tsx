@@ -44,7 +44,7 @@ const Messages = () => {
 
     useEffect(() => {
         
-        socket.current = new WebSocket("ws://dart-social-network.herokuapp.com");
+        socket.current = new WebSocket("wss://dart-social-network.herokuapp.com");
 
         socket.current.onopen = () => {
             console.log("WEBSOCKET OPEN")
