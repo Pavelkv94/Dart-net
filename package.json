@@ -63,6 +63,7 @@
   },
   "devDependencies": {
     "@types/redux-logger": "^3.0.9",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "gh-pages": "^4.0.0"
   }
 }
