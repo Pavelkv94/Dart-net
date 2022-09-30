@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Dart-net/static/css/main.2e99ec75.css",
-    "main.js": "/Dart-net/static/js/main.5175edbf.js",
+    "main.js": "/Dart-net/static/js/main.d37fbfb0.js",
     "static/css/818.8ede8e78.chunk.css": "/Dart-net/static/css/818.8ede8e78.chunk.css",
     "static/js/818.89ff6e92.chunk.js": "/Dart-net/static/js/818.89ff6e92.chunk.js",
     "static/css/380.0814923e.chunk.css": "/Dart-net/static/css/380.0814923e.chunk.css",
@@ -58,7 +58,7 @@
     "static/media/arrow-down.svg": "/Dart-net/static/media/arrow-down.62ce1cc31b940d051e5a06d4c8177ccf.svg",
     "static/media/arrow-right.svg": "/Dart-net/static/media/arrow-right.f926d159a908b445563073e26e664ca4.svg",
     "main.2e99ec75.css.map": "/Dart-net/static/css/main.2e99ec75.css.map",
-    "main.5175edbf.js.map": "/Dart-net/static/js/main.5175edbf.js.map",
+    "main.d37fbfb0.js.map": "/Dart-net/static/js/main.d37fbfb0.js.map",
     "818.8ede8e78.chunk.css.map": "/Dart-net/static/css/818.8ede8e78.chunk.css.map",
     "818.89ff6e92.chunk.js.map": "/Dart-net/static/js/818.89ff6e92.chunk.js.map",
     "380.0814923e.chunk.css.map": "/Dart-net/static/css/380.0814923e.chunk.css.map",
@@ -82,6 +82,6 @@
   },
   "entrypoints": [
     "static/css/main.2e99ec75.css",
-    "static/js/main.5175edbf.js"
+    "static/js/main.d37fbfb0.js"
   ]
 }
