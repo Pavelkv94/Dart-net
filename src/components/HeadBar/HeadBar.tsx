@@ -50,7 +50,7 @@ export const HeadBar = React.memo(({ exit }: any) => {
                 </div>
                 <div className={s.navbar}>
                     <div className={s.navbar_item}>
-                        <NavLink to="/">
+                        <NavLink to="/home">
                             <img src={home} alt="home" width={20} className={s.nav_icon} />
                         </NavLink>
                     </div>

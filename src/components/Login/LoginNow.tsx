@@ -44,7 +44,7 @@ export const LoginNow = ({ t, setLoginMode }: LoginPropsType) => {
                 <p>{t("login.welcomeBack")}</p>
             </div>
             <div className={s.credentials}>
-                <b>{t("login.email")}:</b> test@example.com <b>{t("login.password")}:</b> demo
+                <b>{t("login.email")}:</b> test8@example.com <b>{t("login.password")}:</b> test
             </div>
             <div className={s.time}>
                 <section>{t("login.limit")}:</section>

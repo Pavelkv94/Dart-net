@@ -68,7 +68,7 @@ export const getPostsTC = (user_id: string | undefined) => async (dispatch: AppD
     });
 };
 
-export const getSavedPostsTC = (user_id: string) => async (dispatch: AppDispatchType) => {
+export const getSavedPostsTC = (user_id: string | undefined) => async (dispatch: AppDispatchType) => {
     postsAPI.getSavedPosts(user_id).then((res) => {
         dispatch(getSavedPostsAC(res.data));
     });
@@ -126,3 +126,18 @@ export const unlikedPostTC = (payload: any, place: PlaceType, user?: string | un
 export const likedCommentTC = (payload: any) => async (dispatch: AppDispatchType) => {
     postsAPI.likedComment(payload).then((res) => dispatch(getPostsTC(payload.user_id)));
 };
+
+export const deletePostTC = (post_id:string | undefined, user_id: string | undefined, place: PlaceType) => async (dispatch: AppDispatchType) => {
+    postsAPI.deletePost(post_id).then((res) => {
+        switch (place) {
+            case "allPosts":
+                return dispatch(getPostsTC("all"));
+            case "saved":
+                return dispatch(getSavedPostsTC(user_id));
+            case "userPosts":
+                return dispatch(getPostsTC(user_id));
+            default:
+                return dispatch(getPostsTC(user_id));
+        }
+    })
+}

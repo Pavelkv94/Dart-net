@@ -51,7 +51,8 @@
         "publish": "Publish",
         "pinPicture": "Pin picture",
         "enterImgUrl": "Enter image URL:",
-        "published": "Published:"
+        "published": "Published:",
+        "delete": "Delete"
     },
     "months": {
         "january": "Januaryь",

@@ -3,7 +3,7 @@ import s from "./Post.module.css";
 import planet from "../../../assets/svg/about-country.svg";
 import comment from "../../../assets/svg/comment.svg";
 import { ReactI18NextChild } from "react-i18next";
-import { CommentType, likedPostTC, PlaceType, PostType, sendCommentTC, unlikedPostTC } from "../../../redux/postsReducer";
+import { CommentType, deletePostTC, likedPostTC, PlaceType, PostType, sendCommentTC, unlikedPostTC } from "../../../redux/postsReducer";
 import threeDots from "../../../assets/svg/three-dots.svg";
 import Comment from "./Comment";
 import { ButtonOrange } from "../ButtonOrange/ButtonOrange";
@@ -37,6 +37,7 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
     };
 
     const [openComments, setOpenComments] = useState(false);
+    const [openMenu, setOpenMenu] = useState(false);
 
     const initialComment = {
         user: `${profileData.first_name} ${profileData.last_name}`,
@@ -65,6 +66,11 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
         } else {
             dispatch(unlikedPostTC({ post_id: postData._id, user_id: user_id }, place, user));
         }
+    };
+
+    const deletePost = (post_id:string | undefined) => {
+        dispatch(deletePostTC(post_id, user_id, place));
+        setOpenMenu(true);
     };
 
     const avatar = {
@@ -101,7 +107,7 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
 
     return (
         <div className={s.post} style={style}>
-            <div className={s.post_header}>
+            <div className={s.post_header}><div style={{display: 'flex'}}>
                 <div className={s.post_avatar} style={avatar}></div>
                 <div className={s.post_whois}>
                     <NavLink to={`/${postData.user_id === user_id ? '' : postData.user_id}`}>{postData.user}</NavLink>
@@ -109,9 +115,10 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
                         <img src={planet} alt="icon" width={14} />
                         <p>{`${t("posts.published")} ${postData.created_at}`}</p>
                     </span>
-                </div>
-                <div className={s.dots}>
+                </div></div>
+                <div className={s.dots} onClick={() => setOpenMenu(prev => !prev)}>
                     <img src={threeDots} alt="three dots" width={30} height={30} />
+                    {openMenu && postData.user_id === user_id && <div className={s.dots_menu} onClick={() => deletePost(postData._id)}>{t('posts.delete')}</div>}
                 </div>
             </div>
             <div className={s.post_main}>

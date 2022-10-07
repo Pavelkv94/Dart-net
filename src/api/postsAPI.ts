@@ -7,7 +7,7 @@ export const postsAPI = {
     async getPosts(user_id: string | undefined) {
         return instance.get(baseUrl(`/posts/getPosts/${user_id}`), await expandHeaders());
     },
-    async getSavedPosts(user_id: string) {
+    async getSavedPosts(user_id: string | undefined) {
         return instance.get(baseUrl(`/posts/getsavedPosts/${user_id}`), await expandHeaders());
     },
     async createComment(payload: any) {
@@ -21,5 +21,8 @@ export const postsAPI = {
     },
     async unlikedPost(payload: any) {
         return instance.post(baseUrl("/posts/unliked"), await expandHeaders(), payload);
+    },
+    async deletePost(post_id: string | undefined) {
+        return instance.delete(baseUrl(`/posts/deletePost/${post_id}`), await expandHeaders());
     },
 };

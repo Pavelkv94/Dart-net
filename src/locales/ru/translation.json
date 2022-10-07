@@ -51,7 +51,8 @@
         "publish": "Опубликовать",
         "pinPicture": "Прикрепить картинку",
         "enterImgUrl" : "Введите URL картинки:",
-        "published": "Опубликовано:"
+        "published": "Опубликовано:",
+        "delete": "Удалить"
     },
     "months": {
         "january": "Январь",

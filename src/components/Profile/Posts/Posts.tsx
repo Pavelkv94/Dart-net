@@ -43,7 +43,7 @@ const Posts = ({ setCurrentTab, t, lang, profileData }: PostsPropsType) => {
     }, [setCurrentTab]);
 
     useEffect(() => {
-        dispatch(getPostsTC(profileData.user_id));
+        profileData.user_id && dispatch(getPostsTC(profileData.user_id));
     }, [dispatch, profileData.user_id]);
 
     return (
