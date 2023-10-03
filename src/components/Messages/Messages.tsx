@@ -135,6 +135,7 @@ const Messages = () => {
                             </div>
                             <ButtonOrange width={200} height={40} alignSelf={"self-end"} title={t("messages.send")} onClick={sendMessage} disabled={message.message.trim() === ""}/>
                         </div>
+                        <span style={{color: "red"}}>Chat is not available on the free backend hosting</span>
                     </div>
                 </section>
             </div>
