@@ -17,7 +17,9 @@
         "regSuccess": "Registration completed. Redirecting to login page...",
         "limit": "Set a time limit for your stay online",
         "hours": "Hours",
-        "minutes": "Minutes"
+        "minutes": "Minutes",
+        "loginOrEmail": "Login or Email",
+        "login": "Login"
     },
     "profile": {
         "profile": "Profile",

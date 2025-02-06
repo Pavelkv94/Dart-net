@@ -193,7 +193,8 @@ export const editProfileTC = (payload: any) => async (dispatch: AppDispatchType)
     dispatch(setProfileEditStatusAC("loading"));
     await profileAPI
         .editProfile(payload)
-        .then((res) => {
+        .then((res) => {    //@ts-ignore
+
             dispatch(getProfileTC(res.data.user_id));
             dispatch(setProfileEditStatusAC("succeeded"));
         })

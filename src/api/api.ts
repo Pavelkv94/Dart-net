@@ -4,7 +4,7 @@ export const expandHeaders = async () => ({
     Authorization: `Bearer ${localStorage.getItem("token")}`,
 });
 
-export const baseUrl = (url: string) => `${process.env.REACT_APP_HOST}${url}` || "https://dart-k3e2.onrender.com";
+export const baseUrl = (url: string) => `${process.env.REACT_APP_HOST}${url}` || "https://localhost:3000";
 
 export const instance = {
     get: (url: string, headers: any = {}, params: any = {}) => {

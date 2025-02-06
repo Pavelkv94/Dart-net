@@ -23,8 +23,9 @@ export const store = configureStore({
 	reducer: rootReducer,
 	middleware:  (getDefaultMiddleware) =>
 	getDefaultMiddleware()
+	//@ts-ignore
 		.prepend(thunk, logger)});
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
-export type AppDispatchType = typeof store.dispatch
+export type AppDispatchType = any//typeof store.dispatch

@@ -36,13 +36,13 @@ export const getUsersTC = () => async (dispatch: AppDispatchType) => {
     });
 };
 
-export const followTC = (payload: any) => async (dispatch: AppDispatchType) => {
+export const followTC = (payload: any) => async (dispatch: any) => {
     await usersAPI.follow(payload).then((res) => {
         dispatch(getUsersTC());
     });
 };
 
-export const unfollowTC = (payload: any) => async (dispatch: AppDispatchType) => {
+export const unfollowTC = (payload: any) => async (dispatch: any) => {
     await usersAPI.unfollow(payload).then((res) => {
         dispatch(getUsersTC());
     });
