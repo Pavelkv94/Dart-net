@@ -1,8 +1,7 @@
 import { postsAPI } from "../api/postsAPI";
 import { AppDispatchType } from "./store";
 import { API } from "../api/api";
-
-export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
+import { RequestStatus } from "./appReducer";
 
 type ActionType = any;
 
@@ -34,7 +33,7 @@ export type PlaceType = "myPosts" | "saved" | "allPosts" | "userPosts";
 const initialState = {
     posts: [] as Array<PostType>,
     savedPosts: [] as Array<PostType>,
-    status: "idle" as RequestStatusType,
+    status: RequestStatus.IDLE,
 };
 
 export type InitialStateType = typeof initialState;

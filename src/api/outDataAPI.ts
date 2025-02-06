@@ -1,6 +1,4 @@
-import { baseUrl, expandHeaders, instance } from "./api";
-
-const APINEWS = "ab28e3c72ec04614a4b825cdfa8735e0";
+import { baseUrl, expandHeaders, API } from "./api";
 
 const year = new Date().getFullYear();
 const month = new Date().getMonth();
@@ -15,12 +13,12 @@ const covidHeaders = {
 
 export const outDataAPI = {
     async getWeather(city_id: string) {
-        return instance.get(baseUrl(`/weather/${city_id}`), await expandHeaders());
+        return API.get(baseUrl(`/weather/${city_id}`), await expandHeaders());
     },
     async getNews(lang: string) {
-        return instance.get(`https://newsapi.org/v2/everything?q=tesla&from=${date}&language=${lang}&sortBy=publishedAt&apiKey=${APINEWS}`);
+        return API.get(`https://newsapi.org/v2/everything?q=tesla&from=${date}&language=${lang}&sortBy=publishedAt&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`);
     },
     async getCovidStats(country:string) {
-        return instance.get(`https://covid-193.p.rapidapi.com/statistics?country=${country}`, covidHeaders);
+        return API.get(`https://covid-193.p.rapidapi.com/statistics?country=${country}`, covidHeaders);
     },
 };

@@ -89,20 +89,20 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
     const colorLike = postData.likes.find((el) => el === user_id) ? "#FF7555" : "#535165";
 
     const emojiArray = [
-        emoji.unicode[0],
-        emoji.unicode[2],
-        emoji.unicode[5],
-        emoji.unicode[45],
-        emoji.unicode[35],
-        emoji.unicode[55],
-        emoji.unicode[42],
-        emoji.unicode[116],
-        emoji.unicode[117],
-        emoji.unicode[34],
-        emoji.unicode[51],
-        emoji.unicode[52],
-        emoji.unicode[31],
-        emoji.unicode[58],
+        // emoji.unicode[0],
+        // emoji.unicode[2],
+        // emoji.unicode[5],
+        // emoji.unicode[45],
+        // emoji.unicode[35],
+        // emoji.unicode[55],
+        // emoji.unicode[42],
+        // emoji.unicode[116],
+        // emoji.unicode[117],
+        // emoji.unicode[34],
+        // emoji.unicode[51],
+        // emoji.unicode[52],
+        // emoji.unicode[31],
+        // emoji.unicode[58],
     ];
 
     return (

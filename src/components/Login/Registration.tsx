@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { registrationTC, RequestStatusType, setAppErrAC, setAppStatusAC } from "../../redux/appReducer";
+import { registrationTC, RequestStatus, setAppErrAC, setAppStatusAC } from "../../redux/appReducer";
 import { AppDispatchType, AppStateType } from "../../redux/store";
 import { ButtonOrange } from "../common/ButtonOrange/ButtonOrange";
 import { CustomInput } from "../common/CustomInput/CustomInput";
@@ -26,7 +26,7 @@ export const Registration = ({ t, setLoginMode }: LoginPropsType) => {
   const [regData, setRegData] = useState<InitialRegisterData>(initialData);
 
   const error = useSelector<AppStateType, string | null>((state) => state.app.error);
-  const status = useSelector<AppStateType, RequestStatusType>((state) => state.app.status);
+  const status = useSelector<AppStateType, RequestStatus>((state) => state.app.status);
 
   const handleClick = () => {
     dispatch(registrationTC(regData));

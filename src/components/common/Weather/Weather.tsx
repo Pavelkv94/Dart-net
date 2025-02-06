@@ -36,7 +36,7 @@ const Weather = React.memo(({ t, width }: WeatherPropsType) => {
     const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
 
     useEffect(() => {
-        dispatch(getWeatherTC(city));
+        // dispatch(getWeatherTC(city));
     }, [dispatch, city]);
 
     const style = { width };

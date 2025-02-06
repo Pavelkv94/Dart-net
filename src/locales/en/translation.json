@@ -122,20 +122,22 @@
         "send": "Send"
     },
     "settings": {
-        "aboutMe": "About Me:",
-        "birthday": "Birthday:",
-        "gender": "Gender:",
-        "country": "Country, city:",
-        "education": "Education:",
-        "work": "Work and experience:",
-        "firstName": "First Name:",
-        "lastName": "Last Name:",
+        "aboutMe": "About Me",
+        "birthday": "Birthday",
+        "gender": "Gender",
+        "country": "Country, city",
+        "education": "Education",
+        "work": "Work and experience",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
         "countruPlaceholder": "Belarus, Minsk",
         "confirm": "Confirm",
         "male": "Male",
         "female": "Female",
         "error": "Name length should be no more 20 symbols",
-        "success": "Success!"
+        "success": "Success!",
+        "enter": "Enter"
     },
     "users": {
         "allUsers": "All users",

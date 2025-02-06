@@ -44,26 +44,26 @@ const Messages = () => {
     dispatch(getMessagesTC());
   }, []); //!
 
-  useEffect(() => {
-    socket.current = new WebSocket("wss://dart-social-network.herokuapp.com");
+  // useEffect(() => {
+  //   socket.current = new WebSocket("wss://dart-social-network.herokuapp.com");
 
-    socket.current.onopen = () => {
-      console.log("WEBSOCKET OPEN");
-    };
-    socket.current.onmessage = (event: any) => {
-      // const message = JSON.parse(event.data);
-      // dispatch(newMessageAC(message))
-      //@ts-ignore
+  //   socket.current.onopen = () => {
+  //     console.log("WEBSOCKET OPEN");
+  //   };
+  //   socket.current.onmessage = (event: any) => {
+  //     // const message = JSON.parse(event.data);
+  //     // dispatch(newMessageAC(message))
+  //     //@ts-ignore
 
-      dispatch(getMessagesTC());
-    };
-    socket.current.onclose = () => {
-      console.log("Socket закрыт");
-    };
-    socket.current.onerror = () => {
-      console.log("Socket произошла ошибка");
-    };
-  }, []);
+  //     dispatch(getMessagesTC());
+  //   };
+  //   socket.current.onclose = () => {
+  //     console.log("Socket закрыт");
+  //   };
+  //   socket.current.onerror = () => {
+  //     console.log("Socket произошла ошибка");
+  //   };
+  // }, []);
 
   const sendMessage = async () => {
     socket.current.send(JSON.stringify(message));
@@ -75,7 +75,7 @@ const Messages = () => {
   };
 
   if (!isAuth) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   } else
     return (
       <div className={s.messages_wrapper}>
@@ -136,11 +136,11 @@ const Messages = () => {
                   <img src={emojiCollapse ? arrowRight : arrowDown} alt="arrow" />
                 </div>
                 <div className={s.emojiBlock} style={emojiCollapse ? { height: "20px" } : { height: "114px" }}>
-                  {emoji.unicode.map((m: any, i: number) => (
+                  {/* {emoji.unicode.map((m: any, i: number) => (
                     <div className={s.emoji} onClick={() => setMessage({ ...message, message: message.message + m })} key={i}>
                       {m}
                     </div>
-                  ))}
+                  ))} */}
                 </div>
               </div>
               {/* @ts-ignore */}

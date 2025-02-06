@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Circle } from "./components/common/Preloaders/Circle/Circle";
 import { AppDispatchType } from "./redux/store";
+import { getMeTC, setAppAuthAC } from "./redux/appReducer";
+import { displayMode } from "./redux/AppContants";
 
 //@ts-ignore
 const Login = React.lazy(() => import("./components/Login/Login"));
@@ -12,18 +14,17 @@ const Main = React.lazy(() => import("./components/Main/Main"));
 function App() {
   const dispatch = useDispatch<AppDispatchType>();
 
-  useEffect(() => {
-    // let user_id = localStorage.getItem("user_id");
-    // dispatch(meTC(user_id));
-  }, [dispatch]);
+  // const navigate = useNavigate(); // Use useNavigate for navigation
+  const token = localStorage.getItem("token");
 
-  const displayMode = {
-    profile: "profile",
-    messages: "messages",
-    users: "users",
-    home: "home",
-    settings: "settings",
-  };
+  useEffect(() => {
+    if (token) {
+      // dispatch(getMeTC());
+      dispatch(setAppAuthAC(true));
+    } else {
+      dispatch(setAppAuthAC(false));
+    }
+  }, [dispatch, token]);
 
   return (
     <Routes>
@@ -33,16 +34,16 @@ function App() {
             <Login />
           </Suspense>
         }
-        path="/login"
+        path="/"
       />
-      <Route element={<Main mode={displayMode.profile} />} path="/">
-        {/* <Route element={<Main mode={displayMode.profile} />} path=":id" /> */}
+      <Route element={<Main mode={displayMode.profile} />} path="/profile">
+        <Route element={<Main mode={displayMode.profile} />} path=":id" />
       </Route>
-      {/* <Route element={<Main mode={displayMode.messages} />} path="/messages" /> */}
-      {/* <Route element={<Main mode={displayMode.users} />} path="/users" /> */}
-      {/* <Route element={<Main mode={displayMode.home} />} path="/home" /> */}
-      {/* <Route element={<Main mode={displayMode.settings} />} path="/settings" /> */}
-      <Route element={<div>empty</div>} path="*" />
+      <Route element={<Main mode={displayMode.messages} />} path="/messages" />
+      <Route element={<Main mode={displayMode.users} />} path="/users" />
+      <Route element={<Main mode={displayMode.home} />} path="/home" />
+      <Route element={<Main mode={displayMode.settings} />} path="/settings" />
+      <Route element={<div>Not Found</div>} path="*" />
     </Routes>
   );
 }

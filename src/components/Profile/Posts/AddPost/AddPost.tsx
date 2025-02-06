@@ -67,13 +67,13 @@ const AddPost = ({ t, profileData, setTextareaFocus }: AddPostPropsType) => {
                     <div className={s.arrow_wrapper} onClick={() => setEmojiCollapse((prev) => !prev)}>
                         <img src={emojiCollapse ? arrowRight : arrowDown} alt="arrow" />
                     </div>
-                    <div className={s.emojiBlock} style={emojiCollapse ? { height: "20px" } : { height: "114px" }}>
+                    {/* <div className={s.emojiBlock} style={emojiCollapse ? { height: "20px" } : { height: "114px" }}>
                         {emoji.unicode.map((m: any, i: number) => (
                             <div className={s.emoji} onClick={() => setPost({ ...post, text: post.text + m })} key={i}>
                                 {m}
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
                 {/* @ts-ignore */}
                 <div className={s.clip} title={t("posts.pinPicture")} onClick={() => setOpenImgUrl((prev) => !prev)}>
