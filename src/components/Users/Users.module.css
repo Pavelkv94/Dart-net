@@ -1,0 +1,119 @@
+.users {
+    margin-bottom: 60px;
+}
+.users_header {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ede9e9;
+    border-radius: 5px;
+    display: inline-block;
+    width: calc(100% - 40px);
+    margin-bottom: 20px;
+    padding: 20px;
+    position: relative;
+    margin-top: 30px;
+    display: flex;
+}
+.users_switch {
+    border: 1px solid #ede9e9;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #4e4e4e;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+.active {
+    background-color: #ff7555;
+    color: white;
+}
+.users_switch_vr {
+    width: 2px;
+    height: 30px;
+    background-color: #ede9e9;
+    margin: 10px;
+    align-self: center;
+}
+.users_main {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ede9e9;
+    border-radius: 5px;
+    display: inline-block;
+    width: calc(100% - 60px);
+    margin-bottom: 20px;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.user {
+    background: #fff none repeat scroll 0 0;
+    border-radius: 4px;
+    border: 1px solid #ede9e9;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    position: relative;
+    width: 240px;
+    height: 370px;
+    margin: 0 20px 20px 20px;
+}
+.user_back {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    background-color: gray;
+    background-size: cover;
+    border-radius: 4px;
+}
+.user_avatar {
+    position: absolute;
+    border: 2px solid #fff;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 80px;
+    left: 20px;
+    background-size: cover;
+}
+.user_name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 10px;
+}
+.user_name a {
+    text-decoration: none;
+    color: #313345;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+.user_name a:hover {
+    color: #ff7555;
+    transition: 0.3s;
+}
+.user_name_country {
+    font-size: 12px;
+    color: #757a95;
+    margin-top: 4px;
+}
+.user_info {
+    border: 1px solid green;
+    width: 100%;
+    margin: 10px 0;
+    height: 120px;
+}
+.user_footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    justify-self: flex-end;
+    align-self: flex-end;
+    margin: 10px 0;
+}

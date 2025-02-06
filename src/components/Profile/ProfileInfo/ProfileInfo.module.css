@@ -1,0 +1,185 @@
+.profile_top_screen {
+    height: 430px;
+    border-radius: 5px;
+    box-shadow: 0 6px 22px 0 rgb(0 0 0 / 8%);
+    margin-bottom: 30px;
+}
+.top_screen_background {
+    width: 100%;
+    height: 370px;
+    border-radius: 5px 5px 0 0;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-color: #313131;
+}
+.top_screen_navigate {
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.top_screen_navigate_menu {
+    display: flex;
+}
+.top_screen_navigate_menu_item {
+    text-decoration: none;
+    margin: 0 30px;
+    color: #535165;
+    position: relative;
+    cursor: pointer;
+}
+.top_screen_navigate_menu_item:hover {
+    color: #ff7555;
+}
+.top_screen_navigate_menu_item.active::after {
+    border-bottom: 10px solid #fa6342;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    bottom: 0;
+    content: "";
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%);
+}
+.top_screen_navigate_menu_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.top_screen_navigate section:last-child {
+    width: 200px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-around;
+}
+.navigate_stats {
+    width: 50%;
+    font-size: 14px;
+    color: #535165;
+    font-weight: 500;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.navigate_stats span:last-child {
+    color: #ff7555;
+    letter-spacing: 0.2px;
+    margin-top: 4px;
+}
+.top_screen_avatar_wrapper {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background-color: #ff7555;
+    border-radius: 50%;
+    width: 158px;
+    height: 158px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.top_screen_avatar {
+    width: 150px;
+    height: 150px;
+    border: 2px solid white;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+}
+.top_screen_navigate_name {
+    width: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.navigate_name {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.navigate_country {
+    font-size: 12px;
+    color: #757a95;
+}
+.download_avatar {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #bbb;
+    transition: 0.5s;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.download_avatar:hover {
+    cursor: pointer;
+    background-color: #ff9c85;
+    transition: 0.5s;
+}
+.change_img_btn {
+    color: #313131;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    padding: 12px 20px;
+    transition: all 0.3s;
+    vertical-align: middle;
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.change_img_btn:hover {
+    background-color: #FF7555;
+    border: 1px solid #FF7555;
+    color: white;
+    fill: white;
+}
+.enter_back_url {
+    position: absolute;
+    top: 70px;
+    right: 40px;
+    border: 1px solid black;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px 5px 5px 5px;
+}
+.enter_back_url input {
+    outline: none;
+    border: none;
+    height: 100%;
+    padding: 0 4px;
+    margin: 0;
+    border-radius: 5px 0 0 5px;
+}
+.enter_back_url button {
+    background-color: rgb(240, 240, 240);
+    border: none;
+    cursor: pointer;
+    height: 100%;
+    border-radius: 0 5px 5px 0;
+}
+.enter_back_url button:hover {
+    background-color: rgb(201, 201, 201);
+}

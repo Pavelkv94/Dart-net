@@ -1,0 +1,71 @@
+.weather {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../../../assets/weather.jpg');
+    padding: 20px;
+    position: relative;
+    color: #fff;
+    text-align: center;
+    background-color: #ff7555;
+    display: block;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    height: 250px;
+}
+.weather_header {
+    display: flex;
+    justify-content: space-between;
+}
+.city_select {
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    width: 140px
+}
+.city_select option {
+    color: black;
+}
+.weather_main {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.weather_temp {
+    font-size: 36px;
+    font-weight: 700;
+}
+.weather_dayWeek {
+    font-size: 18px;
+}
+.weather_day {
+    position: absolute;
+    min-width: 100px;
+    width: max-content;
+    height: 80px;
+    display: flex;flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 170px;
+    left: 0px;
+    border-radius: 0 10px 10px 0;
+    background-color: white;
+    color: #ff7555;
+    font-size: 26px;
+    font-weight: 600;
+}
+.weather_day span:first-child {
+    font-weight: 400;
+    margin: 0 10px;
+}
+.sun {
+    animation: preloader-rotate 10s infinite linear;
+}
+@keyframes preloader-rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }

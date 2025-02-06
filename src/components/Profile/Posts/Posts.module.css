@@ -1,0 +1,24 @@
+.posts {
+    margin-bottom: 90px;
+    min-height: 200px;
+    display: flex;
+}
+.right_panel {
+    width: 25%;
+    padding-right: 40px;
+}
+.main_panel {
+    width: 70%;
+    margin-left: 20px;
+    /* padding: 20px; */
+}
+.focused_back {
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 2;
+}

@@ -1,0 +1,25 @@
+
+/* ////// */
+.news_block {
+    display: flex;
+    flex-direction: column;
+}
+.news_block p:first-child {
+    margin: 0;
+    color: #515365;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 15px;
+}
+.news_block p:nth-child(2) {
+    line-height: 16px;
+    font-size: 13px;
+    color: #959ab5;
+    margin: 4px 0
+}
+.news_block a {
+    margin: 4px 0;
+}
+.news_block img {
+    width: 100%;
+}

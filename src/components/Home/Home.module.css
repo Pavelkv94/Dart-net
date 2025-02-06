@@ -1,0 +1,100 @@
+.home {
+    margin-top: 30px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 90px;
+}
+.left_panel {
+    width: 25%;
+}
+.main_panel {
+    width: 50%;
+}
+.reload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(180deg, rgb(255, 255, 255) 55%, rgb(255, 255, 255) 100%);
+    border-radius: 5px;
+    border: 1px solid #ede9e9;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+.reload:hover {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 55%, rgb(238, 238, 238) 100%);
+    transition: 0.3s;
+    padding: 2px 0;
+}
+.reload:active svg {
+    width: 20px;
+    height: 20px;
+    transition: 0.3s;
+}
+.reload svg {
+    width: 30px;
+    height: 30px;
+    margin: 10px 0;
+    fill: #ff7555;
+    transition: 0.3s;
+}
+.reload svg.rotate {
+    animation: preloader-rotate 1s infinite linear;
+}
+@keyframes preloader-rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.right_panel {
+    width: 25%;
+}
+
+
+.not_friends {
+
+    display: flex;
+    flex-wrap: wrap;
+}
+.not_friend_user {
+
+    width: 44%;
+    height: 120px;
+    margin: 0 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.not_friend_user a {
+    margin: 10px 0;
+    text-align: center;
+    color: #515365;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 15px;
+    transition: 0.3s;
+    text-decoration: none;
+
+}
+.not_friend_user a:hover {
+    cursor: pointer;
+    color: #ff7555;
+    transition: 0.3s;
+}
+.avatar_wrapper {
+    border: 2px solid #ff7555;
+    border-radius: 50%;
+
+}
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid white;
+    background-size: cover;
+    background-position: center;
+}
