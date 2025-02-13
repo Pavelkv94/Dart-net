@@ -13,7 +13,7 @@ import Weather from "../common/Weather/Weather";
 import s from "./Home.module.css";
 import emptyProfile from "../../assets/empty-profile.png";
 import { NavLink } from "react-router-dom";
-import { Covid } from "../common/Covid/Covid";
+// import { Covid } from "../common/Covid/Covid";
 
 const Home = () => {
     const { t, i18n } = useTranslation();
@@ -61,7 +61,7 @@ const Home = () => {
                             {notFriends.slice(0, 6).map((el: any, i: any) => (
                                 <div key={i} className={s.not_friend_user}>
                                     <div className={s.avatar_wrapper}>
-                                        <div className={s.avatar} style={{ backgroundImage: el.photo ? `url(${process.env.REACT_APP_HOST}${el.photo})` : `url(${emptyProfile})` }}></div>
+                                        <div className={s.avatar} style={{ backgroundImage: el.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${el.photo})` : `url(${emptyProfile})` }}></div>
                                     </div>
                                     <NavLink to={`/${el.user_id}`}>{el.name}</NavLink>
                                 </div>
@@ -69,7 +69,7 @@ const Home = () => {
                         </div>
                     }
                 />
-                <Covid width={"calc(100% - 60px)"} t={t} />
+                {/* <Covid width={"calc(100% - 60px)"} t={t} /> */}
             </section>
             <section className={s.main_panel}>
                 <div className={s.reload} onClick={reloadUsers}>

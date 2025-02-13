@@ -25,7 +25,6 @@ const Settings = () => {
 
   const dispatch = useDispatch<AppDispatchType>();
 
-  const user_id = useSelector<AppStateType, string>((state) => state.app.user.id);
   const profileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.profileData);
   const status = useSelector<AppStateType, RequestStatus>((state) => state.profile.profileEditStatus);
 
@@ -34,7 +33,7 @@ const Settings = () => {
 
   const onSubmit = () => {
     dispatch(
-      editProfileTC(user_id, {
+      editProfileTC({
         first_name: profileInfoData.first_name,
         last_name: profileInfoData.last_name,
         gender: profileInfoData.gender,

@@ -5,6 +5,10 @@ export const LOGOUT = "LOGOUT";
 export const SET_PROFILE_INFO = "SET-PROFILE-INFO";
 export const SET_ANOTHER_PROFILE_INFO = "SET-ANOTHER-PROFILE-INFO";
 export const SET_PROFILE_STATUS = "SET-PROFILE-STATUS";
+export const SAVE_PHOTO = "SAVE-PHOTO";
+
+export const FETCH_WEATHER = "FETCH_WEATHER";
+export const FETCH_NEWS = "FETCH_NEWS";
 export enum displayMode {
   profile = "profile",
   messages = "messages",

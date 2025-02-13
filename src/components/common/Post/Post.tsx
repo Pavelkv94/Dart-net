@@ -42,7 +42,7 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
     const initialComment = {
         user: `${profileData.first_name} ${profileData.last_name}`,
         user_id: user_id,
-        userAvatar: `${process.env.REACT_APP_HOST}${profileData.photo}`,
+        userAvatar: `${import.meta.env.VITE_REACT_APP_HOST}${profileData.photo}`,
         message: "",
         created_at: "",
         likes: [],
@@ -74,10 +74,10 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
     };
 
     const avatar = {
-        backgroundImage: postData.userAvatar ? `url(${process.env.REACT_APP_HOST}${postData.userAvatar})` : `url(${emptyProfile})`,
+        backgroundImage: postData.userAvatar ? `url(${import.meta.env.VITE_REACT_APP_HOST}${postData.userAvatar})` : `url(${emptyProfile})`,
     };
     const myAvatar = {
-        backgroundImage: profileData.photo ? `url(${process.env.REACT_APP_HOST}${profileData.photo})` : `url(${emptyProfile})`,
+        backgroundImage: profileData.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${profileData.photo})` : `url(${emptyProfile})`,
     };
 
     const image = {

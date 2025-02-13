@@ -6,7 +6,7 @@ import { getSavedPostsTC, PostType } from "../../../redux/postsReducer";
 import { ProfileInfoType } from "../../../redux/profileReducer";
 import { AppDispatchType, AppStateType } from "../../../redux/store";
 import BlockComponent from "../../common/BlockComponent/BlockComponent";
-import { Covid } from "../../common/Covid/Covid";
+// import { Covid } from "../../common/Covid/Covid";
 import { Empty } from "../../common/Empty/Empty";
 import Post from "../../common/Post/Post";
 import { TabType } from "../Profile";
@@ -35,7 +35,7 @@ const Saved = ({ setCurrentTab, t, profileData }: SavedPropsType) => {
     return (
         <div className={s.saved}>
             <section className={s.right_panel}>
-            <Covid t={t} />
+            {/* <Covid t={t} /> */}
             </section>
             <section className={s.main_panel}>
                 {savedPosts.length > 0 ? (

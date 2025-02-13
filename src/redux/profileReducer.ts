@@ -3,16 +3,11 @@ import { getMeTC, RequestStatus } from "./appReducer";
 import { AppDispatchType } from "./store";
 import * as AppConstants from "./AppContants";
 
-type ActionType = any;
-
-type ContactsType = {
-  facebook: string;
-  youtube: string;
-  vk: string;
-  instagram: string;
-  linkedin: string;
-  twitter: string;
-  telegram: string;
+type ActionType = {
+  type: string;
+  payload: object | ProfileInfoType;
+  photoUrl: string;
+  status: RequestStatus;
 };
 
 export type ProfileInfoType = {
@@ -40,6 +35,7 @@ export type ProfileInfoType = {
   gender?: string;
   friends: Array<string>;
 };
+
 const initialState = {
   profileData: {
     id: "",
@@ -75,15 +71,13 @@ const initialState = {
     background: "",
     country: "",
     birthday: "",
-    contacts: {
-      facebook: "",
-      youtube: "",
-      vk: "",
-      instagram: "",
-      linkedin: "",
-      twitter: "",
-      telegram: "",
-    },
+    facebook: "",
+    youtube: "",
+    vk: "",
+    instagram: "",
+    linkedin: "",
+    twitter: "",
+    telegram: "",
     about: "",
     created_at: "",
     education: "",
@@ -102,28 +96,26 @@ export function profileReducer(state: InitialStateType = initialState, action: A
       return { ...state, profileData: action.payload };
     case AppConstants.SET_ANOTHER_PROFILE_INFO:
       return { ...state, anotherProfileData: action.payload };
-    case "SAVE-BACKGROUND":
-      return { ...state, profileData: { ...state.profileData, background: action.url } };
-    case "SAVE-PHOTO":
+    case AppConstants.SAVE_PHOTO:
       return { ...state, profileData: { ...state.profileData, photo: action.photoUrl } };
-    case "SET-PROFILE-STATUS":
-      return { ...state, profileStatus: action.status };
-    case "SET-PROFILE-EDIT-STATUS":
-      return { ...state, profileEditStatus: action.status };
+    // case "SET-PROFILE-STATUS":
+    //   return { ...state, profileStatus: action.status };
+    // case "SET-PROFILE-EDIT-STATUS":
+    //   return { ...state, profileEditStatus: action.status };
 
     default:
       return state;
   }
 }
 
-export const setProfileInfoAC = (payload: any) => {
+export const setProfileInfoAC = (payload: object) => {
   return {
     type: AppConstants.SET_PROFILE_INFO,
     payload,
   };
 };
 
-const setAnotherProfileInfoAC = (payload: any) => {
+const setAnotherProfileInfoAC = (payload: object) => {
   return {
     type: AppConstants.SET_ANOTHER_PROFILE_INFO,
     payload,
@@ -162,44 +154,31 @@ export const getAnotherProfileTC = (user_id: string) => async (dispatch: AppDisp
   await profileAPI
     .getProfileInfo(user_id)
     .then((res) => {
-      let data = res.data;
-      delete data["_id"];
-      delete data["__v"];
+      const data = res.data;
       dispatch(setAnotherProfileInfoAC(data));
       dispatch(setProfileStatusAC(RequestStatus.SUCCEEDED));
     })
-    .catch((e) => {
+    .catch(() => {
       dispatch(setProfileStatusAC(RequestStatus.FAILED));
     });
 };
 
-const savePhotoAC = (photoUrl: any) => ({
-  type: "SAVE-PHOTO",
+const savePhotoAC = (photoUrl: string) => ({
+  type: AppConstants.SAVE_PHOTO,
   photoUrl,
 });
 
-const saveBackgroundAC = (url: string) => ({
-  type: "SAVE-BACKGROUND",
-  url,
-});
-
 export const savePhotoTC = (file: File) => async (dispatch: AppDispatchType) => {
-  await profileAPI.saveProfilePhoto(file).then((res) => dispatch(savePhotoAC(res.data.path)));
+  await profileAPI.saveProfilePhoto(file).then((res) => dispatch(savePhotoAC(res.data.photoUrl)));
 };
 
-export const changeBackgroundTC = (url: string) => async (dispatch: AppDispatchType) => {
-  await profileAPI.changeBackground(url).then((res) => dispatch(saveBackgroundAC(res.data.image)));
-};
-
-export const editProfileTC = (user_id: string, payload: any) => async (dispatch: AppDispatchType) => {
+export const editProfileTC = (payload: object) => async (dispatch: AppDispatchType) => {
   dispatch(setProfileEditStatusAC(RequestStatus.LOADING));
   await profileAPI
-    .updateProfile(user_id, payload)
-    .then((res) => {
-      //@ts-ignore
-
+    .updateProfile(payload)
+    .then(() => {
       dispatch(getMeTC());
       dispatch(setProfileEditStatusAC(RequestStatus.SUCCEEDED));
     })
-    .catch((e) => dispatch(setProfileEditStatusAC(RequestStatus.FAILED)));
+    .catch(() => dispatch(setProfileEditStatusAC(RequestStatus.FAILED)));
 };

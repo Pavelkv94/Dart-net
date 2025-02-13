@@ -39,7 +39,7 @@ export const HeadBar = React.memo(({ exit }: any) => {
     }, [dispatch]);
 
     const avatar = {
-        backgroundImage: photo ? `url(${process.env.REACT_APP_HOST}${photo})` : `url(${emptyProfile})`,
+        backgroundImage: photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${photo})` : `url(${emptyProfile})`,
     };
 
     return (

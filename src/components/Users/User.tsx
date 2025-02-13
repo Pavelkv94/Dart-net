@@ -16,7 +16,7 @@ const User = ({ user, user_id, t }: any) => {
     };
 
     const avatar = {
-        backgroundImage: user.photo ? `url(${process.env.REACT_APP_HOST}${user.photo})` : `url(${emptyProfile})`,
+        backgroundImage: user.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${user.photo})` : `url(${emptyProfile})`,
     };
 
     const follow = () => {

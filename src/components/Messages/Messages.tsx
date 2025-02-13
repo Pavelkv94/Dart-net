@@ -71,7 +71,7 @@ const Messages = () => {
   };
 
   const avatar = {
-    backgroundImage: photo ? `url(${process.env.REACT_APP_HOST}${photo})` : `url(${emptyProfile})`,
+    backgroundImage: photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${photo})` : `url(${emptyProfile})`,
   };
 
   if (!isAuth) {
@@ -90,7 +90,7 @@ const Messages = () => {
                       <div
                         className={s.avatar}
                         style={{
-                          backgroundImage: mess.photo ? `url(${process.env.REACT_APP_HOST}${mess.photo})` : `url(${emptyProfile})`,
+                          backgroundImage: mess.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${mess.photo})` : `url(${emptyProfile})`,
                         }}
                       ></div>
                     </NavLink>
