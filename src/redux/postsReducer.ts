@@ -1,142 +1,174 @@
 import { postsAPI } from "../api/postsAPI";
 import { AppDispatchType } from "./store";
-import { API } from "../api/api";
+import * as AppConstants from "./AppContants";
 import { RequestStatus } from "./appReducer";
 
-type ActionType = any;
+type ActionType = {
+  type: string;
+  payload: PaginatedPostsType | Array<PostType>;
+};
 
 export type CommentType = {
-    user: string;
-    user_id: string;
-    userAvatar: string;
-    message: string;
-    created_at: string;
-    likes: Array<string>;
-    post_id: string | undefined;
-    comment_id?: string;
+  user: string;
+  user_id: string;
+  userAvatar: string;
+  message: string;
+  created_at: string;
+  likes: Array<string>;
+  post_id: string | undefined;
+  comment_id?: string;
 };
 
 export type PostType = {
-    image: string;
-    user: string;
-    user_id: string;
-    userAvatar: string;
-    created_at?: string | Date;
-    text: string;
-    likes: Array<string>;
-    comments: Array<CommentType>;
-    _id?: string | undefined;
+  id: string;
+  image_url: string;
+  user_id: string;
+  user: {
+    photo: string;
+    first_name: string;
+    last_name: string;
+  };
+  createdAt: string;
+  text: string;
+  likes: Array<string>;
+  comments: Array<CommentType>;
+};
+
+export type PaginatedPostsType = {
+  items: Array<PostType>;
+  totalCount: number;
+  pageSize: number;
+  currentPage: number;
+  totalPages: number;
+};
+export type PostBodyType = {
+  image_url: string;
+  text: string;
 };
 
 export type PlaceType = "myPosts" | "saved" | "allPosts" | "userPosts";
 
 const initialState = {
-    posts: [] as Array<PostType>,
-    savedPosts: [] as Array<PostType>,
-    status: RequestStatus.IDLE,
+  userPosts: { items: [] as Array<PostType>, totalCount: 0, pageSize: 0, currentPage: 0, totalPages: 0 } as PaginatedPostsType,
+  savedPosts: { items: [] as Array<PostType>, totalCount: 0, pageSize: 0, currentPage: 0, totalPages: 0 } as PaginatedPostsType,
+  allPosts: { items: [] as Array<PostType>, totalCount: 0, pageSize: 0, currentPage: 0, totalPages: 0 } as PaginatedPostsType,
+  status: RequestStatus.IDLE,
 };
 
 export type InitialStateType = typeof initialState;
 
 export function postsReducer(state: InitialStateType = initialState, action: ActionType): InitialStateType {
-    switch (action.type) {
-        // case "SET-APP-STATUS":
-        //     return { ...state, status: action.status };
-        case "GET-POSTS":
-            return { ...state, posts: action.payload.reverse() };
-        case "GET-SAVED-POSTS":
-            return { ...state, savedPosts: action.payload.reverse() };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    // case "SET-APP-STATUS":
+    //     return { ...state, status: action.status };
+    case AppConstants.FETCH_USER_POSTS:
+      return { ...state, userPosts: action.payload };
+    case AppConstants.FETCH_ALL_POSTS:
+      return { ...state, allPosts: action.payload };
+    case "GET-SAVED-POSTS":
+      return { ...state, savedPosts: action.payload.reverse() };
+    default:
+      return state;
+  }
 }
 
-const getPostsAC = (payload: any) => ({
-    type: "GET-POSTS",
-    payload,
+const getUserPostsAC = (payload: PaginatedPostsType) => ({
+  type: AppConstants.FETCH_USER_POSTS,
+  payload,
 });
 
-const getSavedPostsAC = (payload: any) => ({
-    type: "GET-SAVED-POSTS",
-    payload,
+const getAllPostsAC = (payload: PaginatedPostsType) => ({
+  type: AppConstants.FETCH_ALL_POSTS,
+  payload,
 });
 
-export const getPostsTC = (user_id: string | undefined) => async (dispatch: AppDispatchType) => {
-    postsAPI.getPosts(user_id).then((res) => {
-        dispatch(getPostsAC(res.data));
-    });
+const getSavedPostsAC = (payload: PaginatedPostsType) => ({
+  type: "GET-SAVED-POSTS",
+  payload,
+});
+
+export const getUserPostsTC = (user_id: string | undefined) => async (dispatch: AppDispatchType) => {
+  postsAPI.getUserPosts(user_id).then((res) => {
+    dispatch(getUserPostsAC(res.data));
+  });
+};
+
+export const getAllPostsTC = () => async (dispatch: AppDispatchType) => {
+  postsAPI.getAllPosts().then((res) => {
+    dispatch(getAllPostsAC(res.data));
+  });
 };
 
 export const getSavedPostsTC = (user_id: string | undefined) => async (dispatch: AppDispatchType) => {
-    postsAPI.getSavedPosts(user_id).then((res) => {
-        dispatch(getSavedPostsAC(res.data));
-    });
+  postsAPI.getSavedPosts(user_id).then((res) => {
+    dispatch(getSavedPostsAC(res.data));
+  });
 };
 
-export const createPostTC = (payload: PostType) => async (dispatch: AppDispatchType) => {
-    postsAPI.createPost(payload).then((res) => dispatch(getPostsTC(payload.user_id)));
+export const createPostTC = (payload: PostBodyType) => async (dispatch: AppDispatchType) => {
+  postsAPI.createPost(payload); //.then(() => dispatch(getPostsTC(payload.user_id)));
 };
 
 export const sendCommentTC = (payload: any, place: PlaceType, user?: string | undefined) => async (dispatch: AppDispatchType) => {
-    postsAPI.createComment(payload).then(() => {
-        switch (place) {
-            case "allPosts":
-                return dispatch(getPostsTC("all"));
-            case "saved":
-                return dispatch(getSavedPostsTC(payload.user_id));
-            case "userPosts":
-                return dispatch(getPostsTC(user));
-            default:
-                return dispatch(getPostsTC(payload.user_id));
-        }
-    });
+  postsAPI.createComment(payload).then(() => {
+    switch (place) {
+      case "allPosts":
+        return dispatch(getUserPostsTC("all"));
+      case "saved":
+        return dispatch(getSavedPostsTC(payload.user_id));
+      case "userPosts":
+        return dispatch(getUserPostsTC(user));
+      default:
+        return dispatch(getUserPostsTC(payload.user_id));
+    }
+  });
 };
 
 export const likedPostTC = (payload: any, place: PlaceType, user?: string | undefined) => async (dispatch: AppDispatchType) => {
-    postsAPI.likedPost(payload).then((res) => {
-        switch (place) {
-            case "allPosts":
-                return dispatch(getPostsTC("all"));
-            case "saved":
-                return dispatch(getSavedPostsTC(payload.user_id));
-            case "userPosts":
-                return dispatch(getPostsTC(user));
-            default:
-                return dispatch(getPostsTC(payload.user_id));
-        }
-    });
+  postsAPI.likedPost(payload).then((res) => {
+    switch (place) {
+      case "allPosts":
+        return dispatch(getUserPostsTC("all"));
+      case "saved":
+        return dispatch(getSavedPostsTC(payload.user_id));
+      case "userPosts":
+        return dispatch(getUserPostsTC(user));
+      default:
+        return dispatch(getUserPostsTC(payload.user_id));
+    }
+  });
 };
 
 export const unlikedPostTC = (payload: any, place: PlaceType, user?: string | undefined) => async (dispatch: AppDispatchType) => {
-    postsAPI.unlikedPost(payload).then((res) => {
-        switch (place) {
-            case "allPosts":
-                return dispatch(getPostsTC("all"));
-            case "saved":
-                return dispatch(getSavedPostsTC(payload.user_id));
-            case "userPosts":
-                return dispatch(getPostsTC(user));
-            default:
-                return dispatch(getPostsTC(payload.user_id));
-        }
-    });
+  postsAPI.unlikedPost(payload).then((res) => {
+    switch (place) {
+      case "allPosts":
+        return dispatch(getUserPostsTC("all"));
+      case "saved":
+        return dispatch(getSavedPostsTC(payload.user_id));
+      case "userPosts":
+        return dispatch(getUserPostsTC(user));
+      default:
+        return dispatch(getUserPostsTC(payload.user_id));
+    }
+  });
 };
 
 export const likedCommentTC = (payload: any) => async (dispatch: AppDispatchType) => {
-    postsAPI.likedComment(payload).then((res) => dispatch(getPostsTC(payload.user_id)));
+  postsAPI.likedComment(payload).then((res) => dispatch(getUserPostsTC(payload.user_id)));
 };
 
-export const deletePostTC = (post_id:string | undefined, user_id: string | undefined, place: PlaceType) => async (dispatch: AppDispatchType) => {
-    postsAPI.deletePost(post_id).then((res) => {
-        switch (place) {
-            case "allPosts":
-                return dispatch(getPostsTC("all"));
-            case "saved":
-                return dispatch(getSavedPostsTC(user_id));
-            case "userPosts":
-                return dispatch(getPostsTC(user_id));
-            default:
-                return dispatch(getPostsTC(user_id));
-        }
-    })
-}
+export const deletePostTC = (post_id: string | undefined, user_id: string | undefined, place: PlaceType) => async (dispatch: AppDispatchType) => {
+  postsAPI.deletePost(post_id).then((res) => {
+    switch (place) {
+      case "allPosts":
+        return dispatch(getUserPostsTC("all"));
+      case "saved":
+        return dispatch(getSavedPostsTC(user_id));
+      case "userPosts":
+        return dispatch(getUserPostsTC(user_id));
+      default:
+        return dispatch(getUserPostsTC(user_id));
+    }
+  });
+};

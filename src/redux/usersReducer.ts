@@ -1,11 +1,10 @@
 import { AppDispatchType } from "./store";
 import { usersAPI } from "../api/usersAPI";
-
+import * as AppConstants from "./AppContants";
 type ActionType = any;
 
 const initialState = {
   users: [],
-  currentProfile: {},
 };
 
 export type InitialStateType = typeof initialState;
@@ -14,7 +13,7 @@ export function usersReducer(state: InitialStateType = initialState, action: Act
   switch (action.type) {
     // case "SET-APP-STATUS":
     //     return { ...state, status: action.status };
-    case "GET-USERS":
+    case AppConstants.FETCH_USERS:
       return { ...state, users: action.payload };
     default:
       return state;
@@ -22,7 +21,7 @@ export function usersReducer(state: InitialStateType = initialState, action: Act
 }
 
 const setUsersAC = (payload: any) => ({
-  type: "GET-USERS",
+  type: AppConstants.FETCH_USERS,
   payload,
 });
 

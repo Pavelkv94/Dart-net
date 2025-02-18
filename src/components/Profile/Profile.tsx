@@ -23,8 +23,9 @@ const Profile = () => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const isAuth = useSelector<AppStateType, boolean>((state) => state.app.isAuth);
-  const user_id = useSelector<AppStateType, string>((state) => state.app.user.id);
-  const profileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.profileData);
+  const currentUser = useSelector<AppStateType, UserType>((state) => state.app.user);
+
+  // const profileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.profileData);
   const anotherProfileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.anotherProfileData);
 
   const [currentTab, setCurrentTab] = useState<TabType>("posts");
@@ -38,11 +39,11 @@ const Profile = () => {
   } else
     return (
       <div className={s.profile_wrapper}>
-        <ProfileInfo t={t} profileData={id ? anotherProfileData : profileData} user_id={user_id} currentTab={currentTab} setCurrentTab={setCurrentTab} />
+        <ProfileInfo t={t} profileData={id ? anotherProfileData : currentUser} currentTab={currentTab} setCurrentTab={setCurrentTab} />
 
-        {currentTab === "about" && <About setCurrentTab={setCurrentTab} t={t} profileData={id ? anotherProfileData : profileData} />}
-        {currentTab === "posts" && <Posts setCurrentTab={setCurrentTab} t={t} lang={i18n.language} profileData={id ? anotherProfileData : profileData} />}
-        {currentTab === "saved" && <Saved setCurrentTab={setCurrentTab} t={t} profileData={id ? anotherProfileData : profileData} />}
+        {currentTab === "about" && <About setCurrentTab={setCurrentTab} t={t} profileData={id ? anotherProfileData : currentUser} />}
+        {currentTab === "posts" && <Posts setCurrentTab={setCurrentTab} t={t} lang={i18n.language} profileData={id ? anotherProfileData : currentUser} />}
+        {currentTab === "saved" && <Saved setCurrentTab={setCurrentTab} t={t} profileData={id ? anotherProfileData : currentUser} />}
       </div>
     );
 };

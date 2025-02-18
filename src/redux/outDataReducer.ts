@@ -12,7 +12,7 @@ type WeatherPayloadType = {
   month: number;
 };
 
-type NewsPayloadType = {
+export type NewsPayloadType = {
   source: {
     id: string;
     name: string;
