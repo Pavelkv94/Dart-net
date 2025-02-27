@@ -2,13 +2,11 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
-import { getAnotherProfileTC, getProfileTC, ProfileInfoType } from "../../redux/profileReducer";
+import { Navigate, useParams } from "react-router-dom";
+import { getAnotherProfileTC, ProfileInfoType } from "../../redux/profileReducer";
 import { AppDispatchType, AppStateType } from "../../redux/store";
-import { Circle } from "../common/Preloaders/Circle/Circle";
 import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import { getMeTC } from "../../redux/appReducer";
 
 const Posts = React.lazy(() => import("./Posts/Posts"));
 const About = React.lazy(() => import("./About/About"));
@@ -25,13 +23,13 @@ const Profile = () => {
   const isAuth = useSelector<AppStateType, boolean>((state) => state.app.isAuth);
   const currentUser = useSelector<AppStateType, UserType>((state) => state.app.user);
 
-  // const profileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.profileData);
   const anotherProfileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.anotherProfileData);
 
   const [currentTab, setCurrentTab] = useState<TabType>("posts");
 
   useEffect(() => {
-    id ? dispatch(getAnotherProfileTC(id)) : dispatch(getMeTC());
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    id && dispatch(getAnotherProfileTC(id));
   }, [dispatch, id]);
 
   if (!isAuth) {

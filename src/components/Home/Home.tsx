@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getNewsTC } from "../../redux/outDataReducer";
-import { getAllPostsTC, PostType } from "../../redux/postsReducer";
+import { getAllPostsTC, PaginatedPostsType } from "../../redux/postsReducer";
 import { AppDispatchType, AppStateType } from "../../redux/store";
 import BlockComponent from "../common/BlockComponent/BlockComponent";
 import { NewsBlock } from "../common/NewsBlock/NewsBlock";
@@ -18,20 +18,21 @@ const Home = () => {
 
   const dispatch = useDispatch<AppDispatchType>();
 
-  const user_id = useSelector<AppStateType, string>((state) => state.app.user.user_id);
-  const allPosts = useSelector<AppStateType, Array<PostType>>((state) => state.posts.allPosts);
+  const allPosts = useSelector<AppStateType, PaginatedPostsType>((state) => state.posts.allPosts);
   const news = useSelector<AppStateType, any>((state) => state.outData.news);
-  const users = useSelector<AppStateType, any>((state) => state.users.users);
+  const users = useSelector<AppStateType, any>((state) => state.users.usersData);
 
-  const notFriends = users.items?.filter((el: any) => el.friends.find((id: any) => id !== user_id) === undefined);
+  const notFriends = []//users.items?.filter((el: ProfileInfoType) => el.friends.find((id: string) => id !== user_id) === undefined);
 
   const [rotate, setRotate] = useState<boolean>(false);
+console.log("RENDER");
 
   useEffect(() => {
-    dispatch(getAllPostsTC());
+    dispatch(getAllPostsTC("1", "10"));
   }, [dispatch]);
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     news.length < 1 && dispatch(getNewsTC(i18n.language));
   }, [news, dispatch, i18n.language]);
 
@@ -40,7 +41,7 @@ const Home = () => {
   }, [rotate]);
 
   const reloadUsers = () => {
-    dispatch(getAllPostsTC());
+    dispatch(getAllPostsTC("1", "10"));
     setRotate(true);
   };
 
@@ -83,6 +84,7 @@ const Home = () => {
 	C14.788,95.484,1.638,133,1.638,171.52c0,93.976,76.455,170.431,170.431,170.431c93.976,0,170.431-76.455,170.431-170.431
 	C342.5,109.478,308.731,52.283,254.37,22.255z"
             />
+      case displayMode.home:
           </svg>
         </div>
 

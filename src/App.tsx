@@ -18,13 +18,13 @@ function App() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (token) {
-      // dispatch(getMeTC());
-      dispatch(setAppAuthAC(true));
-    } else {
-      dispatch(setAppAuthAC(false));
-    }
+    const isAuthenticated = !!token; // Проверяем наличие токена
+    dispatch(setAppAuthAC(isAuthenticated));
   }, [dispatch, token]);
+
+  // useEffect(() => {
+  //   dispatch(getMeTC());
+  // }, [dispatch]);
 
   return (
     <Routes>

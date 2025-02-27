@@ -8,6 +8,7 @@ import { CustomInput } from "../common/CustomInput/CustomInput";
 import { LoginPropsType } from "./Login";
 import s from "./Login.module.css";
 import { LoginPayloadType } from "../../api/authAPI";
+import { useNavigate } from "react-router-dom";
 
 export const LoginNow = ({ t, setLoginMode }: LoginPropsType) => {
   const dispatch = useDispatch<AppDispatchType>();
@@ -18,10 +19,11 @@ export const LoginNow = ({ t, setLoginMode }: LoginPropsType) => {
   const [loginData, setLoginData] = useState<LoginPayloadType>(initialData);
 
   const error = useSelector<AppStateType, string | null>((state) => state.app.error);
+  const navigate = useNavigate();
 
-  const handleClick = () => {
-    dispatch(loginTC(loginData));
-    
+  const handleClick = async () => {
+    await dispatch(loginTC(loginData));
+    await navigate(-1);
   };
 
   const changeMode = () => {

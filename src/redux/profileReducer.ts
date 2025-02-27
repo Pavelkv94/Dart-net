@@ -34,6 +34,7 @@ export type ProfileInfoType = {
   work: string;
   gender?: string;
   friends: Array<string>;
+  isFriend: boolean;
 };
 
 const initialState = {
@@ -92,9 +93,9 @@ export type InitialStateType = typeof initialState;
 
 export function profileReducer(state: InitialStateType = initialState, action: ActionType): InitialStateType {
   switch (action.type) {
-    case AppConstants.SET_PROFILE_INFO:
+    case AppConstants.FETCH_PROFILE_INFO:
       return { ...state, profileData: action.payload };
-    case AppConstants.SET_ANOTHER_PROFILE_INFO:
+    case AppConstants.FETCH_ANOTHER_PROFILE_INFO:
       return { ...state, anotherProfileData: action.payload };
     case AppConstants.SAVE_PHOTO:
       return { ...state, profileData: { ...state.profileData, photo: action.photoUrl } };
@@ -110,7 +111,7 @@ export function profileReducer(state: InitialStateType = initialState, action: A
 
 export const setProfileInfoAC = (payload: object) => {
   return {
-    type: AppConstants.SET_PROFILE_INFO,
+    type: AppConstants.FETCH_PROFILE_INFO,
     payload,
   };
 };

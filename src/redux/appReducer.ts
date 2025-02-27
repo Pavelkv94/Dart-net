@@ -1,7 +1,7 @@
 import { AppDispatchType } from "./store";
 import { authAPI, LoginPayloadType, RegistrationPayloadType } from "../api/authAPI";
 import * as AppConstants from "./AppContants";
-import { setProfileInfoAC, setProfileStatusAC } from "./profileReducer";
+import { ProfileInfoType, setProfileInfoAC, setProfileStatusAC } from "./profileReducer";
 
 export enum RequestStatus {
   IDLE = "idle",
@@ -15,8 +15,7 @@ const initialState = {
   status: "idle" as RequestStatus,
   error: null as string | null,
   isAuth: false,
-  user: {} as any,
-  photo: "",
+  user: null as ProfileInfoType | null,
 };
 
 export type InitialStateType = typeof initialState;

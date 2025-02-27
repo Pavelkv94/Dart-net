@@ -4,11 +4,11 @@ export const postsAPI = {
     async createPost(payload: PostBodyType) {
         return API.post(baseUrl("/posts"), await expandHeaders(), payload);
     },
-    async getUserPosts(user_id: string | undefined) {
-        return API.get(baseUrl(`/posts/${user_id}`), await expandHeaders());
+    async getUserPosts(user_id: string | undefined, pageNumber: string = "1", pageSize: string = "10") {
+        return API.get(baseUrl(`/posts/${user_id}?pageNumber=${pageNumber}&pageSize=${pageSize}`), await expandHeaders());
     },
-    async getAllPosts() {
-        return API.get(baseUrl(`/posts`), await expandHeaders());
+    async getAllPosts(pageNumber: string = "1", pageSize: string = "10") {
+        return API.get(baseUrl(`/posts?pageNumber=${pageNumber}&pageSize=${pageSize}`), await expandHeaders());
     },
 
 

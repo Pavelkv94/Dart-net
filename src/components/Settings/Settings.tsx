@@ -58,7 +58,7 @@ const Settings = () => {
   //   }, [status, dispatch]);
 
   useEffect(() => {
-    dispatch(getMeTC());
+    // dispatch(getMeTC());
   }, [dispatch]);
 
   const error = profileInfoData.first_name.length > 20 || profileInfoData.last_name.length > 20;

@@ -23,7 +23,7 @@ const ProfileInfo = ({ t, profileData, currentTab, setCurrentTab }: ProfileInfoP
 
   const { id } = useParams();
 
-  // const posts = useSelector<AppStateType, PaginatedPostsType>((state) => state.posts.userPosts);
+  const postsCount = useSelector<AppStateType, number>((state) => state.posts.userPosts.totalCount);
   // const authorizedUserId = useSelector<AppStateType, string>((state) => state.app.user.id);
 
   const [openBackUrl, setOpenBackUrl] = useState<boolean>(false);
@@ -147,7 +147,7 @@ M261.333,170.667c-8.822,0-16-7.178-16-16s7.178-16,16-16c8.822,0,16,7.178,16,16S2
         <section>
           <div className={s.navigate_stats}>
             <span>{t("profile.posts")}:</span>
-            {/* <span>{posts.items.length}</span> */}
+            <span>{postsCount}</span>
           </div>
           <div className={s.navigate_stats}>
             <span>{t("profile.friends")}:</span>

@@ -31,7 +31,7 @@ const AddPost = ({ t, profileData, setTextareaFocus }: AddPostPropsType) => {
   const [post, setPost] = useState<PostBodyType>(initialPost);
 
   const createPost = () => {
-    dispatch(createPostTC(post));
+    dispatch(createPostTC(post, profileData.id));
     setPost(initialPost);
     setTextareaFocus(false);
   };

@@ -46,7 +46,7 @@ const Posts = ({ setCurrentTab, t, lang, profileData }: PostsPropsType) => {
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    profileData.id && dispatch(getUserPostsTC(profileData.id));
+    profileData.id && dispatch(getUserPostsTC(profileData.id, "1", "10"));
   }, [dispatch, profileData.id]);
 
   return (

@@ -87,14 +87,14 @@ const getSavedPostsAC = (payload: PaginatedPostsType) => ({
   payload,
 });
 
-export const getUserPostsTC = (user_id: string | undefined) => async (dispatch: AppDispatchType) => {
-  postsAPI.getUserPosts(user_id).then((res) => {
+export const getUserPostsTC = (user_id: string | undefined, pageNumber: string, pageSize: string) => async (dispatch: AppDispatchType) => {
+  postsAPI.getUserPosts(user_id, pageNumber, pageSize).then((res) => {
     dispatch(getUserPostsAC(res.data));
   });
 };
 
-export const getAllPostsTC = () => async (dispatch: AppDispatchType) => {
-  postsAPI.getAllPosts().then((res) => {
+export const getAllPostsTC = (pageNumber: string, pageSize: string) => async (dispatch: AppDispatchType) => {
+  postsAPI.getAllPosts(pageNumber, pageSize).then((res) => {
     dispatch(getAllPostsAC(res.data));
   });
 };
@@ -105,8 +105,8 @@ export const getSavedPostsTC = (user_id: string | undefined) => async (dispatch:
   });
 };
 
-export const createPostTC = (payload: PostBodyType) => async (dispatch: AppDispatchType) => {
-  postsAPI.createPost(payload); //.then(() => dispatch(getPostsTC(payload.user_id)));
+export const createPostTC = (payload: PostBodyType, user_id: string) => async (dispatch: AppDispatchType) => {
+  postsAPI.createPost(payload).then(() => dispatch(getUserPostsTC(user_id, "1", "10")));
 };
 
 export const sendCommentTC = (payload: any, place: PlaceType, user?: string | undefined) => async (dispatch: AppDispatchType) => {

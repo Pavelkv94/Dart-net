@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import s from "./Main.module.css";
 import { HeadBar } from "../HeadBar/HeadBar";
-import { logoutTC } from "../../redux/appReducer";
+import { getMeTC, logoutTC } from "../../redux/appReducer";
 import { useDispatch } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AppDispatchType, AppStateType } from "../../redux/store";
@@ -10,6 +10,7 @@ import { Circle } from "../common/Preloaders/Circle/Circle";
 import logo from "../../assets/Logo/logo.png";
 import Home from "../Home/Home";
 import { displayMode } from "../../redux/AppContants";
+import { ProfileInfoType } from "../../redux/profileReducer";
 
 const Profile = React.lazy(() => import("../Profile/Profile"));
 const Messages = React.lazy(() => import("../Messages/Messages"));
@@ -21,12 +22,17 @@ const Main = ({ mode }: { mode: displayMode }) => {
   const navigate = useNavigate();
 
   const isAuth = useSelector<AppStateType, boolean>((state) => state.app.isAuth);
-
+  const user = useSelector<AppStateType, ProfileInfoType | null>((state) => state.app.user);
   const logout = () => {
     dispatch(logoutTC());
     localStorage.removeItem("token");
     navigate("/");
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    !user && dispatch(getMeTC());
+  }, [dispatch, user]);
 
   const currentWindow = (mode: displayMode) => {
     switch (mode) {

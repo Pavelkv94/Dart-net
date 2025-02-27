@@ -13,8 +13,7 @@ const Users = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatchType>();
 
-  const users = useSelector<AppStateType, any>((state) => state.users.users);
-  const user_id = useSelector<AppStateType, string>((state) => state.app.user.id);
+  const users = useSelector<AppStateType, any>((state) => state.users.usersData);
 
   const [usersFilter, setUsersFilter] = useState<UsersFilterType>("all");
   const [usersMode, setUsersMode] = useState<boolean>(false);
@@ -22,8 +21,8 @@ const Users = () => {
 
   useEffect(() => {
     usersFilter === "all" && setFilteredUsers(users.items);
-    usersFilter === "friends" && setFilteredUsers(users.items?.filter((el: any) => el.friends.find((id: any) => id === user_id) !== undefined));
-  }, [usersFilter, users, user_id]);
+    // usersFilter === "friends" && setFilteredUsers(users.items?.filter((el: any) => el.friends.find((id: any) => id === user_id) !== undefined));
+  }, [usersFilter, users]);
 
   useEffect(() => {
     dispatch(getUsersTC());
@@ -52,10 +51,8 @@ const Users = () => {
       </div>
 
       <div className={s.users_main}>
-        {filteredUsers
-          ?.filter((el: any) => el.user_id !== user_id)
-          .map((el: any) => (
-            <User user={el} user_id={user_id} t={t} />
+        {users.items?.map((el: any, index: number) => (
+            <User user={el} t={t} key={index} />
           ))}
       </div>
     </div>
