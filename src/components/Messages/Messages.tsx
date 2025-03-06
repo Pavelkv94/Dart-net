@@ -42,7 +42,7 @@ const Messages = () => {
   }, []); //!
 
   useEffect(() => {
-    socket.current = new WebSocket("ws://localhost:5050");
+    socket.current = new WebSocket(import.meta.env.VITE_WS_URL);
 
     socket.current.onopen = () => {
       console.log("WEBSOCKET OPEN");
