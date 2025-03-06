@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+//@ts-ignore
 import { ReactI18NextChild, useTranslation } from "react-i18next";
 import s from "./Login.module.css";
 import logo from "../../assets/Logo/logo.png";

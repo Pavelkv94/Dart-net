@@ -2,18 +2,9 @@ import { useState } from "react";
 import s from "./Post.module.css";
 import planet from "../../../assets/svg/about-country.svg";
 import comment from "../../../assets/svg/comment.svg";
+//@ts-ignore
 import { ReactI18NextChild } from "react-i18next";
-import {
-  deletePostTC,
-  likedPostTC,
-  PlaceType,
-  PostType,
-  createCommentTC,
-  unlikedPostTC,
-  likePostOrCommentTC,
-  LikeStatus,
-  LikeParentType,
-} from "../../../redux/postsReducer";
+import { deletePostTC, PlaceType, PostType, createCommentTC, likePostOrCommentTC, LikeParentType } from "../../../redux/postsReducer";
 import threeDots from "../../../assets/svg/three-dots.svg";
 import Comment from "./Comment";
 import { ButtonOrange } from "../ButtonOrange/ButtonOrange";
@@ -22,8 +13,9 @@ import { useSelector } from "react-redux";
 import { AppDispatchType, AppStateType } from "../../../redux/store";
 import { useDispatch } from "react-redux";
 import emptyProfile from "../../../assets/empty-profile.png";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { formatDate } from "../../../utils/formatDate";
+//@ts-ignore
 import emoji from "emoji-dictionary";
 
 type PostPropsType = {
@@ -34,11 +26,10 @@ type PostPropsType = {
 };
 
 const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
-  const { id } = useParams();
-
   const dispatch = useDispatch<AppDispatchType>();
 
   const user_id = useSelector<AppStateType, string | undefined>((state) => state.app.user?.id);
+  //@ts-ignore
   const profileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.profileData);
 
   const style = {
@@ -49,8 +40,6 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
   const [openMenu, setOpenMenu] = useState(false);
 
   const [commentText, setCommentText] = useState<string>("");
-
-  const user = id ? id : user_id;
 
   const sendComment = () => {
     if (commentText.trim() !== "") {

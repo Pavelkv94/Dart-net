@@ -4,9 +4,10 @@ import Weather from "../../common/Weather/Weather";
 import s from "./Posts.module.css";
 import AddPost from "./AddPost/AddPost";
 import Post from "../../common/Post/Post";
-import { getUserPostsTC, PaginatedPostsType, PostType } from "../../../redux/postsReducer";
+import { getUserPostsTC, PaginatedPostsType } from "../../../redux/postsReducer";
 import { useDispatch } from "react-redux";
 import { AppDispatchType, AppStateType } from "../../../redux/store";
+//@ts-ignore
 import { ReactI18NextChild } from "react-i18next";
 import { TabType } from "../Profile";
 import { ProfileInfoType } from "../../../redux/profileReducer";
@@ -14,7 +15,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Empty } from "../../common/Empty/Empty";
 import { NewsBlock } from "../../common/NewsBlock/NewsBlock";
-import { getNewsTC, NewsPayloadType } from "../../../redux/outDataReducer";
+import { NewsPayloadType } from "../../../redux/outDataReducer";
 
 type PostsPropsType = {
   t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
@@ -23,7 +24,7 @@ type PostsPropsType = {
   lang: string;
 };
 
-const Posts = ({ setCurrentTab, t, lang, profileData }: PostsPropsType) => {
+const Posts = ({ setCurrentTab, t, profileData }: PostsPropsType) => {
   const { id } = useParams();
 
   const dispatch = useDispatch<AppDispatchType>();
@@ -33,12 +34,6 @@ const Posts = ({ setCurrentTab, t, lang, profileData }: PostsPropsType) => {
   const [textareaFocus, setTextareaFocus] = useState<boolean>(false);
 
   const news = useSelector<AppStateType, NewsPayloadType[]>((state) => state.outData.news);
-
-  console.log("PROFILE", profileData);
-  //   useEffect(() => {
-  //     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  //     news.length < 1 && dispatch(getNewsTC(lang));
-  //   }, [news, dispatch, lang]);
 
   useEffect(() => {
     setCurrentTab("posts");

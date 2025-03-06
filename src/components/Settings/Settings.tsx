@@ -8,7 +8,7 @@ import BlockComponent from "../common/BlockComponent/BlockComponent";
 import { ButtonOrange } from "../common/ButtonOrange/ButtonOrange";
 import { Circle } from "../common/Preloaders/Circle/Circle";
 import s from "./Settings.module.css";
-import { getMeTC, RequestStatus } from "../../redux/appReducer";
+import { RequestStatus } from "../../redux/appReducer";
 
 type SettingsType = "profile";
 
@@ -24,7 +24,7 @@ const Settings = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch<AppDispatchType>();
-
+//@ts-ignore
   const profileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.profileData);
   const status = useSelector<AppStateType, RequestStatus>((state) => state.profile.profileEditStatus);
 

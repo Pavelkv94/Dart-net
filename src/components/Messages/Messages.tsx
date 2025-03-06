@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, NavLink } from "react-router-dom";
 import clip from "../../assets/svg/clip.svg";
@@ -10,7 +10,8 @@ import arrowRight from "../../assets/svg/arrow-right.svg";
 import arrowDown from "../../assets/svg/arrow-down.svg";
 import { ButtonOrange } from "../common/ButtonOrange/ButtonOrange";
 import { useTranslation } from "react-i18next";
-import { getMessagesTC, MessagePayloadType, MessageType, newMessageAC } from "../../redux/messagesReducer";
+import { getMessagesTC, MessagePayloadType, MessageType } from "../../redux/messagesReducer";
+//@ts-ignore
 import emoji from "emoji-dictionary";
 import { formatDate } from "../../utils/formatDate";
 
@@ -20,8 +21,11 @@ const Messages = () => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const isAuth = useSelector<AppStateType, boolean>((state) => state.app.isAuth);
+  //@ts-ignore
   const photo = useSelector<AppStateType, string>((state) => state.app.user?.photo);
+  //@ts-ignore
   const user_id = useSelector<AppStateType, string>((state) => state.app.user?.id);
+  //@ts-ignore
   const messages = useSelector<AppStateType, Array<MessageType[]>>((state) => state.messages.messages);
 
   const initialMessage: MessagePayloadType = {
@@ -39,7 +43,7 @@ const Messages = () => {
 
   useEffect(() => {
     dispatch(getMessagesTC());
-  }, []); //!
+  }, [dispatch]);
 
   useEffect(() => {
     socket.current = new WebSocket(import.meta.env.VITE_WS_URL);
@@ -49,6 +53,7 @@ const Messages = () => {
     };
     socket.current.onmessage = (event: any) => {
       const message = JSON.parse(event.data);
+      console.log(message);
       // dispatch(newMessageAC(message))
       dispatch(getMessagesTC());
     };
@@ -58,7 +63,7 @@ const Messages = () => {
     socket.current.onerror = () => {
       console.log("Socket произошла ошибка");
     };
-  }, []);
+  }, [dispatch]);
 
   const sendMessage = async () => {
     socket.current?.send(JSON.stringify(message));
@@ -77,6 +82,7 @@ const Messages = () => {
         <section className={s.left_panel}>Messages</section>
         <section className={s.main}>
           <div className={s.messages}>
+            {/* @ts-ignore */}
             {messages.map((mess: MessageType) => {
               return (
                 <div key={mess.id} className={`${s.message_item_wrapper} ${mess.user_id === user_id && s.reverse}`}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -19,10 +19,10 @@ const Home = () => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const allPosts = useSelector<AppStateType, PaginatedPostsType>((state) => state.posts.allPosts);
-  const news = useSelector<AppStateType, any>((state) => state.outData.news);
-  const users = useSelector<AppStateType, any>((state) => state.users.usersData);
+  const news = useSelector<AppStateType, unknown>((state) => state.outData.news);
+  // const users = useSelector<AppStateType, any>((state) => state.users.usersData);
 
-  const notFriends = []//users.items?.filter((el: ProfileInfoType) => el.friends.find((id: string) => id !== user_id) === undefined);
+  const notFriends: any[] = []//users.items?.filter((el: ProfileInfoType) => el.friends.find((id: string) => id !== user_id) === undefined);
 
   const [rotate, setRotate] = useState<boolean>(false);
 console.log("RENDER");
@@ -32,8 +32,9 @@ console.log("RENDER");
   }, [dispatch]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    news.length < 1 && dispatch(getNewsTC(i18n.language));
+    if (news && Array.isArray(news) && news.length < 1) {
+      dispatch(getNewsTC(i18n.language));
+    }
   }, [news, dispatch, i18n.language]);
 
   useEffect(() => {

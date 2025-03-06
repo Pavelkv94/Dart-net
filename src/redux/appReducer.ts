@@ -24,22 +24,11 @@ export function appReducer(state: InitialStateType = initialState, action: Actio
   switch (action.type) {
     case AppConstants.AUTH_STATUS:
       return { ...state, isAuth: action.status };
-    // case "SET-APP-STATUS":
-    //   return { ...state, status: action.status };
-    // // case "SET-APP-LOGIN":
-    // //   return { ...state, user: action.user, isAuth: true };
-    // case "SET-APP-ERR":
-    //   return { ...state, error: action.err };
     case AppConstants.FETCH_ME:
       return {
         ...state,
         user: action.payload,
       };
-
-    // case "LOGOUT":
-    //   return { ...state, isAuth: false, user: {} };
-    // case "GET-PHOTO":
-    //   return { ...state, photo: action.photo };
 
     default:
       return state;
@@ -74,19 +63,6 @@ const meAC = (payload: any) => ({
 export const logoutAC = () => ({
   type: AppConstants.LOGOUT,
 });
-
-const getPhotoAC = (photo: string) => ({
-  type: "GET-PHOTO",
-  photo,
-});
-
-export const getPhotoTC = (user_id: string) => async (dispatch: AppDispatchType) => {
-  //   await API.getPhoto(user_id)
-  //     .then((res) => dispatch(getPhotoAC(res.data.photo)))
-  //     .catch((e) => {
-  //       dispatch(setAppErrAC(e.response ? e.response.data.message : "Error get photo"));
-  //     });
-};
 
 export const loginTC = (payload: LoginPayloadType) => async (dispatch: AppDispatchType) => {
   dispatch(setAppStatusAC(RequestStatus.LOADING));

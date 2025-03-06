@@ -94,9 +94,9 @@ export type InitialStateType = typeof initialState;
 export function profileReducer(state: InitialStateType = initialState, action: ActionType): InitialStateType {
   switch (action.type) {
     case AppConstants.FETCH_PROFILE_INFO:
-      return { ...state, profileData: action.payload };
+      return { ...state, profileData: action.payload as InitialStateType['profileData'] };
     case AppConstants.FETCH_ANOTHER_PROFILE_INFO:
-      return { ...state, anotherProfileData: action.payload };
+      return { ...state, anotherProfileData: action.payload as InitialStateType['anotherProfileData'] };
     case AppConstants.SAVE_PHOTO:
       return { ...state, profileData: { ...state.profileData, photo: action.photoUrl } };
     // case "SET-PROFILE-STATUS":
@@ -118,14 +118,14 @@ export const setProfileInfoAC = (payload: object) => {
 
 const setAnotherProfileInfoAC = (payload: object) => {
   return {
-    type: AppConstants.SET_ANOTHER_PROFILE_INFO,
+    type: AppConstants.FETCH_ANOTHER_PROFILE_INFO,
     payload,
   };
 };
 
 export const setProfileStatusAC = (status: RequestStatus) => {
   return {
-    type: AppConstants.SET_PROFILE_STATUS,
+    type: AppConstants.FETCH_PROFILE_STATUS,
     status,
   };
 };

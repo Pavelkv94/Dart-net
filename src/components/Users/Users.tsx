@@ -17,12 +17,17 @@ const Users = () => {
 
   const [usersFilter, setUsersFilter] = useState<UsersFilterType>("all");
   const [usersMode, setUsersMode] = useState<boolean>(false);
-  const [filteredUsers, setFilteredUsers] = useState(users);
+  //@ts-ignore
+  // const [filteredUsers, setFilteredUsers] = useState(users);
 
-  useEffect(() => {
-    usersFilter === "all" && setFilteredUsers(users.items);
-    // usersFilter === "friends" && setFilteredUsers(users.items?.filter((el: any) => el.friends.find((id: any) => id === user_id) !== undefined));
-  }, [usersFilter, users]);
+  console.log(usersFilter);
+
+  // useEffect(() => {
+  //   //@ts-ignore
+  //   usersFilter === "all" && setFilteredUsers(users.items);
+  //   console.log(filteredUsers);
+  //   // usersFilter === "friends" && setFilteredUsers(users.items?.filter((el: any) => el.friends.find((id: any) => id === user_id) !== undefined));
+  // }, [usersFilter, users]);
 
   useEffect(() => {
     dispatch(getUsersTC());

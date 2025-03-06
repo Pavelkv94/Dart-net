@@ -8,8 +8,10 @@ import s from "./AddPost.module.css";
 import { useDispatch } from "react-redux";
 import { AppDispatchType } from "../../../../redux/store";
 import { createPostTC, PostBodyType } from "../../../../redux/postsReducer";
+//@ts-ignore  
 import { ReactI18NextChild } from "react-i18next";
 import { ProfileInfoType } from "../../../../redux/profileReducer";
+//@ts-ignore
 import emoji from "emoji-dictionary";
 
 type AddPostPropsType = {

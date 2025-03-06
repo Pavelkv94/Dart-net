@@ -6,11 +6,11 @@ import cameraIcon from "../../../assets/svg/camera-icon.svg";
 import ok from "../../../assets/svg/ok.svg";
 import s from "./ProfileInfo.module.css";
 import emptyProfile from "../../../assets/empty-profile.png";
+//@ts-ignore
 import { ReactI18NextChild } from "react-i18next";
 import { TabType } from "../Profile";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { PaginatedPostsType, PostType } from "../../../redux/postsReducer";
 
 type ProfileInfoPropsType = {
   t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;

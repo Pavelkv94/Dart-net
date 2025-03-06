@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
-import { CommentType, LikeParentType, likePostOrCommentTC, LikeStatus, PlaceType } from "../../../redux/postsReducer";
+import { CommentType, LikeParentType, likePostOrCommentTC, PlaceType } from "../../../redux/postsReducer";
 import { AppDispatchType } from "../../../redux/store";
 import s from "./Post.module.css";
 import { formatDate } from "../../../utils/formatDate";
 
 type CommentPropsType = {
   comment: CommentType;
-  user_id: string;
+  user_id: string | undefined;
   place: PlaceType;
 };
 

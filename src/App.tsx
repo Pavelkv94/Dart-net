@@ -4,10 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Circle } from "./components/common/Preloaders/Circle/Circle";
 import { AppDispatchType } from "./redux/store";
-import { getMeTC, setAppAuthAC } from "./redux/appReducer";
+import { setAppAuthAC } from "./redux/appReducer";
 import { displayMode } from "./redux/AppContants";
 
-//@ts-ignore
 const Login = React.lazy(() => import("./components/Login/Login"));
 const Main = React.lazy(() => import("./components/Main/Main"));
 

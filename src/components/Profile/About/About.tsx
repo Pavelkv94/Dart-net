@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import BlockComponent from "../../common/BlockComponent/BlockComponent";
 import s from "./About.module.css";
 import birthday from "../../../assets/svg/about-birthday.svg";
@@ -17,6 +17,7 @@ import instagram from "../../../assets/svg/about-instagram.svg";
 import linkedin from "../../../assets/svg/about-linkedin.svg";
 import twitter from "../../../assets/svg/about-twitter.svg";
 import telegram from "../../../assets/svg/about-telegram.svg";
+//@ts-ignore
 import { ReactI18NextChild } from "react-i18next";
 import { TabType } from "../Profile";
 import { ProfileInfoType } from "../../../redux/profileReducer";

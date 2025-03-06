@@ -1,4 +1,3 @@
-import React from "react";
 import s from './CustomInput.module.css'
 
 export const CustomInput = ({type, width, height, placeholder, value, onChange}:any) => {

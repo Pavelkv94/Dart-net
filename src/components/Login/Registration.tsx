@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { registrationTC, RequestStatus, setAppErrAC, setAppStatusAC } from "../../redux/appReducer";
@@ -33,7 +33,7 @@ export const Registration = ({ t, setLoginMode }: LoginPropsType) => {
   };
 
   const changeMode = () => {
-    dispatch(setAppStatusAC("idle"));
+    dispatch(setAppStatusAC(RequestStatus.IDLE));
     dispatch(setAppErrAC(""));
     setLoginMode(true);
   };
@@ -41,11 +41,12 @@ export const Registration = ({ t, setLoginMode }: LoginPropsType) => {
   const disabled = regData.email === "" || regData.password === "";
 
   useEffect(() => {
-    status === "succeeded" &&
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    status === RequestStatus.SUCCEEDED &&
       setTimeout(() => {
         setLoginMode(true);
       }, 3000);
-  }, [status]);
+  }, [status, setLoginMode]);
 
   return (
     <section>

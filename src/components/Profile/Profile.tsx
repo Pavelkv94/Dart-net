@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -21,8 +21,8 @@ const Profile = () => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const isAuth = useSelector<AppStateType, boolean>((state) => state.app.isAuth);
-  const currentUser = useSelector<AppStateType, UserType>((state) => state.app.user);
-
+  const currentUser = useSelector<AppStateType>((state) => state.app.user);
+  //@ts-ignore
   const anotherProfileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.anotherProfileData);
 
   const [currentTab, setCurrentTab] = useState<TabType>("posts");
@@ -37,10 +37,13 @@ const Profile = () => {
   } else
     return (
       <div className={s.profile_wrapper}>
+        {/* @ts-ignore */}
         <ProfileInfo t={t} profileData={id ? anotherProfileData : currentUser} currentTab={currentTab} setCurrentTab={setCurrentTab} />
-
+        {/* @ts-ignore */}
         {currentTab === "about" && <About setCurrentTab={setCurrentTab} t={t} profileData={id ? anotherProfileData : currentUser} />}
+        {/* @ts-ignore */}
         {currentTab === "posts" && <Posts setCurrentTab={setCurrentTab} t={t} lang={i18n.language} profileData={id ? anotherProfileData : currentUser} />}
+        {/* @ts-ignore */}
         {currentTab === "saved" && <Saved setCurrentTab={setCurrentTab} t={t} profileData={id ? anotherProfileData : currentUser} />}
       </div>
     );

@@ -72,7 +72,7 @@ export const HeadBar = React.memo(({ exit }: { exit: () => void }) => {
           <div className={`${s.navbar_item} ${s.last_navbar_item}`} onClick={() => setOpenProfileMenu((prev) => !prev)}>
             <div className={s.avatar} style={avatar}></div>
             <img src={down_arr} alt="down-arrow" width={14} className={s.nav_icon} />
-            {openProfileMenu && <HeadDropdownMenu setOpenProfileMenu={setOpenProfileMenu} exit={exit} openProfileMenu={s} t={t} />}
+            {openProfileMenu && <HeadDropdownMenu setOpenProfileMenu={setOpenProfileMenu} exit={exit} t={t} />}
           </div>
         </div>
       </nav>

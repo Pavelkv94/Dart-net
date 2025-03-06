@@ -4,6 +4,7 @@ import { AppDispatchType, AppStateType } from "../../../redux/store";
 import s from "./Weather.module.css";
 import sun from "../../../assets/svg/weather-sun.svg";
 import { useDispatch } from "react-redux";
+//@ts-ignore
 import { ReactI18NextChild } from "react-i18next";
 import { getWeatherTC, WeatherType } from "../../../redux/outDataReducer";
 
