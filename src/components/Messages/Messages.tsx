@@ -10,9 +10,9 @@ import arrowRight from "../../assets/svg/arrow-right.svg";
 import arrowDown from "../../assets/svg/arrow-down.svg";
 import { ButtonOrange } from "../common/ButtonOrange/ButtonOrange";
 import { useTranslation } from "react-i18next";
-import { getMessagesTC, MessageType, newMessageAC } from "../../redux/messagesReducer";
-
-// const emoji = require("emoji-dictionary");
+import { getMessagesTC, MessagePayloadType, MessageType, newMessageAC } from "../../redux/messagesReducer";
+import emoji from "emoji-dictionary";
+import { formatDate } from "../../utils/formatDate";
 
 const Messages = () => {
   const { t } = useTranslation();
@@ -20,17 +20,14 @@ const Messages = () => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const isAuth = useSelector<AppStateType, boolean>((state) => state.app.isAuth);
-  const photo = useSelector<AppStateType, string>((state) => state.app.photo);
-  const user_id = useSelector<AppStateType, string>((state) => state.app.user.user_id);
-  const messages = useSelector<AppStateType, Array<MessageType>>((state) => state.messages.messages);
+  const photo = useSelector<AppStateType, string>((state) => state.app.user?.photo);
+  const user_id = useSelector<AppStateType, string>((state) => state.app.user?.id);
+  const messages = useSelector<AppStateType, Array<MessageType[]>>((state) => state.messages.messages);
 
-  const initialMessage = {
+  const initialMessage: MessagePayloadType = {
     user_id,
-    photo,
     message: "",
-    id: Math.random(),
     event: "message",
-    date: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
     image: "",
   };
 
@@ -38,36 +35,34 @@ const Messages = () => {
   const [emojiCollapse, setEmojiCollapse] = useState<boolean>(true);
   const [message, setMessage] = useState(initialMessage);
 
-  const socket = useRef<any>();
-  //@ts-ignore
+  const socket = useRef<WebSocket | null>(null);
+
   useEffect(() => {
     dispatch(getMessagesTC());
   }, []); //!
 
-  // useEffect(() => {
-  //   socket.current = new WebSocket("wss://dart-social-network.herokuapp.com");
+  useEffect(() => {
+    socket.current = new WebSocket("ws://localhost:5050");
 
-  //   socket.current.onopen = () => {
-  //     console.log("WEBSOCKET OPEN");
-  //   };
-  //   socket.current.onmessage = (event: any) => {
-  //     // const message = JSON.parse(event.data);
-  //     // dispatch(newMessageAC(message))
-  //     //@ts-ignore
-
-  //     dispatch(getMessagesTC());
-  //   };
-  //   socket.current.onclose = () => {
-  //     console.log("Socket закрыт");
-  //   };
-  //   socket.current.onerror = () => {
-  //     console.log("Socket произошла ошибка");
-  //   };
-  // }, []);
+    socket.current.onopen = () => {
+      console.log("WEBSOCKET OPEN");
+    };
+    socket.current.onmessage = (event: any) => {
+      const message = JSON.parse(event.data);
+      // dispatch(newMessageAC(message))
+      dispatch(getMessagesTC());
+    };
+    socket.current.onclose = () => {
+      console.log("Socket закрыт");
+    };
+    socket.current.onerror = () => {
+      console.log("Socket произошла ошибка");
+    };
+  }, []);
 
   const sendMessage = async () => {
-    socket.current.send(JSON.stringify(message));
-    setMessage(initialMessage);
+    socket.current?.send(JSON.stringify(message));
+    setMessage({ ...message, message: "" });
   };
 
   const avatar = {
@@ -82,7 +77,7 @@ const Messages = () => {
         <section className={s.left_panel}>Messages</section>
         <section className={s.main}>
           <div className={s.messages}>
-            {messages.map((mess: any) => {
+            {messages.map((mess: MessageType) => {
               return (
                 <div key={mess.id} className={`${s.message_item_wrapper} ${mess.user_id === user_id && s.reverse}`}>
                   <div className={s.avatar_wrapper}>
@@ -90,7 +85,7 @@ const Messages = () => {
                       <div
                         className={s.avatar}
                         style={{
-                          backgroundImage: mess.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${mess.photo})` : `url(${emptyProfile})`,
+                          backgroundImage: mess.user?.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${mess.user.photo})` : `url(${emptyProfile})`,
                         }}
                       ></div>
                     </NavLink>
@@ -104,7 +99,7 @@ const Messages = () => {
                         </div>
                       )}
                     </div>
-                    <p className={s.message_data}>{mess.date}</p>
+                    <p className={s.message_data}>{formatDate(mess.createdAt)}</p>
                   </div>
                 </div>
               );
@@ -136,14 +131,13 @@ const Messages = () => {
                   <img src={emojiCollapse ? arrowRight : arrowDown} alt="arrow" />
                 </div>
                 <div className={s.emojiBlock} style={emojiCollapse ? { height: "20px" } : { height: "114px" }}>
-                  {/* {emoji.unicode.map((m: any, i: number) => (
+                  {emoji.unicode.map((m: any, i: number) => (
                     <div className={s.emoji} onClick={() => setMessage({ ...message, message: message.message + m })} key={i}>
                       {m}
                     </div>
-                  ))} */}
+                  ))}
                 </div>
               </div>
-              {/* @ts-ignore */}
               <div className={s.clip} title={t("posts.pinPicture")} onClick={() => setOpenImgUrl((prev) => !prev)}>
                 <img src={clip} alt="clip" width={22} height={22} />
               </div>
@@ -156,7 +150,7 @@ const Messages = () => {
                 disabled={message.message.trim() === ""}
               />
             </div>
-            <span style={{ color: "red" }}>Chat is not available on the free backend hosting</span>
+            {/* <span style={{ color: "red" }}>Chat is not available on the free backend hosting</span> */}
           </div>
         </section>
       </div>

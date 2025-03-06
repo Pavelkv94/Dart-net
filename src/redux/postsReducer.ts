@@ -46,6 +46,11 @@ export type PostBodyType = {
   text: string;
 };
 
+export type CommentBodyType = {
+  comment: string;
+  post_id: string;
+};
+
 export type PlaceType = "myPosts" | "saved" | "allPosts" | "userPosts";
 
 const initialState = {
@@ -109,17 +114,16 @@ export const createPostTC = (payload: PostBodyType, user_id: string) => async (d
   postsAPI.createPost(payload).then(() => dispatch(getUserPostsTC(user_id, "1", "10")));
 };
 
-export const sendCommentTC = (payload: any, place: PlaceType, user?: string | undefined) => async (dispatch: AppDispatchType) => {
+export const createCommentTC = (payload: CommentBodyType, place: PlaceType, user_id?: string | undefined) => async (dispatch: AppDispatchType) => {
   postsAPI.createComment(payload).then(() => {
+    // return dispatch(getAllPostsTC("1", "10"));
     switch (place) {
       case "allPosts":
-        return dispatch(getUserPostsTC("all"));
-      case "saved":
-        return dispatch(getSavedPostsTC(payload.user_id));
+        return dispatch(getAllPostsTC("1", "10"));
       case "userPosts":
-        return dispatch(getUserPostsTC(user));
+        return dispatch(getUserPostsTC(user_id, "1", "10"));
       default:
-        return dispatch(getUserPostsTC(payload.user_id));
+        return dispatch(getAllPostsTC("1", "10"));
     }
   });
 };

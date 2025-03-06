@@ -1,5 +1,5 @@
 import { baseUrl, expandHeaders, API } from "./api";
-import { PostBodyType } from "../redux/postsReducer";
+import { CommentBodyType, PostBodyType } from "../redux/postsReducer";
 export const postsAPI = {
     async createPost(payload: PostBodyType) {
         return API.post(baseUrl("/posts"), await expandHeaders(), payload);
@@ -10,15 +10,19 @@ export const postsAPI = {
     async getAllPosts(pageNumber: string = "1", pageSize: string = "10") {
         return API.get(baseUrl(`/posts?pageNumber=${pageNumber}&pageSize=${pageSize}`), await expandHeaders());
     },
-
-
+    async createComment(payload: CommentBodyType) {
+        return API.post(baseUrl("/comments"), await expandHeaders(), payload);
+    },
+    async deletePost(post_id: string | undefined) {
+        return API.delete(baseUrl(`/posts/${post_id}`), await expandHeaders());
+    },
     
+
+
     async getSavedPosts(user_id: string | undefined) {
         return API.get(baseUrl(`/posts/getsavedPosts/${user_id}`), await expandHeaders());
     },
-    async createComment(payload: any) {
-        return API.put(baseUrl("/posts/addComment"), await expandHeaders(), payload);
-    },
+
     async likedPost(payload: any) {
         return API.post(baseUrl("/posts/liked"), await expandHeaders(), payload);
     },
@@ -28,7 +32,5 @@ export const postsAPI = {
     async unlikedPost(payload: any) {
         return API.post(baseUrl("/posts/unliked"), await expandHeaders(), payload);
     },
-    async deletePost(post_id: string | undefined) {
-        return API.delete(baseUrl(`/posts/deletePost/${post_id}`), await expandHeaders());
-    },
+
 };

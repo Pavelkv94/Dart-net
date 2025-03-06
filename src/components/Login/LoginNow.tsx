@@ -23,7 +23,7 @@ export const LoginNow = ({ t, setLoginMode }: LoginPropsType) => {
 
   const handleClick = async () => {
     await dispatch(loginTC(loginData));
-    await navigate(-1);
+    await navigate("/profile");
   };
 
   const changeMode = () => {

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import s from "./Post.module.css";
 import planet from "../../../assets/svg/about-country.svg";
 import comment from "../../../assets/svg/comment.svg";
 import { ReactI18NextChild } from "react-i18next";
-import { CommentType, deletePostTC, likedPostTC, PlaceType, PostType, sendCommentTC, unlikedPostTC } from "../../../redux/postsReducer";
+import { deletePostTC, likedPostTC, PlaceType, PostType, createCommentTC, unlikedPostTC } from "../../../redux/postsReducer";
 import threeDots from "../../../assets/svg/three-dots.svg";
 import Comment from "./Comment";
 import { ButtonOrange } from "../ButtonOrange/ButtonOrange";
@@ -23,15 +23,12 @@ type PostPropsType = {
   place: PlaceType;
 };
 
-// const emoji = require("emoji-dictionary");
-
 const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
   const { id } = useParams();
 
   const dispatch = useDispatch<AppDispatchType>();
 
-  const user_id = useSelector<AppStateType, string>((state) => state.app.user.user_id);
-
+  const user_id = useSelector<AppStateType, string | undefined>((state) => state.app.user?.id);
   const profileData = useSelector<AppStateType, ProfileInfoType>((state) => state.profile.profileData);
 
   const style = {
@@ -41,24 +38,14 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
   const [openComments, setOpenComments] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
-  const initialComment = {
-    user: `${profileData.first_name} ${profileData.last_name}`,
-    user_id: user_id,
-    userAvatar: `${import.meta.env.VITE_REACT_APP_HOST}${profileData.photo}`,
-    message: "",
-    created_at: "",
-    likes: [],
-    post_id: postData.id,
-  };
-
-  const [commentData, setCommentData] = useState<CommentType>(initialComment);
+  const [commentText, setCommentText] = useState<string>("");
 
   const user = id ? id : user_id;
 
   const sendComment = () => {
-    if (commentData.message.trim() !== "") {
-      dispatch(sendCommentTC(commentData, place, user));
-      setCommentData(initialComment);
+    if (commentText.trim() !== "") {
+      dispatch(createCommentTC({ comment: commentText, post_id: postData.id }, place, user_id));
+      setCommentText("");
     }
   };
 
@@ -88,7 +75,6 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
     height: "400px",
   };
 
-  
   const colorLike = postData.likes.find((el) => el === user_id) ? "#FF7555" : "#535165";
 
   const emojiArray = [
@@ -114,7 +100,9 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
         <div style={{ display: "flex" }}>
           <div className={s.post_avatar} style={avatar}></div>
           <div className={s.post_whois}>
-            <NavLink to={`/${postData.user_id === user_id ? "" : postData.user_id}`}>{postData.user.first_name} {postData.user.last_name}</NavLink>
+            <NavLink to={`/${postData.user_id === user_id ? "" : postData.user_id}`}>
+              {postData.user.first_name} {postData.user.last_name}
+            </NavLink>
             <span>
               <img src={planet} alt="icon" width={14} />
               <p>{`${t("posts.published")} ${formatDate(postData.createdAt)}`}</p>
@@ -177,14 +165,14 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
                 cols={30}
                 rows={5}
                 placeholder="Post your comment"
-                value={commentData.message}
-                onChange={(e) => setCommentData({ ...commentData, message: e.currentTarget.value })}
+                value={commentText}
+                onChange={(e) => setCommentText(e.currentTarget.value)}
               />
               <div className={s.add_comment_controls}>
                 <ButtonOrange title={"Send"} width={100} height={30} onClick={sendComment} />
                 <div className={s.emoji_block}>
-                  {emojiArray.map((m: any, i: number) => (
-                    <div className={s.emoji} onClick={() => setCommentData({ ...commentData, message: commentData.message + m })} key={i}>
+                  {emojiArray.map((m: string, i: number) => (
+                    <div className={s.emoji} onClick={() => setCommentText(commentText + m)} key={i}>
                       {m}
                     </div>
                   ))}

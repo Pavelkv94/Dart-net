@@ -12,12 +12,11 @@ import { HeadDropdownMenu } from "./HeadDropdownMenu";
 import { LangType } from "../Login/Login";
 import { NavLink } from "react-router-dom";
 import { AppDispatchType, AppStateType } from "../../redux/store";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import emptyProfile from "../../assets/empty-profile.png";
 import { getNewsTC } from "../../redux/outDataReducer";
 
-export const HeadBar = React.memo(({ exit }: any) => {
+export const HeadBar = React.memo(({ exit }: { exit: () => void }) => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const { t, i18n } = useTranslation();
@@ -25,7 +24,7 @@ export const HeadBar = React.memo(({ exit }: any) => {
   const [lang, setLang] = useState(i18n.language);
 
   // const user_id = useSelector<AppStateType, string>((state) => state.app.user.user_id);
-  const photo = useSelector<AppStateType, string>((state) => state.app.user.photo);
+  const photo = useSelector<AppStateType, string | undefined>((state) => state.app.user?.photo);
 
   const changeLanguage = (language: LangType) => {
     i18n.changeLanguage(language);

@@ -68,7 +68,7 @@ const Posts = ({ setCurrentTab, t, lang, profileData }: PostsPropsType) => {
         )}
 
         {posts.items?.length > 0 ? (
-          posts.items.map((el, i) => <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t} place={id ? "userPosts" : "myPosts"} />)
+          posts.items.map((el, i) => <Post key={i} width={"calc(100% - 40px)"} postData={el} t={t} place={"userPosts"} />)
         ) : (
           <Empty t={t} title="profile.postsEmpty" width={"calc(100% - 40px)"} flag="post" />
         )}
