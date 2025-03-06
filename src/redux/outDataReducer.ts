@@ -1,82 +1,87 @@
 import { AppDispatchType } from "./store";
 import { outDataAPI } from "../api/outDataAPI";
+import * as AppConstants from "./AppContants";
 
-export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
+type WeatherPayloadType = {
+  temperature: number;
+  summary: string;
+  realfeel: number;
+  city: string;
+  dayWeek: number;
+  day: number;
+  month: number;
+};
 
-type ActionType = any;
+export type NewsPayloadType = {
+  source: {
+    id: string;
+    name: string;
+  };
+  author: string;
+  title: string;
+  description: string;
+  url: string;
+  urlToImage: string;
+  publishedAt: string;
+  content: string;
+};
+
+type ActionType = {
+  type: string;
+  payload: NewsPayloadType[] | WeatherPayloadType;
+};
+
 export type WeatherType = {
-    temperature: number;
-    summary: string;
-    realfeel: number;
-    city: string;
-    dayWeek: number;
-    day: number;
-    month: number;
+  temperature: number;
+  summary: string;
+  realfeel: number;
+  city: string;
+  dayWeek: number;
+  day: number;
+  month: number;
 };
 const initialState = {
-    weather: {} as WeatherType,
-    news: [] as any,
-    covid: {} as any
+  weather: {} as WeatherType,
+  news: [] as NewsPayloadType[],
 };
 
 export type InitialStateType = typeof initialState;
 
 export function outDataReducer(state: InitialStateType = initialState, action: ActionType): InitialStateType {
-    switch (action.type) {
-        // case "SET-APP-STATUS":
-        //     return { ...state, status: action.status };
-        case "SET-WEATHER":
-            return { ...state, weather: action.payload };
-        case "SET-NEWS":
-            return { ...state, news: action.payload };
-            case "SET-COVID":
-                return { ...state, covid: action.payload };
-            
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case AppConstants.FETCH_WEATHER:
+      return { ...state, weather: action.payload as WeatherType };
+    case AppConstants.FETCH_NEWS:
+      return { ...state, news: action.payload as NewsPayloadType[] };
+    default:
+      return state;
+  }
 }
 
-const getNewsAC = (payload: any) => ({
-    type: "SET-NEWS",
-    payload,
+const getNewsAC = (payload: NewsPayloadType[]) => ({
+  type: AppConstants.FETCH_NEWS,
+  payload,
 });
 
 export const getNewsTC = (lang: string) => async (dispatch: AppDispatchType) => {
-    await outDataAPI.getNews(lang).then((res: any) => dispatch(getNewsAC(res.data.articles)));
+  await outDataAPI.getNews(lang).then((res: { data: { articles: NewsPayloadType[] } }) => dispatch(getNewsAC(res.data.articles)));
 };
 
-const setWeatherAC = (payload: any) => ({
-    type: "SET-WEATHER",
-    payload,
+const setWeatherAC = (payload: WeatherPayloadType) => ({
+  type: AppConstants.FETCH_WEATHER,
+  payload,
 });
 
 export const getWeatherTC = (city_id: string) => async (dispatch: AppDispatchType) => {
-    await outDataAPI
-        .getWeather(city_id)
-        .then((res) => {
-            let payload = {
-                temperature: res.data.Temperature,
-                summary: res.data.Summary,
-                realfeel: res.data.RealFeel,
-                city: city_id,
-                dayWeek: +new Date().getDay(),
-                day: +new Date().getDate(),
-                month: +new Date().getMonth(),
-            };
-            dispatch(setWeatherAC(payload));
-            // dispatch(setAppStatusAC("succeeded"));
-            // console.log(res)
-        })
-        .catch((e) => {
-            // dispatch(setAppErrAC(e.response ? e.response.data.message : "Weather is not available"));
-        });
-};
-
-const setCovidAC = (payload: any) => ({
-    type: "SET-COVID",
-    payload,
-});
-export const getCovidTC = (country: string) => async (dispatch: AppDispatchType) => {
-    await outDataAPI.getCovidStats(country).then((res) => dispatch(setCovidAC(res.data.response[0])));
+  const weatherResponse = await outDataAPI.getWeather(city_id);
+  const payload = {
+    temperature: weatherResponse.data[0].Temperature.Metric.Value,
+    summary: weatherResponse.data[0].WeatherText,
+    realfeel: 0,
+    city: city_id,
+    dayWeek: +new Date().getDay(),
+    day: +new Date().getDate(),
+    month: +new Date().getMonth(),
+  };
+  dispatch(setWeatherAC(payload));
 };

@@ -1,69 +1,44 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "vite-dart-net",
   "private": true,
-  "homepage": "https://Pavelkv94.github.io/Dart-net",
-  "dependencies": {
-    "@reduxjs/toolkit": "^1.8.4",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.11.47",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "@types/react-redux": "^7.1.24",
-    "@types/redux": "^3.6.0",
-    "axios": "^0.27.2",
-    "bufferutil": "^4.0.6",
-    "dotenv": "^16.0.1",
-    "emoji-dictionary": "^1.0.11",
-    "i18next": "^21.9.0",
-    "i18next-browser-languagedetector": "^6.1.4",
-    "i18next-http-backend": "^1.4.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-i18next": "^11.18.3",
-    "react-redux": "^8.0.2",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
-    "redux": "^4.2.0",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.4.1",
-    "typescript": "^4.7.4",
-    "utf-8-validate": "^5.0.9",
-    "web-vitals": "^2.1.4",
-    "ws": "^8.8.1"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "node -r dotenv/config ./node_modules/.bin/react-scripts start dotenv_config_path=.env.development",
-    "build": "node -r dotenv/config ./node_modules/.bin/react-scripts build dotenv_config_path=.env.production",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.5.1",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "emoji-dictionary": "^1.0.11",
+    "i18next": "^24.2.2",
+    "i18next-browser-languagedetector": "^8.0.2",
+    "i18next-http-backend": "^3.0.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-i18next": "^15.4.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.1.5",
+    "redux": "^5.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
     "@types/redux-logger": "^3.0.9",
+    "@vitejs/plugin-react": "^4.3.4",
     "cross-env": "^7.0.3",
-    "gh-pages": "^4.0.0"
+    "eslint": "^9.19.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.18",
+    "globals": "^15.14.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.22.0",
+    "vite": "^6.1.0"
   }
 }

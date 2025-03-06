@@ -1,9 +1,7 @@
-import { baseUrl, expandHeaders, instance } from "./api";
+import { baseUrl, expandHeaders, API } from "./api";
 
 export const messagesAPI = {
-    async getMessages() {
-        return instance.get(baseUrl(`/messages/get`), await expandHeaders());
-    },
-
-   
+  async getMessages() {
+    return API.get(baseUrl(`/messages`), await expandHeaders());
+  },
 };

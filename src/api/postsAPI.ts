@@ -1,28 +1,37 @@
-import { baseUrl, expandHeaders, instance } from "./api";
-
+import { baseUrl, expandHeaders, API } from "./api";
+import { CommentBodyType, LikePayloadType, PostBodyType } from "../redux/postsReducer";
 export const postsAPI = {
-    async createPost(payload: any) {
-        return instance.post(baseUrl("/posts/create"), await expandHeaders(), payload);
-    },
-    async getPosts(user_id: string | undefined) {
-        return instance.get(baseUrl(`/posts/getPosts/${user_id}`), await expandHeaders());
-    },
-    async getSavedPosts(user_id: string | undefined) {
-        return instance.get(baseUrl(`/posts/getsavedPosts/${user_id}`), await expandHeaders());
-    },
-    async createComment(payload: any) {
-        return instance.put(baseUrl("/posts/addComment"), await expandHeaders(), payload);
-    },
-    async likedPost(payload: any) {
-        return instance.post(baseUrl("/posts/liked"), await expandHeaders(), payload);
-    },
-    async likedComment(payload: any) {
-        return instance.post(baseUrl("/posts/likedComment"), await expandHeaders(), payload);
-    },
-    async unlikedPost(payload: any) {
-        return instance.post(baseUrl("/posts/unliked"), await expandHeaders(), payload);
-    },
-    async deletePost(post_id: string | undefined) {
-        return instance.delete(baseUrl(`/posts/deletePost/${post_id}`), await expandHeaders());
-    },
+  async createPost(payload: PostBodyType) {
+    return API.post(baseUrl("/posts"), await expandHeaders(), payload);
+  },
+  async getUserPosts(user_id: string | undefined, pageNumber: string = "1", pageSize: string = "10") {
+    return API.get(baseUrl(`/posts/${user_id}?pageNumber=${pageNumber}&pageSize=${pageSize}`), await expandHeaders());
+  },
+  async getAllPosts(pageNumber: string = "1", pageSize: string = "10") {
+    return API.get(baseUrl(`/posts?pageNumber=${pageNumber}&pageSize=${pageSize}`), await expandHeaders());
+  },
+  async createComment(payload: CommentBodyType) {
+    return API.post(baseUrl("/comments"), await expandHeaders(), payload);
+  },
+  async deletePost(post_id: string | undefined) {
+    return API.delete(baseUrl(`/posts/${post_id}`), await expandHeaders());
+  },
+
+  async likePostOrComment(payload: LikePayloadType) {
+    return API.put(baseUrl("/like"), await expandHeaders(), payload);
+  },
+
+  async getSavedPosts(user_id: string | undefined) {
+    return API.get(baseUrl(`/posts/getsavedPosts/${user_id}`), await expandHeaders());
+  },
+
+  async likedPost(payload: any) {
+    return API.post(baseUrl("/posts/liked"), await expandHeaders(), payload);
+  },
+  async likedComment(payload: any) {
+    return API.post(baseUrl("/posts/likedComment"), await expandHeaders(), payload);
+  },
+  async unlikedPost(payload: any) {
+    return API.post(baseUrl("/posts/unliked"), await expandHeaders(), payload);
+  },
 };

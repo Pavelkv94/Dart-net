@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import thunk from 'redux-thunk';
 import logger from 'redux-logger'
 import { appReducer } from "./appReducer";
 import { configureStore } from "@reduxjs/toolkit";
@@ -21,9 +20,11 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
 	reducer: rootReducer,
-	middleware:  (getDefaultMiddleware) =>
-	getDefaultMiddleware()
-		.prepend(thunk, logger)});
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware()
+			// .prepend(thunk)
+			.concat(logger)
+});
 
 export type AppStateType = ReturnType<typeof rootReducer>
 

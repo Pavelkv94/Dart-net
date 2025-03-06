@@ -14,7 +14,7 @@ export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit, t 
             <div className={s.user_info}>
                 <p>{email}</p>
             </div>
-            <NavLink to="/" style={{ textDecoration: "none" }} onClick={onClose}>
+            <NavLink to="/profile" style={{ textDecoration: "none" }} onClick={onClose}>
                 <div className={s.link_menu_item}>
                     <svg width="22px" height="22px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className={s.svg}>
                         <title />
@@ -51,7 +51,7 @@ export const HeadDropdownMenu = ({ openProfileMenu, setOpenProfileMenu, exit, t 
                     {t("messages.messages")}
                 </div>
             </NavLink>
-            <NavLink to="/" style={{ textDecoration: "none" }} onClick={onClose}>
+            <NavLink to="/profile" style={{ textDecoration: "none" }} onClick={onClose}>
                 <div className={s.link_menu_item}>
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 471.701 471.701" width={22} height={22} className={s.svg}>
                         <g>

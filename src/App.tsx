@@ -3,42 +3,49 @@ import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Circle } from "./components/common/Preloaders/Circle/Circle";
-import { meTC } from "./redux/appReducer";
 import { AppDispatchType } from "./redux/store";
+import { getMeTC, setAppAuthAC } from "./redux/appReducer";
+import { displayMode } from "./redux/AppContants";
 
 //@ts-ignore
 const Login = React.lazy(() => import("./components/Login/Login"));
 const Main = React.lazy(() => import("./components/Main/Main"));
 
 function App() {
-    const dispatch = useDispatch<AppDispatchType>();
+  const dispatch = useDispatch<AppDispatchType>();
 
-    useEffect(() => {
-        let user_id = localStorage.getItem("user_id");
-        dispatch(meTC(user_id));
-    }, [dispatch]);
+  // const navigate = useNavigate(); // Use useNavigate for navigation
+  const token = localStorage.getItem("token");
 
-    const displayMode = {
-        profile: "profile",
-        messages: "messages",
-        users: "users",
-        home: "home",
-        settings: "settings"
-    };
+  useEffect(() => {
+    const isAuthenticated = !!token; // Проверяем наличие токена
+    dispatch(setAppAuthAC(isAuthenticated));
+  }, [dispatch, token]);
 
-    return (
-        <Routes>
-            <Route element={<Suspense fallback={<Circle />}><Login /></Suspense>} path="/login" />
-            <Route element={<Main mode={displayMode.profile} />} path="/" >
-               <Route element={<Main mode={displayMode.profile} />} path=":id" />
-            </Route>
-            <Route element={<Main mode={displayMode.messages} />} path="/messages" />
-            <Route element={<Main mode={displayMode.users} />} path="/users" />
-            <Route element={<Main mode={displayMode.home} />} path="/home" />
-            <Route element={<Main mode={displayMode.settings} />} path="/settings" />
-            <Route element={<div>empty</div>} path="*" />
-        </Routes>
-    );
+  // useEffect(() => {
+  //   dispatch(getMeTC());
+  // }, [dispatch]);
+
+  return (
+    <Routes>
+      <Route
+        element={
+          <Suspense fallback={<Circle />}>
+            <Login />
+          </Suspense>
+        }
+        path="/"
+      />
+      <Route element={<Main mode={displayMode.profile} />} path="/profile">
+        <Route element={<Main mode={displayMode.profile} />} path=":id" />
+      </Route>
+      <Route element={<Main mode={displayMode.messages} />} path="/messages" />
+      <Route element={<Main mode={displayMode.users} />} path="/users" />
+      <Route element={<Main mode={displayMode.home} />} path="/home" />
+      <Route element={<Main mode={displayMode.settings} />} path="/settings" />
+      <Route element={<div>Not Found</div>} path="*" />
+    </Routes>
+  );
 }
 
 export default App;
