@@ -1,38 +1,26 @@
-import React from "react";
 import { useDispatch } from "react-redux";
-import { CommentType, likedCommentTC } from "../../../redux/postsReducer";
+import { CommentType, LikeParentType, likePostOrCommentTC, LikeStatus, PlaceType } from "../../../redux/postsReducer";
 import { AppDispatchType } from "../../../redux/store";
 import s from "./Post.module.css";
 import { formatDate } from "../../../utils/formatDate";
 
 type CommentPropsType = {
-  createdAt: string;
-  post_id: string;
-  commentator_id: string;
-  comment: string;
-  id: string;
-  user: {
-    photo: string;
-    first_name: string;
-    last_name: string;
-  };
+  comment: CommentType;
+  user_id: string;
+  place: PlaceType;
 };
 
-const Comment = ({ comment, user_id }: CommentPropsType) => {
-  console.log(comment);
+const Comment = ({ comment, user_id, place }: CommentPropsType) => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const setCommentLike = () => {
-    if (!comment.likes.find((el) => el === user_id)) {
-    //   dispatch(likedCommentTC({ comment_id: comment.comment_id, post_id: comment.post_id, user_id: user_id }));
-    } else {
-      //unliked
-    }
+    dispatch(likePostOrCommentTC({ parent_id: comment.id, parent_type: LikeParentType.Comment }, place, user_id));
   };
 
   const avatar = {
     backgroundImage: `url(${import.meta.env.VITE_REACT_APP_HOST}${comment.user.photo})`,
   };
+  const colorLike = comment.isILiked ? "#FF7555" : "#535165";
 
   return (
     <div className={s.comment_wrapper}>
@@ -56,7 +44,7 @@ const Comment = ({ comment, user_id }: CommentPropsType) => {
               y="0px"
               width="30px"
               height="30px"
-              fill="#535165"
+              fill={colorLike}
               viewBox="0 0 544.582 544.582"
             >
               <g>
@@ -67,7 +55,7 @@ const Comment = ({ comment, user_id }: CommentPropsType) => {
                 />
               </g>
             </svg>
-            {comment.likes}
+            {comment.likesCount}
           </div>
         </div>
       </div>

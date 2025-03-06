@@ -33,7 +33,7 @@ const User = ({ user, t }: { user: ProfileInfoType; t: TFunction }) => {
         <div className={s.user_avatar} style={avatar}></div>
       </div>
       <div className={s.user_name}>
-        <NavLink to={`/${user.id}`}>
+        <NavLink to={`/profile/${user.id}`}>
           <span>{user.first_name + " " + user.last_name}</span>
         </NavLink>
         <span className={s.user_name_country}>{user.country}</span>

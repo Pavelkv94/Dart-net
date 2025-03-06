@@ -8,16 +8,16 @@ type ActionType = {
   payload: PaginatedPostsType | Array<PostType>;
 };
 
-export type CommentType = {
-  user: string;
-  user_id: string;
-  userAvatar: string;
-  message: string;
-  created_at: string;
-  likes: Array<string>;
-  post_id: string | undefined;
-  comment_id?: string;
-};
+// export type CommentType = {
+//   user: string;
+//   user_id: string;
+//   userAvatar: string;
+//   message: string;
+//   created_at: string;
+//   likes: Array<string>;
+//   post_id: string | undefined;
+//   comment_id?: string;
+// };
 
 export type PostType = {
   id: string;
@@ -53,6 +53,20 @@ export type CommentBodyType = {
 
 export type PlaceType = "myPosts" | "saved" | "allPosts" | "userPosts";
 
+export enum LikeStatus {
+  None = "None",
+  Like = "Like",
+  Dislike = "Dislike",
+}
+export enum LikeParentType {
+  Post = "Post",
+  Comment = "Comment",
+}
+export type LikePayloadType = {
+  parent_id: string;
+  parent_type: LikeParentType;
+};
+
 const initialState = {
   userPosts: { items: [] as Array<PostType>, totalCount: 0, pageSize: 0, currentPage: 0, totalPages: 0 } as PaginatedPostsType,
   savedPosts: { items: [] as Array<PostType>, totalCount: 0, pageSize: 0, currentPage: 0, totalPages: 0 } as PaginatedPostsType,
@@ -70,6 +84,7 @@ export function postsReducer(state: InitialStateType = initialState, action: Act
       return { ...state, userPosts: action.payload };
     case AppConstants.FETCH_ALL_POSTS:
       return { ...state, allPosts: action.payload };
+
     case "GET-SAVED-POSTS":
       return { ...state, savedPosts: action.payload.reverse() };
     default:
@@ -117,6 +132,19 @@ export const createPostTC = (payload: PostBodyType, user_id: string) => async (d
 export const createCommentTC = (payload: CommentBodyType, place: PlaceType, user_id?: string | undefined) => async (dispatch: AppDispatchType) => {
   postsAPI.createComment(payload).then(() => {
     // return dispatch(getAllPostsTC("1", "10"));
+    switch (place) {
+      case "allPosts":
+        return dispatch(getAllPostsTC("1", "10"));
+      case "userPosts":
+        return dispatch(getUserPostsTC(user_id, "1", "10"));
+      default:
+        return dispatch(getAllPostsTC("1", "10"));
+    }
+  });
+};
+
+export const likePostOrCommentTC = (payload: LikePayloadType, place: PlaceType, user_id?: string | undefined) => async (dispatch: AppDispatchType) => {
+  postsAPI.likePostOrComment(payload).then(() => {
     switch (place) {
       case "allPosts":
         return dispatch(getAllPostsTC("1", "10"));

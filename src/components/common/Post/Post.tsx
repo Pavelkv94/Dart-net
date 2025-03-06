@@ -3,7 +3,17 @@ import s from "./Post.module.css";
 import planet from "../../../assets/svg/about-country.svg";
 import comment from "../../../assets/svg/comment.svg";
 import { ReactI18NextChild } from "react-i18next";
-import { deletePostTC, likedPostTC, PlaceType, PostType, createCommentTC, unlikedPostTC } from "../../../redux/postsReducer";
+import {
+  deletePostTC,
+  likedPostTC,
+  PlaceType,
+  PostType,
+  createCommentTC,
+  unlikedPostTC,
+  likePostOrCommentTC,
+  LikeStatus,
+  LikeParentType,
+} from "../../../redux/postsReducer";
 import threeDots from "../../../assets/svg/three-dots.svg";
 import Comment from "./Comment";
 import { ButtonOrange } from "../ButtonOrange/ButtonOrange";
@@ -50,11 +60,7 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
   };
 
   const setPostLike = () => {
-    if (!postData.likes.find((el) => el === user_id)) {
-      dispatch(likedPostTC({ post_id: postData.id, user_id: user_id }, place, user));
-    } else {
-      dispatch(unlikedPostTC({ post_id: postData.id, user_id: user_id }, place, user));
-    }
+    dispatch(likePostOrCommentTC({ parent_id: postData.id, parent_type: LikeParentType.Post }, place, user_id));
   };
 
   const deletePost = (post_id: string | undefined) => {
@@ -75,7 +81,7 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
     height: "400px",
   };
 
-  const colorLike = postData.likes.find((el) => el === user_id) ? "#FF7555" : "#535165";
+  const colorLike = postData.isILiked ? "#FF7555" : "#535165";
 
   const emojiArray = [
     emoji.unicode[0],
@@ -145,7 +151,7 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
               />
             </g>
           </svg>
-          {postData.likes.length}
+          {postData.likesCount}
         </div>
         <div title="Comment" className={s.comments} onClick={() => setOpenComments((prev) => !prev)}>
           <img src={comment} alt="comment icon" width={30} height={30} />
@@ -181,7 +187,7 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
             </div>
           </div>
           {postData.comments.map((el, i) => (
-            <Comment key={i} comment={el} user_id={user_id} />
+            <Comment key={i} comment={el} user_id={user_id} place={place} />
           ))}
         </div>
       )}
