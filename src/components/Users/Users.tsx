@@ -14,24 +14,24 @@ const Users = () => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const users = useSelector<AppStateType, any>((state) => state.users.usersData);
+  const user_id = useSelector<AppStateType, any>((state) => state.app.user?.id);
 
   const [usersFilter, setUsersFilter] = useState<UsersFilterType>("all");
   const [usersMode, setUsersMode] = useState<boolean>(false);
-  //@ts-ignore
-  // const [filteredUsers, setFilteredUsers] = useState(users);
+  const [filteredUsers, setFilteredUsers] = useState(users);
 
-  console.log(usersFilter);
-
-  // useEffect(() => {
-  //   //@ts-ignore
-  //   usersFilter === "all" && setFilteredUsers(users.items);
-  //   console.log(filteredUsers);
-  //   // usersFilter === "friends" && setFilteredUsers(users.items?.filter((el: any) => el.friends.find((id: any) => id === user_id) !== undefined));
-  // }, [usersFilter, users]);
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    usersFilter === "all" ? setFilteredUsers(users) : setFilteredUsers(users.items?.filter((el: any) => el.friends.find((id: any) => id === user_id) !== undefined));
+  }, [usersFilter, users, user_id]);
 
   useEffect(() => {
     dispatch(getUsersTC());
   }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredUsers(users);
+  }, [users]);
 
   const allClick = () => {
     setUsersMode(false);
@@ -56,7 +56,7 @@ const Users = () => {
       </div>
 
       <div className={s.users_main}>
-        {users.items?.map((el: any, index: number) => (
+        {filteredUsers.items?.map((el: any, index: number) => (
             <User user={el} t={t} key={index} />
           ))}
       </div>

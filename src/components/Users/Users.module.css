@@ -104,10 +104,15 @@
     margin-top: 4px;
 }
 .user_info {
-    border: 1px solid green;
     width: 100%;
     margin: 10px 0;
-    height: 120px;
+    height: 100px;
+    display: flex;
+    color: #757a95;
+    font-size: 12px;
+    padding: 0 10px;
+    flex-direction: column;
+    align-items: flex-start;
 }
 .user_footer {
     width: 100%;

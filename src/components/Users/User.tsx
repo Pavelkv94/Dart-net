@@ -39,7 +39,15 @@ const User = ({ user, t }: { user: ProfileInfoType; t: TFunction }) => {
         </NavLink>
         <span className={s.user_name_country}>{user.country}</span>
       </div>
-      <div className={s.user_info}></div>
+      <div className={s.user_info}>
+        <span><b>Status:</b> {user.status}</span>
+        <span><b>Work:</b> {user.work}</span>
+        <span><b>Education:</b> {user.education}</span>
+        <span><b>Birthday:</b> {user.birthday}</span>
+        <span><b>Gender:</b> {user.gender}</span>
+        <span><b>Email:</b> {user.email}</span>
+
+      </div>
       <div className={s.user_footer}>
         {user.isFriend ? (
           <ButtonOrange title={t("users.unfollow")} width={100} height={30} onClick={unfollow} backgroundColor="gray" />
