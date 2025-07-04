@@ -7,6 +7,7 @@ type ActionType = {
   type: string;
   payload: object | ProfileInfoType;
   photoUrl: string;
+  backgroundUrl: string;
   status: RequestStatus;
 };
 
@@ -97,8 +98,6 @@ export function profileReducer(state: InitialStateType = initialState, action: A
       return { ...state, profileData: action.payload as InitialStateType['profileData'] };
     case AppConstants.FETCH_ANOTHER_PROFILE_INFO:
       return { ...state, anotherProfileData: action.payload as InitialStateType['anotherProfileData'] };
-    case AppConstants.SAVE_PHOTO:
-      return { ...state, profileData: { ...state.profileData, photo: action.photoUrl } };
     // case "SET-PROFILE-STATUS":
     //   return { ...state, profileStatus: action.status };
     // case "SET-PROFILE-EDIT-STATUS":
@@ -164,13 +163,12 @@ export const getAnotherProfileTC = (user_id: string) => async (dispatch: AppDisp
     });
 };
 
-const savePhotoAC = (photoUrl: string) => ({
-  type: AppConstants.SAVE_PHOTO,
-  photoUrl,
-});
+export const savePhotoTC = (file: File, user_id: string) => async (dispatch: AppDispatchType) => {
+  await profileAPI.saveProfilePhoto(file).then(() => dispatch(getAnotherProfileTC(user_id)));
+};
 
-export const savePhotoTC = (file: File) => async (dispatch: AppDispatchType) => {
-  await profileAPI.saveProfilePhoto(file).then((res) => dispatch(savePhotoAC(res.data.photoUrl)));
+export const saveBackgroundTC = (file: File, user_id: string) => async (dispatch: AppDispatchType) => {
+  await profileAPI.changeBackground(file).then(() => dispatch(getAnotherProfileTC(user_id)));
 };
 
 export const editProfileTC = (payload: object) => async (dispatch: AppDispatchType) => {

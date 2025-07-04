@@ -1,9 +1,8 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { editProfileTC, ProfileInfoType, savePhotoTC } from "../../../redux/profileReducer";
+import { ProfileInfoType, saveBackgroundTC, savePhotoTC } from "../../../redux/profileReducer";
 import { AppDispatchType, AppStateType } from "../../../redux/store";
 import cameraIcon from "../../../assets/svg/camera-icon.svg";
-import ok from "../../../assets/svg/ok.svg";
 import s from "./ProfileInfo.module.css";
 import emptyProfile from "../../../assets/empty-profile.png";
 //@ts-ignore
@@ -11,6 +10,7 @@ import { ReactI18NextChild } from "react-i18next";
 import { TabType } from "../Profile";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { getMediaSource } from "../../../utils/getMediaSource";
 
 type ProfileInfoPropsType = {
   t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
@@ -24,60 +24,36 @@ const ProfileInfo = ({ t, profileData, currentTab, setCurrentTab }: ProfileInfoP
   const { id } = useParams();
 
   const postsCount = useSelector<AppStateType, number>((state) => state.posts.userPosts.totalCount);
-  // const authorizedUserId = useSelector<AppStateType, string>((state) => state.app.user.id);
-
-  const [openBackUrl, setOpenBackUrl] = useState<boolean>(false);
-  const [backUrl, setBackUrl] = useState<string>("");
 
   const background = {
-    backgroundImage: `url(${profileData.background})`,
+    backgroundImage: `url(${getMediaSource(profileData.background)})`,
   };
 
   const avatar = {
-    backgroundImage: profileData.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${profileData.photo})` : `url(${emptyProfile})`,
+    backgroundImage: profileData.photo ? `url(${getMediaSource(profileData.photo)})` : `url(${emptyProfile})`,
   };
 
   const avaRef = useRef<HTMLInputElement>(null);
+  const backgroundRef = useRef<HTMLInputElement>(null);
 
-  const onAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length) {
-      dispatch(savePhotoTC(e.target.files[0]));
+  const handleAvatarChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      dispatch(savePhotoTC(e.target.files[0], id || profileData.id));
     }
   };
-  const changeBackground = () => {
-    if (backUrl.trim() !== "") {
-      dispatch(editProfileTC({ background: backUrl }));
-    }
-    setBackUrl("");
-    setOpenBackUrl(false);
-  };
-
-  const onKeyHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      changeBackground();
+  const handleBackgroundChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      dispatch(saveBackgroundTC(e.target.files[0], id || profileData.id));
     }
   };
 
   return (
     <div className={s.profile_top_screen}>
       <div className={s.top_screen_background} style={background}>
-        {openBackUrl && (
-          <div className={s.enter_back_url}>
-            <input
-              type="text"
-              autoFocus
-              placeholder={t("profile.enterUrl")}
-              value={backUrl}
-              onChange={(e) => setBackUrl(e.currentTarget.value)}
-              onKeyDown={onKeyHandler}
-            />
-            <button onClick={changeBackground}>
-              <img src={ok} alt="ok" width={14} />
-            </button>
-          </div>
-        )}
         {!id && (
-          <button className={s.change_img_btn} onClick={() => setOpenBackUrl((prev) => !prev)}>
+          <>
+            <input type="file" ref={backgroundRef} style={{ display: "none" }} onChange={handleBackgroundChange} accept="image/jpeg,image/png" />
+            <button className={s.change_img_btn} onClick={() => backgroundRef.current?.click()}>
             <svg
               version="1.1"
               id="Layer_1"
@@ -113,6 +89,7 @@ M261.333,170.667c-8.822,0-16-7.178-16-16s7.178-16,16-16c8.822,0,16,7.178,16,16S2
             </svg>
             {t("profile.changeImage")}
           </button>
+          </>
         )}
         <div className={s.top_screen_avatar_wrapper}>
           <div className={s.top_screen_avatar} style={avatar}>
@@ -123,7 +100,7 @@ M261.333,170.667c-8.822,0-16-7.178-16-16s7.178-16,16-16c8.822,0,16,7.178,16,16S2
             )}
           </div>
         </div>
-        <input type="file" ref={avaRef} style={{ display: "none" }} onChange={onAvatarSelected} accept="image/jpeg,image/png" />
+        <input type="file" ref={avaRef} style={{ display: "none" }} onChange={handleAvatarChange} accept="image/jpeg,image/png" />
       </div>
       <div className={s.top_screen_navigate}>
         <section className={s.top_screen_navigate_name}>

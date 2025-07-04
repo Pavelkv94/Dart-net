@@ -3,6 +3,7 @@ import { CommentType, LikeParentType, likePostOrCommentTC, PlaceType } from "../
 import { AppDispatchType } from "../../../redux/store";
 import s from "./Post.module.css";
 import { formatDate } from "../../../utils/formatDate";
+import { getMediaSource } from "../../../utils/getMediaSource";
 
 type CommentPropsType = {
   comment: CommentType;
@@ -18,7 +19,7 @@ const Comment = ({ comment, user_id, place }: CommentPropsType) => {
   };
 
   const avatar = {
-    backgroundImage: `url(${import.meta.env.VITE_REACT_APP_HOST}${comment.user.photo})`,
+    backgroundImage: `url(${getMediaSource(comment.user.photo)})`,
   };
   const colorLike = comment.isILiked ? "#FF7555" : "#535165";
 

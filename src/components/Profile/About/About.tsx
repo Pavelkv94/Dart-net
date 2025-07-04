@@ -21,7 +21,7 @@ import telegram from "../../../assets/svg/about-telegram.svg";
 import { ReactI18NextChild } from "react-i18next";
 import { TabType } from "../Profile";
 import { ProfileInfoType } from "../../../redux/profileReducer";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { formatDate } from "../../../utils/formatDate";
 
 type PersonalInfoItemType = {
@@ -39,6 +39,7 @@ type AboutType = {
 };
 
 const About = ({ setCurrentTab, t, profileData }: AboutType) => {
+  const { id } = useParams();
   useEffect(() => {
     setCurrentTab("about");
   }, [setCurrentTab]);
@@ -107,13 +108,13 @@ const About = ({ setCurrentTab, t, profileData }: AboutType) => {
           <div>
             <div className={s.flex}>
               <div>{generalInfoItems}</div>
-              <NavLink to="/settings" className={s.edit_profile_wrapper}>
+              {!id && <NavLink to="/settings" className={s.edit_profile_wrapper}>
                 {" "}
                 <div className={s.edit_profile}>
                   <img src={settingIcon} alt="settings icon" width={50} />
                   <p>{t("profile.editProfile")}</p>
                 </div>
-              </NavLink>
+              </NavLink>}
             </div>
             <section className={s.social_networks}>
               <span>{t("profile.socialNetworks")}</span>

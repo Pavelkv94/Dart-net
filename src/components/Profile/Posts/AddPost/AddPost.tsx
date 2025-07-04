@@ -13,6 +13,7 @@ import { ReactI18NextChild } from "react-i18next";
 import { ProfileInfoType } from "../../../../redux/profileReducer";
 //@ts-ignore
 import emoji from "emoji-dictionary";
+import { getMediaSource } from "../../../../utils/getMediaSource";
 
 type AddPostPropsType = {
   t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
@@ -41,7 +42,7 @@ const AddPost = ({ t, profileData, setTextareaFocus }: AddPostPropsType) => {
   const [emojiCollapse, setEmojiCollapse] = useState<boolean>(true);
 
   const avatar = {
-    backgroundImage: profileData.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${profileData.photo})` : `url(${emptyProfile})`,
+    backgroundImage: profileData.photo ? `url(${getMediaSource(profileData.photo)})` : `url(${emptyProfile})`,
   };
 
   return (

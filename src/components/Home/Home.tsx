@@ -28,7 +28,7 @@ const Home = () => {
 console.log("RENDER");
 
   useEffect(() => {
-    dispatch(getAllPostsTC("1", "10"));
+    dispatch(getAllPostsTC("1", "100"));
   }, [dispatch]);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ console.log("RENDER");
   }, [rotate]);
 
   const reloadUsers = () => {
-    dispatch(getAllPostsTC("1", "10"));
+    dispatch(getAllPostsTC("1", "100"));
     setRotate(true);
   };
 

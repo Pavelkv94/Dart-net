@@ -7,16 +7,17 @@ import { AppDispatchType } from "../../redux/store";
 import { ContactActionType, setContactActionTC } from "../../redux/usersReducer";
 import { ProfileInfoType } from "../../redux/profileReducer";
 import { TFunction } from "i18next";
+import { getMediaSource } from "../../utils/getMediaSource";
 
 const User = ({ user, t }: { user: ProfileInfoType; t: TFunction }) => {
   const dispatch = useDispatch<AppDispatchType>();
 
   const background = {
-    backgroundImage: `url(${user.background})`,
+    backgroundImage: `url(${getMediaSource(user.background)})`,
   };
 
   const avatar = {
-    backgroundImage: user.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${user.photo})` : `url(${emptyProfile})`,
+    backgroundImage: user.photo ? `url(${getMediaSource(user.photo)})` : `url(${emptyProfile})`,
   };
 
   const follow = () => {

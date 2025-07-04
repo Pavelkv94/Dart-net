@@ -14,6 +14,7 @@ import { getMessagesTC, MessagePayloadType, MessageType } from "../../redux/mess
 //@ts-ignore
 import emoji from "emoji-dictionary";
 import { formatDate } from "../../utils/formatDate";
+import { getMediaSource } from "../../utils/getMediaSource";
 
 const Messages = () => {
   const { t } = useTranslation();
@@ -71,7 +72,7 @@ const Messages = () => {
   };
 
   const avatar = {
-    backgroundImage: photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${photo})` : `url(${emptyProfile})`,
+    backgroundImage: photo ? `url(${getMediaSource(photo)})` : `url(${emptyProfile})`,
   };
 
   if (!isAuth) {
@@ -91,7 +92,7 @@ const Messages = () => {
                       <div
                         className={s.avatar}
                         style={{
-                          backgroundImage: mess.user?.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${mess.user.photo})` : `url(${emptyProfile})`,
+                          backgroundImage: mess.user?.photo ? `url(${getMediaSource(mess.user.photo)})` : `url(${emptyProfile})`,
                         }}
                       ></div>
                     </NavLink>

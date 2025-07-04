@@ -15,6 +15,7 @@ import { AppDispatchType, AppStateType } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import emptyProfile from "../../assets/empty-profile.png";
 import { getNewsTC } from "../../redux/outDataReducer";
+import { getMediaSource } from "../../utils/getMediaSource";
 
 export const HeadBar = React.memo(({ exit }: { exit: () => void }) => {
   const dispatch = useDispatch<AppDispatchType>();
@@ -37,7 +38,7 @@ export const HeadBar = React.memo(({ exit }: { exit: () => void }) => {
   // }, [dispatch]);
 
   const avatar = {
-    backgroundImage: photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${photo})` : `url(${emptyProfile})`,
+    backgroundImage: photo ? `url(${getMediaSource(photo)})` : `url(${emptyProfile})`,
   };
 
   return (

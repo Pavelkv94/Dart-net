@@ -10,11 +10,13 @@ export const profileAPI = {
   },
   async saveProfilePhoto(photoFile: File) {
     const formData = new FormData();
-    formData.append("image", photoFile);
+    formData.append("file", photoFile);
     return API.post(baseUrl(`/users/uploadPhoto`), await expandHeadersForPhoto(), formData);
   },
-  async changeBackground(url: string) {
-    return API.put(baseUrl("/profile/changeBackground"), await expandHeadersForPhoto(), { url });
+  async changeBackground(backgroundFile: File) {
+    const formData = new FormData();
+    formData.append("file", backgroundFile);
+    return API.post(baseUrl(`/users/uploadBackground`), await expandHeadersForPhoto(), formData);
   },
   async updateProfile(payload: object) {
     return API.put(baseUrl(`/users/edit`), await expandHeaders(), payload);

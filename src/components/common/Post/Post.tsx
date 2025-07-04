@@ -17,6 +17,7 @@ import { NavLink } from "react-router-dom";
 import { formatDate } from "../../../utils/formatDate";
 //@ts-ignore
 import emoji from "emoji-dictionary";
+import { getMediaSource } from "../../../utils/getMediaSource";
 
 type PostPropsType = {
   t: (value: string) => ReactI18NextChild | Iterable<ReactI18NextChild>;
@@ -58,10 +59,10 @@ const Post = ({ t, width = "100%", postData, place }: PostPropsType) => {
   };
 
   const avatar = {
-    backgroundImage: postData.user.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${postData.user.photo})` : `url(${emptyProfile})`,
+    backgroundImage: postData.user.photo ? `url(${getMediaSource(postData.user.photo)})` : `url(${emptyProfile})`,
   };
   const myAvatar = {
-    backgroundImage: profileData.photo ? `url(${import.meta.env.VITE_REACT_APP_HOST}${profileData.photo})` : `url(${emptyProfile})`,
+    backgroundImage: profileData.photo ? `url(${getMediaSource(profileData.photo)})` : `url(${emptyProfile})`,
   };
 
   const image = {
